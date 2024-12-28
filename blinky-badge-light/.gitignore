@@ -1,0 +1,4 @@
+# Ignore build artifacts
+build/
+# Ignore IDE specific files
+.vscode/
