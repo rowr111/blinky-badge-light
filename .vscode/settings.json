@@ -1,0 +1,5 @@
+{
+    "cmake.sourceDirectory": "C:/code/blinky-badge-light/blinky-badge-light",
+    "idf.espIdfPathWin": "C:\\Users\\Jeanie\\esp\\v5.3.1\\esp-idf",
+    "idf.toolsPathWin": "C:\\Users\\Jeanie\\.espressif"
+}

@@ -2,3 +2,4 @@
 build/
 # Ignore IDE specific files
 .vscode/
+managed_components/
