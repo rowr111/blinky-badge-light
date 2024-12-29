@@ -9,6 +9,8 @@ static const char *TAG = "LED_CONTROL";
 static led_strip_handle_t strip;
 static int current_pattern = 0; // Active pattern ID
 static uint8_t brightness = MAX_BRIGHTNESS;
+static const uint8_t brightness_levels[] = {MAX_BRIGHTNESS / 10, MAX_BRIGHTNESS / 5, MAX_BRIGHTNESS / 2, (3 * MAX_BRIGHTNESS) / 4, MAX_BRIGHTNESS, MAX_BRIGHTNESS}; // 10%, 20%, 50%, 75%, 100%, 100%
+static int brightness_index = 0; // Index for the current brightness level
 
 // Function to convert HSV to RGB
 void hsv_to_rgb(uint8_t h, uint8_t s, uint8_t v, uint8_t *r, uint8_t *g, uint8_t *b) {
@@ -80,8 +82,10 @@ void set_pattern(int pattern_id) {
 }
 
 // Set LED brightness
-void set_brightness(uint8_t level) {
-    brightness = (level > MAX_BRIGHTNESS) ? MAX_BRIGHTNESS : level;
+void set_brightness(int index) {
+    ESP_LOGI(TAG, "Updating LEDs with brightness %d", index);
+    brightness_index = index % (sizeof(brightness_levels) / sizeof(brightness_levels[0]));
+    brightness = brightness_levels[brightness_index];
     update_leds();
 }
 
