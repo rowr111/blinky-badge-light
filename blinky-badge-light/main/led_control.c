@@ -95,22 +95,22 @@ void update_leds() {
 
     switch (current_pattern) {
         case 0: // Solid color (red)
-            for (int i = 1; i < LED_COUNT; i++) {
-                led_strip_set_pixel(strip, i, 255, 0, 0);
+            for (int i = 0; i < LED_COUNT; i++) {
+                led_strip_set_pixel(strip, i, 255 * brightness / MAX_BRIGHTNESS, 0, 0);
             }
             break;
         case 1: // Solid color (green)
-            for (int i = 1; i < LED_COUNT; i++) {
-                led_strip_set_pixel(strip, i, 0, 255, 0);
+            for (int i = 0; i < LED_COUNT; i++) {
+                led_strip_set_pixel(strip, i, 0, 255 * brightness / MAX_BRIGHTNESS, 0);
             }
             break;
         case 2: // Solid color (blue)
-            for (int i = 1; i < LED_COUNT; i++) {
-                led_strip_set_pixel(strip, i, 0, 0, 255);
+            for (int i = 0; i < LED_COUNT; i++) {
+                led_strip_set_pixel(strip, i, 0, 0, 255 * brightness / MAX_BRIGHTNESS);
             }
             break;
         case 3: // Rainbow
-            for (int i = 1; i < LED_COUNT; i++) {
+            for (int i = 0; i < LED_COUNT; i++) {
                 uint8_t r = (i * 10) % 255;
                 uint8_t g = (i * 20) % 255;
                 uint8_t b = (i * 30) % 255;
