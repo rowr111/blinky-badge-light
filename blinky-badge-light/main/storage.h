@@ -13,5 +13,6 @@ typedef struct {
 void init_storage();
 void save_settings(const badge_settings_t *settings);
 void load_settings(badge_settings_t *settings);
+void load_genomes_from_storage(void);
 
 #endif // STORAGE_H

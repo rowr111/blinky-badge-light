@@ -2,8 +2,11 @@
 #include "nvs_flash.h"
 #include "nvs.h"
 #include "esp_log.h"
+#include "genes.h"
 
 static const char *TAG = "STORAGE";
+
+genome patterns[NUM_PATTERNS];
 
 // Initialize NVS
 void init_storage() {
@@ -57,6 +60,38 @@ void load_settings(badge_settings_t *settings) {
         ESP_LOGW(TAG, "Failed to load settings, using defaults");
         settings->pattern_id = 0;
         settings->brightness = 128;
+    }
+
+    nvs_close(nvs_handle);
+}
+
+void save_genomes_to_storage() {
+    nvs_handle_t nvs_handle;
+    ESP_ERROR_CHECK(nvs_open("storage", NVS_READWRITE, &nvs_handle));
+    ESP_ERROR_CHECK(nvs_set_blob(nvs_handle, "genomes", patterns, sizeof(patterns)));
+    ESP_ERROR_CHECK(nvs_commit(nvs_handle));
+    nvs_close(nvs_handle);
+    ESP_LOGI(TAG, "Genomes saved to storage.");
+    
+}
+
+void load_genomes_from_storage() {
+    nvs_handle_t nvs_handle;
+    size_t required_size = sizeof(patterns);
+
+    ESP_ERROR_CHECK(nvs_open("storage", NVS_READONLY, &nvs_handle));
+    esp_err_t err = nvs_get_blob(nvs_handle, "genomes", patterns, &required_size);
+
+    if (err == ESP_ERR_NVS_NOT_FOUND) {
+        ESP_LOGW(TAG, "No genomes found in storage. Generating new patterns.");
+        for (int i = 0; i < NUM_PATTERNS; i++) {
+            generate_gene(&patterns[i]);
+        }
+        save_genomes_to_storage();
+    } else if (err == ESP_OK) {
+        ESP_LOGI(TAG, "Genomes loaded from storage.");
+    } else {
+        ESP_LOGE(TAG, "Failed to load genomes: %s", esp_err_to_name(err));
     }
 
     nvs_close(nvs_handle);

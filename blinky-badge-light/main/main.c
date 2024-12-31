@@ -1,20 +1,33 @@
-#include "led_control.h"
-#include "touch_input.h"
-#include "storage.h"
-
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "nvs_flash.h"
+
+#include "led_control.h"
+#include "touch_input.h"
+#include "storage.h"
+#include "genes.h"
 
 // Shared settings
 badge_settings_t settings;
 
 // Lighting task
 void lighting_task(void *param) {
+    int loop = 0;
+    uint8_t framebuffer[LED_COUNT * 3];
+
     while (1) {
-        // Update LEDs based on the current pattern
-        //update_leds();
-        vTaskDelay(50 / portTICK_PERIOD_MS); // Adjust delay for smoother animations
+        // Render the current pattern
+        render_pattern(settings.pattern_id, framebuffer, LED_COUNT, loop);
+
+        // Update LEDs
+        update_leds(framebuffer);
+
+        // Increment loop counter for animation
+        loop = (loop + 1) % 256;
+
+        // Delay for smooth animation (adjust as needed)
+        vTaskDelay(20 / portTICK_PERIOD_MS);
     }
 }
 
@@ -28,6 +41,7 @@ void touch_task(void *param) {
                     // Pad 1: Cycle patterns
                     settings.pattern_id = (settings.pattern_id + 1) % NUM_PATTERNS;
                     set_pattern(settings.pattern_id);
+                    ESP_LOGI("MAIN", "Current pattern: %d", settings.pattern_id);
                     // Save the updated settings
                     save_settings(&settings);
                     break;
@@ -62,6 +76,16 @@ void battery_task(void *param) {
 }
 
 void app_main() {
+    // Initialize NVS
+    esp_err_t ret = nvs_flash_init();
+    if (ret != ESP_OK) {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ret = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(ret);
+
+    // Load or generate genomes
+    load_genomes_from_storage();
     // Initialize components
     init_leds();
     init_touch();
