@@ -29,12 +29,13 @@ void app_main() {
                         set_pattern(settings.pattern_id);
                         // Save the updated settings
                         save_settings(&settings);
+                        break;
                     case 1:
                         // Pad 2: Adjust brightness
                         settings.brightness = (settings.brightness + 1) % NUM_BRIGHTNESS_LEVELS;
                         set_brightness(settings.brightness);
-                        // Save the updated settings
                         save_settings(&settings);
+                        break;
                     default:
                         // Handle other pads if needed
                         break;
@@ -44,6 +45,6 @@ void app_main() {
                 // Add long press actions if needed
             }
         }
-        vTaskDelay(10000 / portTICK_PERIOD_MS);
+        vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
