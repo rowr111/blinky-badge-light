@@ -54,7 +54,12 @@ void touch_task(void *param) {
                 }
             } else if (event == LONG_PRESS) {
                 ESP_LOGI("MAIN", "Long press on pad %d", i);
-                // Handle long press actions (e.g., save settings)
+                if (i == 2) {
+                    // Pad 3: Generate new genome for current pattern
+                    generate_gene(&patterns[settings.pattern_id]);
+                    save_genomes_to_storage();
+                    break;
+                }
             }
         }
         vTaskDelay(100 / portTICK_PERIOD_MS); // Adjust polling rate
