@@ -5,6 +5,7 @@
 #include "genes.h"
 #include "esp_log.h"
 #include <math.h>
+#include <stdbool.h>
 
 static const char *TAG = "LED_CONTROL";
 
@@ -14,6 +15,7 @@ static int current_pattern = 0; // Active pattern ID
 static uint8_t brightness = MAX_BRIGHTNESS;
 static const uint8_t brightness_levels[] = {MAX_BRIGHTNESS / 10, MAX_BRIGHTNESS / 5, MAX_BRIGHTNESS / 2, (3 * MAX_BRIGHTNESS) / 4, MAX_BRIGHTNESS, MAX_BRIGHTNESS}; // 10%, 20%, 50%, 75%, 100%, 100%
 static int brightness_index = 0; // Index for the current brightness level
+volatile bool flash_active = false;
 
 // Initialize LED strip
 void init_leds() {
@@ -86,4 +88,21 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
         // Set the pixel in the framebuffer
         set_pixel(framebuffer, i, color.r, color.g, color.b);
     }
+}
+
+void flash_feedback_pattern() {
+    flash_active = true; // Pause the lighting task
+    uint8_t framebuffer[LED_COUNT * 3] = {0};
+
+    // Flash all LEDs with white light for a brief moment
+    for (int i = 0; i < LED_COUNT; i++) {
+        set_pixel(framebuffer, i, 80, 80, 80); // White but lets not blind people
+    }
+    update_leds(framebuffer);
+    vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms flash
+
+    // Turn off LEDs
+    memset(framebuffer, 0, sizeof(framebuffer));
+    update_leds(framebuffer);
+    flash_active = false; // Resume the lighting task
 }

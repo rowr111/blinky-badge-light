@@ -16,18 +16,20 @@ void lighting_task(void *param) {
     int loop = 0;
     uint8_t framebuffer[LED_COUNT * 3];
 
-    while (1) {
-        // Render the current pattern
-        render_pattern(settings.pattern_id, framebuffer, LED_COUNT, loop);
+    while (1) { 
+        if (!flash_active) { // Only render patterns if no feedback is active
+            // Render the current pattern
+            render_pattern(settings.pattern_id, framebuffer, LED_COUNT, loop);
 
-        // Update LEDs
-        update_leds(framebuffer);
+            // Update LEDs
+            update_leds(framebuffer);
 
-        // Increment loop counter for animation
-        loop = (loop + 1) % 256;
+            // Increment loop counter for animation
+            loop = (loop + 1) % 256;
 
-        // Delay for smooth animation (adjust as needed)
-        vTaskDelay(20 / portTICK_PERIOD_MS);
+            // Delay for smooth animation (adjust as needed)
+            vTaskDelay(20 / portTICK_PERIOD_MS);
+        }
     }
 }
 
@@ -58,6 +60,7 @@ void touch_task(void *param) {
                     // Pad 3: Generate new genome for current pattern
                     generate_gene(&patterns[settings.pattern_id]);
                     save_genomes_to_storage();
+                    flash_feedback_pattern();
                     break;
                 }
             }

@@ -2,6 +2,7 @@
 #define LED_CONTROL_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 // Function to initialize LEDs
 void init_leds(void);
@@ -11,6 +12,10 @@ void set_brightness();
 void update_leds(uint8_t *framebuffer);
 // Function to render a pattern based on the index and loop
 void render_pattern(int index, uint8_t *framebuffer, int count, int loop);
+
+void flash_feedback_pattern(void);
+
+extern volatile bool flash_active; 
 
 
 // Constants
