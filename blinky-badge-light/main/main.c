@@ -19,9 +19,12 @@ void lighting_task(void *param) {
 
     while (1) { 
         if (!flash_active) { // Only render patterns if no feedback is active
-            // Render the current pattern
-            render_pattern(settings.pattern_id, framebuffer, LED_COUNT, loop);
-
+            // Render the current pattern 
+            if (force_safety_pattern) {
+                safety_pattern(framebuffer, LED_COUNT, loop);
+            } else {
+                render_pattern(settings.pattern_id, framebuffer, LED_COUNT, loop);
+            }
             // Update LEDs
             update_leds(framebuffer);
 

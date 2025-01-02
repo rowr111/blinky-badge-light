@@ -12,6 +12,7 @@ static adc_oneshot_unit_handle_t adc_handle;
 static adc_cali_handle_t cali_handle;
 
 volatile bool limit_brightness = false;
+volatile bool force_safety_pattern = false;
 
 void init_battery_monitor() {
     // Initialize ADC for oneshot mode
@@ -65,10 +66,11 @@ void battery_monitor_task(void *param) {
         } else if (battery_voltage > SHIPMODE_THRESH / 1000.0) {
             ESP_LOGE(TAG, "Battery critically low: %.2fV. Entering safety mode.", battery_voltage);
             limit_brightness = true;
-            //enter_safety_mode();
+            force_safety_pattern = true;
         } else {
             ESP_LOGE(TAG, "Battery extremely low: %.2fV. Goodbye, cruel world!!!", battery_voltage);
             limit_brightness = true;
+            force_safety_pattern = true;
             //enter_ship_mode();
         }
 

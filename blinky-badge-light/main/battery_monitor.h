@@ -20,5 +20,6 @@ void cleanup_battery_monitor();  // Clean up ADC resources
 #define SHIPMODE_THRESH   3330 // Ship mode threshold in mV
 
 extern volatile bool limit_brightness; // Flag to limit brightness when battery is low but not critical
+extern volatile bool force_safety_pattern; // Flag to force safety pattern when battery is critically low
 
 #endif // BATTERY_MONITOR_H

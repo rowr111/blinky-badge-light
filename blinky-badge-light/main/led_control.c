@@ -117,3 +117,36 @@ void flash_feedback_pattern() {
     update_leds(framebuffer);
     flash_active = false; // Resume the lighting task
 }
+
+void safety_pattern(uint8_t *framebuffer, int count, int loop) {
+    // Set brightness to 10% of MAX_BRIGHTNESS
+    uint8_t safety_brightness = MAX_BRIGHTNESS / 10;
+
+    // Define color intensities
+    uint8_t lower_red = safety_brightness / 6; // Lower brightness red
+    uint8_t full_red = safety_brightness;     // Full brightness red
+
+    // Slow down the pattern cycle
+    int slowdown_factor = 7;  // Adjust this to change the speed (higher = slower)
+    int slowed_loop = loop / slowdown_factor;
+
+    // Create the safety pattern
+    for (int i = 0; i < count; i++) {
+        int pattern_index = (i + slowed_loop) % 4; // Cycle through 4-step pattern
+
+        switch (pattern_index) {
+            case 0: // Black
+                set_pixel(framebuffer, i, 0, 0, 0);
+                break;
+            case 1: // Lower brightness red
+                set_pixel(framebuffer, i, lower_red, 0, 0);
+                break;
+            case 2: // Full brightness red
+                set_pixel(framebuffer, i, full_red, 0, 0);
+                break;
+            case 3: // Lower brightness red
+                set_pixel(framebuffer, i, lower_red, 0, 0);
+                break;
+        }
+    }
+}
