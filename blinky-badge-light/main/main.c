@@ -94,5 +94,5 @@ void app_main() {
     // Create tasks
     xTaskCreate(lighting_task, "Lighting Task", 2048, NULL, 5, NULL);
     xTaskCreate(touch_task, "Touch Task", 2048, NULL, 5, NULL);
-    xTaskCreate(battery_monitor_task, "Battery Monitor Task", 2048, NULL, 3, NULL);
+    xTaskCreate(battery_monitor_task, "Battery Monitor Task", 2048, NULL, 5, NULL);
 }
