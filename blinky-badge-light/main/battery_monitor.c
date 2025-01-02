@@ -6,13 +6,12 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#define ADC_ATTEN   ADC_ATTEN_DB_12
-#define ADC_UNIT    ADC_UNIT_1
-
 static const char *TAG = "BATTERY_MONITOR";
 
 static adc_oneshot_unit_handle_t adc_handle;
 static adc_cali_handle_t cali_handle;
+
+volatile bool limit_brightness = false;
 
 void init_battery_monitor() {
     // Initialize ADC for oneshot mode
@@ -59,17 +58,17 @@ void battery_monitor_task(void *param) {
 
         if (battery_voltage > BRIGHT_THRESH / 1000.0) {
             ESP_LOGI(TAG, "Battery is normal: %.2fV", battery_voltage);
+            limit_brightness = false;
         } else if (battery_voltage > SAFETY_THRESH / 1000.0) {
             ESP_LOGW(TAG, "Battery low: %.2fV. Limiting brightness.", battery_voltage);
-            // Call your brightness limiting function here
-            //limit_brightness();
+            limit_brightness = true;
         } else if (battery_voltage > SHIPMODE_THRESH / 1000.0) {
             ESP_LOGE(TAG, "Battery critically low: %.2fV. Entering safety mode.", battery_voltage);
-            // Call your safety mode function here
+            limit_brightness = true;
             //enter_safety_mode();
         } else {
-            ESP_LOGE(TAG, "Battery extremely low: %.2fV. Entering ship mode.", battery_voltage);
-            // Call your ship mode function here
+            ESP_LOGE(TAG, "Battery extremely low: %.2fV. Goodbye, cruel world!!!", battery_voltage);
+            limit_brightness = true;
             //enter_ship_mode();
         }
 

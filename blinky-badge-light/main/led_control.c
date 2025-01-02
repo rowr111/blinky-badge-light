@@ -3,6 +3,7 @@
 #include "led_strip.h"
 #include "led_utils.h"
 #include "genes.h"
+#include "battery_monitor.h"
 #include "esp_log.h"
 #include <math.h>
 #include <stdbool.h>
@@ -15,6 +16,7 @@ static int current_pattern = 0; // Active pattern ID
 static uint8_t brightness = MAX_BRIGHTNESS;
 static const uint8_t brightness_levels[] = {MAX_BRIGHTNESS / 10, MAX_BRIGHTNESS / 5, MAX_BRIGHTNESS / 2, (3 * MAX_BRIGHTNESS) / 4, MAX_BRIGHTNESS, MAX_BRIGHTNESS}; // 10%, 20%, 50%, 75%, 100%, 100%
 static int brightness_index = 0; // Index for the current brightness level
+static int limited_brightness_index = 1; // Index for the limited brightness level
 volatile bool flash_active = false;
 
 // Initialize LED strip
@@ -69,13 +71,22 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
     uint8_t hue;
     Color color;
 
+    // Determine the effective brightness
+    uint8_t effective_brightness = brightness;
+    if (limit_brightness) {
+        uint8_t limited_brightness = brightness_levels[limited_brightness_index];
+        if (limited_brightness < brightness) {
+            effective_brightness = limited_brightness;
+        }
+    }
+
     for (int i = 0; i < count; i++) {
         // Calculate hue and base brightness
         hue = (g->hue_base + i * g->hue_ratedir + loop) % 256;
         uint8_t base_brightness = 127 + (127 * sinf(2 * M_PI * loop / 256));
 
-        // Scale brightness with settings.brightness
-        uint8_t final_brightness = (base_brightness * brightness) / 255;
+        // Scale brightness with effective_brightness
+        uint8_t final_brightness = (base_brightness * effective_brightness) / 255;
 
         // Generate color using Wheel function
         color = Wheel(hue);
