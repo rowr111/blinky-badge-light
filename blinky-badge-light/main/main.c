@@ -3,6 +3,7 @@
 #include "freertos/task.h"
 #include "nvs_flash.h"
 
+#include "battery_monitor.h"
 #include "led_control.h"
 #include "touch_input.h"
 #include "storage.h"
@@ -69,20 +70,6 @@ void touch_task(void *param) {
     }
 }
 
-// Battery monitoring task
-void battery_task(void *param) {
-    while (1) {
-        /*
-        int battery_level = get_battery_level(); // Implement this function
-        if (battery_level < 20) {
-            // Low battery warning
-            ESP_LOGW("BATTERY", "Battery is low: %d%%", battery_level);
-        }
-        */
-        vTaskDelay(5000 / portTICK_PERIOD_MS); // Check battery every 5 seconds
-    }
-}
-
 void app_main() {
     // Initialize NVS
     esp_err_t ret = nvs_flash_init();
@@ -95,6 +82,7 @@ void app_main() {
     // Load or generate genomes
     load_genomes_from_storage();
     // Initialize components
+    init_battery_monitor();
     init_leds();
     init_touch();
     init_storage();
@@ -106,5 +94,5 @@ void app_main() {
     // Create tasks
     xTaskCreate(lighting_task, "Lighting Task", 2048, NULL, 5, NULL);
     xTaskCreate(touch_task, "Touch Task", 2048, NULL, 5, NULL);
-    xTaskCreate(battery_task, "Battery Task", 2048, NULL, 3, NULL);
+    xTaskCreate(battery_monitor_task, "Battery Monitor Task", 2048, NULL, 3, NULL);
 }
