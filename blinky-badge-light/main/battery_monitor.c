@@ -61,7 +61,7 @@ float get_battery_voltage() {
 
 void turn_off() {
     ESP_LOGI(TAG, "Shutting down...");
-    gpio_set_level(MOSFET_GATE_PIN, 0);  // Pull MOSFET gate low to cut power
+    gpio_set_level(MOSFET_GATE_PIN, 1);  // Pull MOSFET gate HIGH to cut power
 
     // Small delay to ensure MOSFET powers down cleanly
     vTaskDelay(pdMS_TO_TICKS(100));
@@ -81,8 +81,8 @@ void init_battery_monitor() {
     };
     gpio_config(&io_conf);
 
-    // Set MOSFET gate high to keep power on
-    gpio_set_level(MOSFET_GATE_PIN, 1);
+    // Set MOSFET gate LOW to keep power on
+    gpio_set_level(MOSFET_GATE_PIN, 0);
 
     // Configure button interrupt
     gpio_set_intr_type(BUTTON_PIN, GPIO_INTR_ANYEDGE); // Trigger on press and release
