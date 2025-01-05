@@ -17,6 +17,31 @@ Hello!  Welcome to the github repo for Blinky Badge "light".
 - I also re-use the pattern generation concepts from the original badge in some of the patterns, so visually there are also some similarities.
 - This badge does not share the radio communication features of the original, nor does it have a screen/ui - thus it's called blinky badge "light".  (Also, it makes.. light. get it? :D)
    
+## Features
+### Patterns:
+ - three unique patterns generated on initial startup for each badge
+    - the first pattern will also be sound reactive
+ - fourth sound reactive pattern whose color indicates dB level
+ - one 'safety' pattern
+    - not in the normal pattern list
+    - forced when battery level is very low
+
+### Capacitive Touch Buttons:
+1. iterate through unique patterns (wraps around when gets to the end)
+2. change brightness level (wraps around after brightest)
+3. replace current pattern with new unique pattern
+    - doesn't work on fourth pattern or safety pattern
+    - small flash on pattern change for visual indicator of change
+
+### Power Button (physical button):
+ - press to turn badge on
+ - long press to turn badge off
+
+### Power Indicator LED (small, yellow):
+ - off during normal operation with good battery charge
+ - on (solid) when power is starting to get low
+ - blinking during charging
+
 
 ## Physical Structure/Components
 
