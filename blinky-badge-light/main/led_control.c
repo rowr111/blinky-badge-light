@@ -1,12 +1,15 @@
-#include "led_control.h"
-#include "driver/rmt_tx.h"
-#include "led_strip.h"
-#include "led_utils.h"
-#include "genes.h"
-#include "battery_monitor.h"
-#include "esp_log.h"
 #include <math.h>
 #include <stdbool.h>
+
+#include "driver/rmt_tx.h"
+#include "esp_log.h"
+#include "led_strip.h"
+#include "led_utils.h"
+
+#include "battery_monitor.h"
+#include "genes.h"
+#include "led_control.h"
+#include "pins.h"
 
 static const char *TAG = "LED_CONTROL";
 

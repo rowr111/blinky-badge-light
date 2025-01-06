@@ -20,8 +20,6 @@ extern volatile bool flash_active;
 
 
 // Constants
-#define LED_PIN 16              // GPIO pin for LED data
-#define LED_COUNT 10            // Number of LEDs
 #define MAX_BRIGHTNESS 255      // Maximum brightness level
 #define NUM_PATTERNS 5          // Number of lighting patterns
 #define NUM_BRIGHTNESS_LEVELS 5 // Number of brightness levels

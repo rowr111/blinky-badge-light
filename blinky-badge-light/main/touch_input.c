@@ -1,8 +1,10 @@
-#include "touch_input.h"
 #include "driver/touch_pad.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+
+#include "pins.h"
+#include "touch_input.h"
 
 static const char *TAG = "TOUCH_INPUT";
 
@@ -27,9 +29,9 @@ static bool short_press_detected[NUM_TOUCH_PADS] = {false};
 
 // Array of touch pad numbers
 static const touch_pad_t touch_pads[NUM_TOUCH_PADS] = {
-    0, //gpio 4
-    2, //gpio 2
-    7, //gpio 0
+    TOUCH_PAD_1,
+    TOUCH_PAD_2,
+    TOUCH_PAD_3,
 };
 
 // Initialize touch input

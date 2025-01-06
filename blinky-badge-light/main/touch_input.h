@@ -15,9 +15,4 @@ int get_touch_event(int pad_num);
 // Number of touch pads
 #define NUM_TOUCH_PADS 3
 
-// Touch pad GPIO assignments (adjust as needed)
-#define TOUCH_PAD_1 17
-#define TOUCH_PAD_2 18
-#define TOUCH_PAD_3 19
-
 #endif // TOUCH_INPUT_H

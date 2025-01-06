@@ -1,4 +1,5 @@
 #include "battery_monitor.h"
+#include "pins.h"
 #include "esp_log.h"
 #include "esp_adc/adc_oneshot.h"
 #include "esp_adc/adc_cali.h"
