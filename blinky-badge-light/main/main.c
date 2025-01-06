@@ -5,6 +5,8 @@
 
 #include "battery_monitor.h"
 #include "led_control.h"
+#include "pins.h"
+#include "microphone.h"
 #include "touch_input.h"
 #include "storage.h"
 #include "genes.h"
@@ -87,6 +89,7 @@ void app_main() {
     // Initialize components
     init_battery_monitor();
     init_leds();
+    init_microphone();
     init_touch();
     init_storage();
     load_settings(&settings);
@@ -98,4 +101,5 @@ void app_main() {
     xTaskCreate(lighting_task, "Lighting Task", 2048, NULL, 5, NULL);
     xTaskCreate(touch_task, "Touch Task", 2048, NULL, 5, NULL);
     xTaskCreate(battery_monitor_task, "Battery Monitor Task", 2048, NULL, 5, NULL);
+    xTaskCreate(microphone_task, "Microphone Task", 2048, NULL, 5, NULL);
 }

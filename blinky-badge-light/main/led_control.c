@@ -9,6 +9,7 @@
 #include "battery_monitor.h"
 #include "genes.h"
 #include "led_control.h"
+#include "microphone.h"
 #include "pins.h"
 
 static const char *TAG = "LED_CONTROL";
@@ -42,6 +43,12 @@ void init_leds() {
 // Set the active pattern
 void set_pattern(int pattern_id) {
     current_pattern = pattern_id % NUM_PATTERNS;
+    // Enable microphone for patterns 0 and 4, the sound reactive patterns
+    if (current_pattern == 0 || current_pattern == 4) {
+        set_mic_active(true);
+    } else {
+        set_mic_active(false);
+    }
 }
 
 // Set LED brightness
