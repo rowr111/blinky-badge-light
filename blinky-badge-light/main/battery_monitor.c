@@ -8,6 +8,7 @@
 #include "freertos/task.h"
 
 #include "battery_monitor.h"
+#include "pins.h"
 
 #define LONG_PRESS_THRESHOLD_MS 3000 // 3 seconds
 #define BUTTON_INIT_IGNORE_TIME_MS 10000 // 10 seconds - Ignore button presses during this time after boot

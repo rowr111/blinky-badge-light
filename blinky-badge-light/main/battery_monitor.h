@@ -10,7 +10,6 @@ void battery_monitor_task(void *param);
 void cleanup_battery_monitor();  // Clean up ADC resources
 
 // Constants
-#define ADC_CHANNEL ADC_CHANNEL_0  // GPIO36
 #define VOLTAGE_DIVIDER_RATIO 1.4545 // Adjust based on resistors used (using 10k and 22k during testing)
 #define ADC_ATTEN   ADC_ATTEN_DB_12
 #define ADC_UNIT    ADC_UNIT_1
