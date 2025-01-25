@@ -17,6 +17,7 @@ volatile bool mic_active = false; // Initialize the microphone flag
 static TaskHandle_t microphone_task_handle = NULL; // Task handle for the microphone task
 i2s_chan_handle_t rx_handle;  // I2S receive channel handle
 char i2s_rx_buff[RX_SAMPLE_SIZE];
+size_t bytes_read;
 
 void set_mic_active(bool active) {
     mic_active = active;
@@ -41,13 +42,13 @@ void init_microphone() {
 
     i2s_std_config_t std_cfg = {
         .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG(16000),
-        .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_STEREO),
+        .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO),
         .gpio_cfg = {
             .mclk = I2S_GPIO_UNUSED,  
             .bclk = I2S_SCK_PIN,
             .ws = I2S_WS_PIN,
-            .dout = I2S_DI_PIN,
-            .din = I2S_GPIO_UNUSED,
+            .dout = I2S_GPIO_UNUSED,
+            .din = I2S_DI_PIN,
             .invert_flags = {
                 .mclk_inv = false,
                 .bclk_inv = false,
@@ -88,49 +89,25 @@ float get_sound_level() {
         return -1.0f; // Return error value
     }
 
-    int32_t samples[SAMPLE_BUFFER_SIZE];
-    size_t bytes_read = 0;
+    char *buf_ptr_read = i2s_rx_buff;
 
-    // Read samples from the I2S microphone
-    esp_err_t ret = i2s_channel_read(rx_handle, samples, sizeof(samples), &bytes_read, portMAX_DELAY);
-    if (ret != ESP_OK) {
-        ESP_LOGE("MICROPHONE", "Failed to read I2S data: %s", esp_err_to_name(ret));
-        return -1.0f; // Return error value
+    if (i2s_channel_read(rx_handle, i2s_rx_buff, RX_SAMPLE_SIZE, &bytes_read, 1000) == ESP_OK) {
+        ESP_LOGI(TAG, "bytes read: %d; raw buf size: %d", bytes_read, sizeof(i2s_rx_buff) / sizeof(i2s_rx_buff[0]));
+        int raw_samples_read = bytes_read / 2 / (I2S_DATA_BIT_WIDTH_32BIT / 8);
+        ESP_LOGI(TAG, "raw samples read: %d", raw_samples_read);
+        for (int i = 0; i < raw_samples_read; i++)
+        {
+            // let's inspect our input once in a while
+            if (i % 10000 == 0) { // the first sample of every new buffer
+                ESP_LOGI(TAG, "rx packet looks like %04x %04x %04x %04x", i2s_rx_buff[i], i2s_rx_buff[i+1], i2s_rx_buff[i+2], i2s_rx_buff[i+3]);
+            }
+           
+        }
+    } else {
+        ESP_LOGI(TAG, "Read Failed!");
     }
 
-    if (bytes_read == 0) {
-        ESP_LOGW("MICROPHONE", "No data read from I2S");
-        return -1.0f; // Return error value
-    }
-
-    size_t num_samples = bytes_read / sizeof(int32_t);
-
-    // Debugging: Print some of the raw samples
-    ESP_LOGI("MICROPHONE", "First 5 samples: %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32,
-         samples[0], samples[1], samples[2], samples[3], samples[4]);
-
-
-    // Calculate RMS (Root Mean Square)
-    double sum_squares = 0.0;
-    for (size_t i = 0; i < num_samples; i++) {
-        double sample = (double)samples[i] / (1 << 31); // Normalize to -1.0 to 1.0 range
-        sum_squares += sample * sample;
-    }
-
-    float rms = sqrtf(sum_squares / num_samples);
-
-    // Clamp RMS to avoid log10(0)
-    if (rms < 1e-9) {
-        ESP_LOGW("MICROPHONE", "RMS too low to calculate dB");
-        rms = 1e-9; // Prevent division by zero or negative values
-    }
-
-    // Convert RMS to dB
-    float db_level = 20.0f * log10f(rms);
-
-    ESP_LOGI("MICROPHONE", "RMS: %.8f, dB Level: %.2f", rms, db_level);
-
-    return db_level;
+    return 0;
 }
 
 

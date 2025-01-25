@@ -8,6 +8,8 @@
 #include "touch_input.h"
 #include "storage.h"
 #include "genes.h"
+#include "pins.h"
+#include "microphone.h"
 
 // Shared settings
 badge_settings_t settings;
@@ -89,6 +91,7 @@ void app_main() {
     init_leds();
     init_touch();
     init_storage();
+    init_microphone();    
     load_settings(&settings);
 
     set_pattern(settings.pattern_id);
