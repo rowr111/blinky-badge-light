@@ -10,10 +10,13 @@
 #include "microphone.h"
 
 static const char *TAG = "MICROPHONE";
+#define BUFFER_SIZE 1024
+#define RX_SAMPLE_SIZE (I2S_DATA_BIT_WIDTH_32BIT * BUFFER_SIZE)
 
 volatile bool mic_active = false; // Initialize the microphone flag
 static TaskHandle_t microphone_task_handle = NULL; // Task handle for the microphone task
 i2s_chan_handle_t rx_handle;  // I2S receive channel handle
+char i2s_rx_buff[RX_SAMPLE_SIZE];
 
 void set_mic_active(bool active) {
     mic_active = active;
@@ -34,28 +37,22 @@ void init_microphone() {
     esp_err_t err;
 
     // I2S configuration
-    i2s_chan_config_t chan_cfg = {
-        .id = I2S_NUM_0, // Using I2S port 0
-        .role = I2S_ROLE_MASTER,
-        .dma_desc_num = 6, // DMA descriptors
-        .dma_frame_num = 240, // Number of frames per DMA buffer
-        .auto_clear = true, // Auto-clear RX buffer on overflow
-    };
+    i2s_chan_config_t chan_cfg = I2S_CHANNEL_DEFAULT_CONFIG(I2S_NUM_0, I2S_ROLE_MASTER);
 
     i2s_std_config_t std_cfg = {
-        .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG(SAMPLE_RATE),
-        .slot_cfg = {
-            .data_bit_width = I2S_DATA_BIT_WIDTH_32BIT, // Match microphone output
-            .slot_bit_width = I2S_SLOT_BIT_WIDTH_32BIT, // Ensure alignment
-            .slot_mode = I2S_SLOT_MODE_MONO,            // Use mono mode
-            .slot_mask = I2S_STD_SLOT_LEFT, // The L/R pin of MIC is pulled down, which selects left slot
-        },
+        .clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG(16000),
+        .slot_cfg = I2S_STD_MSB_SLOT_DEFAULT_CONFIG(I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_STEREO),
         .gpio_cfg = {
-            .mclk = -1,  // Define in pins.h
+            .mclk = I2S_GPIO_UNUSED,  
             .bclk = I2S_SCK_PIN,
             .ws = I2S_WS_PIN,
-            .dout = -1,
-            .din = I2S_DI_PIN
+            .dout = I2S_DI_PIN,
+            .din = I2S_GPIO_UNUSED,
+            .invert_flags = {
+                .mclk_inv = false,
+                .bclk_inv = false,
+                .ws_inv = false,
+            },
         },
     };
 
@@ -82,6 +79,8 @@ void init_microphone() {
 
     ESP_LOGI(TAG, "Microphone initialized successfully");
 }
+
+
 
 float get_sound_level() {
     if (!rx_handle) {
