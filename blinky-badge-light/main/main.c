@@ -98,4 +98,8 @@ void app_main() {
     xTaskCreate(lighting_task, "Lighting Task", 2048, NULL, 5, NULL);
     xTaskCreate(touch_task, "Touch Task", 2048, NULL, 5, NULL);
     xTaskCreate(battery_monitor_task, "Battery Monitor Task", 2048, NULL, 5, NULL);
+<<<<<<< Updated upstream
+=======
+    xTaskCreate(microphone_task, "Microphone Task", 4096, NULL, 5, NULL);
+>>>>>>> Stashed changes
 }

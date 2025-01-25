@@ -13,4 +13,12 @@
 // Battery monitoring pin
 #define ADC_CHANNEL ADC_CHANNEL_0  // GPIO36
 
+<<<<<<< Updated upstream
+=======
+// Microphone pins
+#define I2S_SCK_PIN GPIO_NUM_26  // Clock Pin (BCLK)
+#define I2S_WS_PIN  GPIO_NUM_25  // Word Select (LRCLK)
+#define I2S_DI_PIN  GPIO_NUM_22  // Data In (DOUT)
+
+>>>>>>> Stashed changes
 #endif // PINS_H
