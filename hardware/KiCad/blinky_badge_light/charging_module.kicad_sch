@@ -1,14 +1,18 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "e0fbe3ab-184b-404b-a741-4d19bdd0723c")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Device:Battery_Cell"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -91,7 +95,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0.762) (xy 0 0)
+						(xy 0 1.778) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -103,7 +107,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 1.778) (xy 0 2.54)
+						(xy 0 0.762) (xy 0 0)
 					)
 					(stroke
 						(width 0)
@@ -176,9 +180,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:C"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0.254)
 			)
@@ -251,7 +258,7 @@
 			(symbol "C_0_1"
 				(polyline
 					(pts
-						(xy -2.032 -0.762) (xy 2.032 -0.762)
+						(xy -2.032 0.762) (xy 2.032 0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -263,7 +270,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.032 0.762) (xy 2.032 0.762)
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -312,11 +319,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:LED"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -384,10 +396,22 @@
 			(symbol "LED_0_1"
 				(polyline
 					(pts
-						(xy -1.27 -1.27) (xy -1.27 1.27)
+						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
 					)
 					(stroke
-						(width 0.254)
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
+					)
+					(stroke
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -408,7 +432,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
+						(xy -1.27 -1.27) (xy -1.27 1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -420,22 +444,10 @@
 				)
 				(polyline
 					(pts
-						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
+						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
 					)
 					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
-					)
-					(stroke
-						(width 0)
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -481,9 +493,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:R"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
 			)
@@ -602,6 +617,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "TP4056:TP4056"
 			(pin_names
@@ -684,18 +700,6 @@
 			(symbol "TP4056_0_1"
 				(polyline
 					(pts
-						(xy 7.62 -15.24) (xy 38.1 -15.24)
-					)
-					(stroke
-						(width 0.127)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 7.62 5.08) (xy 7.62 -15.24)
 					)
 					(stroke
@@ -708,7 +712,7 @@
 				)
 				(polyline
 					(pts
-						(xy 38.1 -15.24) (xy 38.1 5.08)
+						(xy 7.62 -15.24) (xy 38.1 -15.24)
 					)
 					(stroke
 						(width 0.127)
@@ -721,6 +725,18 @@
 				(polyline
 					(pts
 						(xy 38.1 5.08) (xy 7.62 5.08)
+					)
+					(stroke
+						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 38.1 -15.24) (xy 38.1 5.08)
 					)
 					(stroke
 						(width 0.127)
@@ -802,53 +818,17 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 45.72 -10.16 180)
-					(length 7.62)
-					(name "BAT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin unspecified line
-					(at 45.72 -7.62 180)
+					(at 45.72 0 180)
 					(length 7.62)
-					(name "*STDBY"
+					(name "EPAD"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin unspecified line
-					(at 45.72 -5.08 180)
-					(length 7.62)
-					(name "*CHRG"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
+					(number "EPAD"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -875,16 +855,52 @@
 					)
 				)
 				(pin unspecified line
-					(at 45.72 0 180)
+					(at 45.72 -5.08 180)
 					(length 7.62)
-					(name "EPAD"
+					(name "*CHRG"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "EPAD"
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 45.72 -7.62 180)
+					(length 7.62)
+					(name "*STDBY"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 45.72 -10.16 180)
+					(length 7.62)
+					(name "BAT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -893,12 +909,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -989,7 +1010,30 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
+	)
+	(rectangle
+		(start 74.93 22.86)
+		(end 212.09 139.7)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 79b79371-c88c-4c7b-bdd4-a9b4a6a98a90)
+	)
+	(text "BATTERY AND CHARGER"
+		(exclude_from_sim yes)
+		(at 87.63 137.16 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "ada55b69-f1c9-4fed-81bc-302c78fad2ee")
 	)
 	(junction
 		(at 165.1 60.96)
@@ -1135,7 +1179,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 91.44) (xy 119.38 91.44)
+			(xy 115.57 91.44) (xy 119.38 91.44)
 		)
 		(stroke
 			(width 0)
@@ -1275,7 +1319,7 @@
 	)
 	(wire
 		(pts
-			(xy 106.68 91.44) (xy 110.49 91.44)
+			(xy 106.68 91.44) (xy 107.95 91.44)
 		)
 		(stroke
 			(width 0)
@@ -1322,28 +1366,6 @@
 			(type default)
 		)
 		(uuid "fa9ba13a-cc0e-467e-8086-407dd16b4d09")
-	)
-	(rectangle
-		(start 74.93 22.86)
-		(end 212.09 139.7)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(uuid 79b79371-c88c-4c7b-bdd4-a9b4a6a98a90)
-	)
-	(text "BATTERY AND CHARGER"
-		(exclude_from_sim yes)
-		(at 87.63 137.16 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "ada55b69-f1c9-4fed-81bc-302c78fad2ee")
 	)
 	(global_label "USB Power"
 		(shape input)
@@ -2167,7 +2189,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOP8-PP_TPW"
+		(property "Footprint" "footprints:SOP8-PP_TPW"
 			(at 165.1 96.52 0)
 			(effects
 				(font
@@ -2243,7 +2265,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 114.3 91.44 0)
+		(at 111.76 91.44 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2251,7 +2273,7 @@
 		(dnp no)
 		(uuid "f53743be-418d-49ea-ba4b-f32a26e21924")
 		(property "Reference" "D25"
-			(at 113.03 86.36 0)
+			(at 109.22 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2259,7 +2281,7 @@
 			)
 		)
 		(property "Value" "LED"
-			(at 113.03 88.9 0)
+			(at 109.22 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2267,7 +2289,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
-			(at 114.3 91.44 0)
+			(at 111.76 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2276,7 +2298,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8550724011370958848"
-			(at 114.3 91.44 0)
+			(at 111.76 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2285,7 +2307,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode"
-			(at 114.3 91.44 0)
+			(at 111.76 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2294,7 +2316,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2297"
-			(at 114.3 91.44 0)
+			(at 111.76 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)

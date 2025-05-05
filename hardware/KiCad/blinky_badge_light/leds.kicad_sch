@@ -1,12 +1,14 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "69bd686b-135c-4872-a157-82690b1727bd")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Device:C"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0.254)
 			)
@@ -79,7 +81,7 @@
 			(symbol "C_0_1"
 				(polyline
 					(pts
-						(xy -2.032 -0.762) (xy 2.032 -0.762)
+						(xy -2.032 0.762) (xy 2.032 0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -91,7 +93,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.032 0.762) (xy 2.032 0.762)
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -140,6 +142,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "LED:WS2812B"
 			(pin_names
@@ -226,18 +229,6 @@
 			(symbol "WS2812B_0_1"
 				(polyline
 					(pts
-						(xy 1.27 -3.556) (xy 1.778 -3.556)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 1.27 -2.54) (xy 1.778 -2.54)
 					)
 					(stroke
@@ -250,19 +241,7 @@
 				)
 				(polyline
 					(pts
-						(xy 4.699 -3.556) (xy 2.667 -3.556)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.286 -2.54) (xy 1.27 -3.556) (xy 1.27 -3.048)
+						(xy 1.27 -3.556) (xy 1.778 -3.556)
 					)
 					(stroke
 						(width 0)
@@ -275,6 +254,18 @@
 				(polyline
 					(pts
 						(xy 2.286 -1.524) (xy 1.27 -2.54) (xy 1.27 -2.032)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.286 -2.54) (xy 1.27 -3.556) (xy 1.27 -3.048)
 					)
 					(stroke
 						(width 0)
@@ -308,6 +299,18 @@
 						(type none)
 					)
 				)
+				(polyline
+					(pts
+						(xy 4.699 -3.556) (xy 2.667 -3.556)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 				(rectangle
 					(start 5.08 5.08)
 					(end -5.08 -5.08)
@@ -321,6 +324,24 @@
 				)
 			)
 			(symbol "WS2812B_1_1"
+				(pin input line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "DIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin power_in line
 					(at 0 7.62 270)
 					(length 2.54)
@@ -332,24 +353,6 @@
 						)
 					)
 					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 7.62 0 180)
-					(length 2.54)
-					(name "DOUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -375,10 +378,273 @@
 						)
 					)
 				)
-				(pin input line
-					(at -7.62 0 0)
+				(pin output line
+					(at 7.62 0 180)
 					(length 2.54)
-					(name "DIN"
+					(name "DOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Logic_LevelTranslator:SN74LVC1T45DBV"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -6.35 8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SN74LVC1T45DBV"
+				(at 3.81 8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
+				(at 0 -11.43 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74lvc1t45.pdf"
+				(at -22.86 -16.51 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Single-Bit Dual-Supply Bus Transceiver With Configurable Voltage Translation and 3-State Outputs, SOT-23-6"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Level-Shifter CMOS-TTL-Translation"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SN74LVC1T45DBV_0_1"
+				(rectangle
+					(start -7.62 7.62)
+					(end 7.62 -7.62)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 0) (xy -2.54 1.016) (xy -0.762 1.016)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.762 0) (xy -0.762 2.032) (xy 1.016 1.016) (xy -0.762 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.762 -1.016) (xy -2.54 -1.016) (xy -2.54 0) (xy -4.572 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 1.016) (xy 2.794 1.016) (xy 2.794 0) (xy 4.064 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0) (xy 1.016 -1.778) (xy 1.016 -2.032) (xy -0.762 -1.016) (xy 1.016 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.794 0) (xy 2.794 -1.016) (xy 1.016 -1.016)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SN74LVC1T45DBV_1_1"
+				(pin bidirectional line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(name "DIR"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 10.16 270)
+					(length 2.54)
+					(name "VCCA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -10.16 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 2.54 10.16 270)
+					(length 2.54)
+					(name "VCCB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "B"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -394,12 +660,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -490,7 +761,30 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
+	)
+	(rectangle
+		(start 175.26 77.47)
+		(end 242.57 124.46)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 22d335c6-6e0a-4d66-9716-5cebd1dc05bb)
+	)
+	(text "LEVEL SHIFTER"
+		(exclude_from_sim no)
+		(at 184.15 121.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "78b2702a-8cec-4d93-8f45-ed266d291f77")
 	)
 	(junction
 		(at 176.53 161.29)
@@ -505,49 +799,49 @@
 		(uuid "03e57eec-bc93-4596-8714-1c9ad8b7a245")
 	)
 	(junction
-		(at 140.97 83.82)
+		(at 144.78 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "076bb578-a401-4571-a967-21b38d98dc68")
 	)
 	(junction
-		(at 140.97 38.1)
+		(at 144.78 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0dc592be-0a4c-43fc-9c74-ec611a47195e")
 	)
 	(junction
-		(at 163.83 58.42)
+		(at 167.64 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0f0a7d55-cd0a-4da8-b206-afbf02e26414")
 	)
 	(junction
-		(at 209.55 83.82)
+		(at 213.36 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1190bbd7-8558-4b54-9ebe-5b08beaaec56")
 	)
 	(junction
-		(at 209.55 63.5)
+		(at 213.36 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "11982a15-4520-4a91-b512-d4358ecbc2a0")
 	)
 	(junction
-		(at 118.11 83.82)
+		(at 121.92 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "148ecba2-303f-47b7-b214-b3da177d7065")
 	)
 	(junction
-		(at 140.97 58.42)
+		(at 144.78 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "182b628d-68dd-4a78-8b7e-b95b09307bee")
 	)
 	(junction
-		(at 232.41 83.82)
+		(at 236.22 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1a6208e7-ddca-43de-997d-94e5e5d509e5")
@@ -559,13 +853,13 @@
 		(uuid "1cf1ebe6-6df9-4810-aa39-bd712743919d")
 	)
 	(junction
-		(at 232.41 38.1)
+		(at 236.22 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1ee0f79c-788d-4211-a82d-e8a72beb1f9c")
 	)
 	(junction
-		(at 95.25 63.5)
+		(at 99.06 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "218751b6-2627-4e3e-a5a6-c5458d373f00")
@@ -589,19 +883,19 @@
 		(uuid "2664620a-5b1b-45b9-8064-8ab0d29adb88")
 	)
 	(junction
-		(at 118.11 38.1)
+		(at 121.92 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "32e58cda-495f-42fd-b20e-2c139bce574d")
 	)
 	(junction
-		(at 95.25 83.82)
+		(at 99.06 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3417bad9-1cdc-439b-9900-f59a60be400b")
 	)
 	(junction
-		(at 163.83 63.5)
+		(at 167.64 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "35f59682-caf8-4623-a60d-841eb15020cf")
@@ -613,19 +907,19 @@
 		(uuid "391ca518-7b3c-4c5e-93c4-0b5939c2bc95")
 	)
 	(junction
-		(at 118.11 58.42)
+		(at 121.92 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "39610f4b-e237-4b0f-8549-678db698c6d6")
 	)
 	(junction
-		(at 209.55 58.42)
+		(at 213.36 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3ad460be-fe84-4c7f-af8b-71fa0acc0551")
 	)
 	(junction
-		(at 72.39 58.42)
+		(at 76.2 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3d214591-ea04-455b-a475-ec00a1d012a8")
@@ -637,19 +931,19 @@
 		(uuid "3e03afd5-bd95-48b1-b4ac-209281c3c44e")
 	)
 	(junction
-		(at 72.39 38.1)
+		(at 76.2 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3e1832d7-3822-44bf-8112-2b66d7d7eacb")
 	)
 	(junction
-		(at 72.39 83.82)
+		(at 76.2 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3f9cfc6a-21ad-4018-9ac4-ffda97662975")
 	)
 	(junction
-		(at 118.11 63.5)
+		(at 121.92 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "44ab09ee-e610-4b33-871c-8fc70aac910c")
@@ -661,19 +955,19 @@
 		(uuid "44e6c85b-aac2-4a90-af8d-f37b26cc9f2b")
 	)
 	(junction
-		(at 255.27 83.82)
+		(at 259.08 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4582d7d3-a3ea-4b23-85eb-597d1e2d8341")
 	)
 	(junction
-		(at 186.69 58.42)
+		(at 190.5 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4b5c45bd-094b-4a99-b7ac-10138c3eef22")
 	)
 	(junction
-		(at 255.27 58.42)
+		(at 259.08 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4bc18a71-7350-4b42-a452-440c554dcf9e")
@@ -685,7 +979,7 @@
 		(uuid "4d9206bf-08a9-4d9f-a44e-c8132c026fd1")
 	)
 	(junction
-		(at 128.27 38.1)
+		(at 132.08 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "62bec8c5-4fc7-4ce1-825f-c74c0df3981a")
@@ -715,13 +1009,13 @@
 		(uuid "6aa2b0b0-0eca-4b9c-9b14-fa1cba1f1151")
 	)
 	(junction
-		(at 232.41 63.5)
+		(at 236.22 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6b04b6fe-c224-4d81-b77f-ceb07029ca9e")
 	)
 	(junction
-		(at 255.27 63.5)
+		(at 259.08 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6b2ffeac-685e-4e9e-b11a-346f70f66394")
@@ -737,6 +1031,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "711eb229-8e3c-43c2-b1ad-04f593eaf6a5")
+	)
+	(junction
+		(at 196.85 115.57)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7522fc5e-ce8e-40dc-b292-ef1a5248b2b5")
 	)
 	(junction
 		(at 96.52 146.05)
@@ -757,7 +1057,7 @@
 		(uuid "7d3ca31f-3a6f-40fc-af99-9dac5a8fe796")
 	)
 	(junction
-		(at 72.39 109.22)
+		(at 76.2 92.71)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "82653eb2-4d70-4789-931a-7e5bf9c0d07f")
@@ -787,13 +1087,13 @@
 		(uuid "927b1ce6-01c8-417f-8af7-b5e75d2d432f")
 	)
 	(junction
-		(at 163.83 38.1)
+		(at 167.64 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "944587b6-2a09-4731-b94b-69d3fae4d4dd")
 	)
 	(junction
-		(at 49.53 83.82)
+		(at 53.34 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "95363af4-1e31-431a-8f99-2a8ed5dbb924")
@@ -817,7 +1117,7 @@
 		(uuid "9f82a916-a10f-42ee-bff2-293589bdd13a")
 	)
 	(junction
-		(at 186.69 83.82)
+		(at 190.5 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a054ee04-b186-41a2-9708-68daa9d4f9b5")
@@ -835,7 +1135,7 @@
 		(uuid "a312e6c4-7e7c-4923-a70a-21f2474fbbe8")
 	)
 	(junction
-		(at 72.39 63.5)
+		(at 76.2 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a3a99be2-7ab1-4576-8587-8d571730cb2b")
@@ -859,25 +1159,25 @@
 		(uuid "a74f56ab-26a4-4617-89ab-5ecff8791b7f")
 	)
 	(junction
-		(at 49.53 88.9)
+		(at 53.34 72.39)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a79c2302-e893-41cc-b713-e939b63fc87d")
 	)
 	(junction
-		(at 83.82 109.22)
+		(at 87.63 92.71)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "abd916cb-652c-4517-8ced-31a0485a54a6")
 	)
 	(junction
-		(at 163.83 83.82)
+		(at 167.64 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ada6bb30-260a-4c48-bcd8-2490e5b74519")
 	)
 	(junction
-		(at 232.41 58.42)
+		(at 236.22 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b0ccaf27-bb47-494e-a97d-d20e32f6f9c1")
@@ -895,31 +1195,31 @@
 		(uuid "b7e91fe2-f6ea-4a9a-a89b-2cea7cf9d3f7")
 	)
 	(junction
-		(at 186.69 38.1)
+		(at 190.5 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b94687c3-0e20-4775-918c-8c754b30225c")
 	)
 	(junction
-		(at 95.25 38.1)
+		(at 99.06 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bb19bf86-bf36-42a5-9a25-d3ad011eb828")
 	)
 	(junction
-		(at 140.97 63.5)
+		(at 144.78 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bbf09924-1161-4d83-a027-38ac183d4c15")
 	)
 	(junction
-		(at 49.53 63.5)
+		(at 53.34 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bc76d114-fd28-45c9-941d-cd6cfdacc31f")
 	)
 	(junction
-		(at 95.25 58.42)
+		(at 99.06 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "be543d68-9159-4448-9309-ab60b436cd75")
@@ -937,7 +1237,7 @@
 		(uuid "c82bb4d3-5f8e-4c8f-b0e0-5ce4fcac1cdf")
 	)
 	(junction
-		(at 95.25 88.9)
+		(at 99.06 72.39)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cb996c7b-c7fe-4573-a28d-443a66ac9e5d")
@@ -955,7 +1255,7 @@
 		(uuid "cc8d8112-08a5-45eb-bf5b-f87d19f75778")
 	)
 	(junction
-		(at 209.55 38.1)
+		(at 213.36 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ccab6ad8-e0fe-4f87-97c5-f1066ed6b1b6")
@@ -967,7 +1267,7 @@
 		(uuid "ccbcece5-9f13-41fc-b96e-862e032d0d82")
 	)
 	(junction
-		(at 186.69 63.5)
+		(at 190.5 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cd8df246-b41a-4840-8fc0-c9f92460e3a0")
@@ -979,13 +1279,13 @@
 		(uuid "cefc778d-ec03-4b2f-9fa5-7a00e677b91c")
 	)
 	(junction
-		(at 49.53 109.22)
+		(at 53.34 92.71)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d900234f-c9b4-4d56-8f3a-751be54caf5e")
 	)
 	(junction
-		(at 255.27 38.1)
+		(at 259.08 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dcbc89e6-ab6e-4840-9eae-fb648e296231")
@@ -995,6 +1295,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dce94f1b-a253-441c-a7ea-e630d943ae84")
+	)
+	(junction
+		(at 204.47 87.63)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e2388df6-dd33-4f7e-9fcb-b25edda779f5")
 	)
 	(junction
 		(at 43.18 146.05)
@@ -1009,7 +1315,13 @@
 		(uuid "eac8442d-3ab8-451a-8c58-77b05f1e8a34")
 	)
 	(junction
-		(at 95.25 109.22)
+		(at 209.55 87.63)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "eda7d1f9-876b-41bb-a539-9ddd2e71a317")
+	)
+	(junction
+		(at 99.06 92.71)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ef080637-d80e-4b4c-ba3b-0dbbf4c2e7a3")
@@ -1033,7 +1345,7 @@
 		(uuid "f738e777-2cd8-4c05-b68e-bd4ff5123869")
 	)
 	(junction
-		(at 72.39 88.9)
+		(at 76.2 72.39)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f7a54754-ecba-4121-a43c-18519de28b00")
@@ -1046,7 +1358,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 38.1) (xy 186.69 38.1)
+			(xy 167.64 21.59) (xy 190.5 21.59)
 		)
 		(stroke
 			(width 0)
@@ -1066,7 +1378,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 88.9) (xy 49.53 88.9)
+			(xy 50.8 72.39) (xy 53.34 72.39)
 		)
 		(stroke
 			(width 0)
@@ -1076,7 +1388,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 73.66) (xy 133.35 73.66)
+			(xy 129.54 57.15) (xy 137.16 57.15)
 		)
 		(stroke
 			(width 0)
@@ -1096,7 +1408,7 @@
 	)
 	(wire
 		(pts
-			(xy 57.15 48.26) (xy 64.77 48.26)
+			(xy 60.96 31.75) (xy 68.58 31.75)
 		)
 		(stroke
 			(width 0)
@@ -1116,7 +1428,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 58.42) (xy 95.25 58.42)
+			(xy 76.2 41.91) (xy 99.06 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1126,7 +1438,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 81.28) (xy 72.39 83.82)
+			(xy 76.2 64.77) (xy 76.2 67.31)
 		)
 		(stroke
 			(width 0)
@@ -1136,7 +1448,7 @@
 	)
 	(wire
 		(pts
-			(xy 217.17 48.26) (xy 224.79 48.26)
+			(xy 220.98 31.75) (xy 228.6 31.75)
 		)
 		(stroke
 			(width 0)
@@ -1146,7 +1458,7 @@
 	)
 	(wire
 		(pts
-			(xy 273.05 38.1) (xy 273.05 83.82)
+			(xy 276.86 21.59) (xy 276.86 67.31)
 		)
 		(stroke
 			(width 0)
@@ -1156,7 +1468,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 91.44) (xy 72.39 88.9)
+			(xy 76.2 74.93) (xy 76.2 72.39)
 		)
 		(stroke
 			(width 0)
@@ -1166,7 +1478,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 63.5) (xy 186.69 63.5)
+			(xy 167.64 46.99) (xy 190.5 46.99)
 		)
 		(stroke
 			(width 0)
@@ -1206,7 +1518,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 48.26) (xy 41.91 48.26)
+			(xy 38.1 31.75) (xy 45.72 31.75)
 		)
 		(stroke
 			(width 0)
@@ -1216,7 +1528,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 109.22) (xy 118.11 109.22)
+			(xy 99.06 92.71) (xy 121.92 92.71)
 		)
 		(stroke
 			(width 0)
@@ -1246,7 +1558,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 48.26) (xy 247.65 48.26)
+			(xy 243.84 31.75) (xy 251.46 31.75)
 		)
 		(stroke
 			(width 0)
@@ -1256,7 +1568,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 55.88) (xy 49.53 58.42)
+			(xy 53.34 39.37) (xy 53.34 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1266,7 +1578,17 @@
 	)
 	(wire
 		(pts
-			(xy 57.15 73.66) (xy 64.77 73.66)
+			(xy 196.85 115.57) (xy 207.01 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1bc7f6ba-c334-47bd-93f4-ea13b342c1ba")
+	)
+	(wire
+		(pts
+			(xy 60.96 57.15) (xy 68.58 57.15)
 		)
 		(stroke
 			(width 0)
@@ -1276,7 +1598,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 91.44) (xy 118.11 88.9)
+			(xy 121.92 74.93) (xy 121.92 72.39)
 		)
 		(stroke
 			(width 0)
@@ -1286,7 +1608,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 66.04) (xy 95.25 63.5)
+			(xy 99.06 49.53) (xy 99.06 46.99)
 		)
 		(stroke
 			(width 0)
@@ -1316,7 +1638,7 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 58.42) (xy 259.08 58.42)
+			(xy 259.08 41.91) (xy 262.89 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1346,7 +1668,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 38.1) (xy 95.25 38.1)
+			(xy 76.2 21.59) (xy 99.06 21.59)
 		)
 		(stroke
 			(width 0)
@@ -1356,7 +1678,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 48.26) (xy 133.35 48.26)
+			(xy 129.54 31.75) (xy 137.16 31.75)
 		)
 		(stroke
 			(width 0)
@@ -1386,7 +1708,7 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 63.5) (xy 259.08 63.5)
+			(xy 259.08 46.99) (xy 262.89 46.99)
 		)
 		(stroke
 			(width 0)
@@ -1406,7 +1728,7 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 109.22) (xy 34.29 63.5)
+			(xy 38.1 92.71) (xy 38.1 46.99)
 		)
 		(stroke
 			(width 0)
@@ -1416,7 +1738,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 48.26) (xy 87.63 48.26)
+			(xy 83.82 31.75) (xy 91.44 31.75)
 		)
 		(stroke
 			(width 0)
@@ -1436,7 +1758,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 55.88) (xy 140.97 58.42)
+			(xy 144.78 39.37) (xy 144.78 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1466,7 +1788,7 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 55.88) (xy 232.41 58.42)
+			(xy 236.22 39.37) (xy 236.22 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1506,7 +1828,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 66.04) (xy 163.83 63.5)
+			(xy 167.64 49.53) (xy 167.64 46.99)
 		)
 		(stroke
 			(width 0)
@@ -1516,7 +1838,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 83.82) (xy 186.69 83.82)
+			(xy 167.64 67.31) (xy 190.5 67.31)
 		)
 		(stroke
 			(width 0)
@@ -1536,7 +1858,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 88.9) (xy 95.25 91.44)
+			(xy 99.06 72.39) (xy 99.06 74.93)
 		)
 		(stroke
 			(width 0)
@@ -1566,7 +1888,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 63.5) (xy 72.39 63.5)
+			(xy 53.34 46.99) (xy 76.2 46.99)
 		)
 		(stroke
 			(width 0)
@@ -1576,7 +1898,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 58.42) (xy 118.11 58.42)
+			(xy 99.06 41.91) (xy 121.92 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1586,7 +1908,17 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 63.5) (xy 209.55 63.5)
+			(xy 204.47 87.63) (xy 204.47 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "38d5566f-22c1-4103-b10d-4a2c6635723f")
+	)
+	(wire
+		(pts
+			(xy 190.5 46.99) (xy 213.36 46.99)
 		)
 		(stroke
 			(width 0)
@@ -1596,7 +1928,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 81.28) (xy 49.53 83.82)
+			(xy 53.34 64.77) (xy 53.34 67.31)
 		)
 		(stroke
 			(width 0)
@@ -1606,7 +1938,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 58.42) (xy 232.41 58.42)
+			(xy 213.36 41.91) (xy 236.22 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1636,7 +1968,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 73.66) (xy 247.65 73.66)
+			(xy 243.84 57.15) (xy 251.46 57.15)
 		)
 		(stroke
 			(width 0)
@@ -1656,7 +1988,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 109.22) (xy 83.82 115.57)
+			(xy 87.63 92.71) (xy 87.63 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1706,7 +2038,7 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 63.5) (xy 49.53 63.5)
+			(xy 38.1 46.99) (xy 53.34 46.99)
 		)
 		(stroke
 			(width 0)
@@ -1726,7 +2058,7 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 81.28) (xy 255.27 83.82)
+			(xy 259.08 64.77) (xy 259.08 67.31)
 		)
 		(stroke
 			(width 0)
@@ -1746,7 +2078,7 @@
 	)
 	(wire
 		(pts
-			(xy 41.91 73.66) (xy 39.37 73.66)
+			(xy 45.72 57.15) (xy 43.18 57.15)
 		)
 		(stroke
 			(width 0)
@@ -1756,7 +2088,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 55.88) (xy 163.83 58.42)
+			(xy 167.64 39.37) (xy 167.64 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1766,7 +2098,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 38.1) (xy 209.55 38.1)
+			(xy 190.5 21.59) (xy 213.36 21.59)
 		)
 		(stroke
 			(width 0)
@@ -1786,7 +2118,7 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 58.42) (xy 255.27 58.42)
+			(xy 236.22 41.91) (xy 259.08 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1796,7 +2128,7 @@
 	)
 	(wire
 		(pts
-			(xy 148.59 73.66) (xy 156.21 73.66)
+			(xy 152.4 57.15) (xy 160.02 57.15)
 		)
 		(stroke
 			(width 0)
@@ -1816,7 +2148,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 83.82) (xy 118.11 83.82)
+			(xy 99.06 67.31) (xy 121.92 67.31)
 		)
 		(stroke
 			(width 0)
@@ -1826,7 +2158,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 66.04) (xy 118.11 63.5)
+			(xy 121.92 49.53) (xy 121.92 46.99)
 		)
 		(stroke
 			(width 0)
@@ -1876,7 +2208,7 @@
 	)
 	(wire
 		(pts
-			(xy 171.45 48.26) (xy 179.07 48.26)
+			(xy 175.26 31.75) (xy 182.88 31.75)
 		)
 		(stroke
 			(width 0)
@@ -1886,7 +2218,7 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 83.82) (xy 255.27 83.82)
+			(xy 236.22 67.31) (xy 259.08 67.31)
 		)
 		(stroke
 			(width 0)
@@ -1896,7 +2228,7 @@
 	)
 	(wire
 		(pts
-			(xy 57.15 99.06) (xy 64.77 99.06)
+			(xy 60.96 82.55) (xy 68.58 82.55)
 		)
 		(stroke
 			(width 0)
@@ -1916,7 +2248,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 55.88) (xy 118.11 58.42)
+			(xy 121.92 39.37) (xy 121.92 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1926,7 +2258,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 58.42) (xy 72.39 58.42)
+			(xy 53.34 41.91) (xy 76.2 41.91)
 		)
 		(stroke
 			(width 0)
@@ -1936,7 +2268,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 63.5) (xy 163.83 63.5)
+			(xy 144.78 46.99) (xy 167.64 46.99)
 		)
 		(stroke
 			(width 0)
@@ -1966,7 +2298,7 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 38.1) (xy 255.27 38.1)
+			(xy 236.22 21.59) (xy 259.08 21.59)
 		)
 		(stroke
 			(width 0)
@@ -1996,7 +2328,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 40.64) (xy 95.25 38.1)
+			(xy 99.06 24.13) (xy 99.06 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2006,7 +2338,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 40.64) (xy 118.11 38.1)
+			(xy 121.92 24.13) (xy 121.92 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2026,7 +2358,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 38.1) (xy 72.39 38.1)
+			(xy 53.34 21.59) (xy 76.2 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2106,7 +2438,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 73.66) (xy 87.63 73.66)
+			(xy 83.82 57.15) (xy 91.44 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2126,7 +2458,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 48.26) (xy 110.49 48.26)
+			(xy 106.68 31.75) (xy 114.3 31.75)
 		)
 		(stroke
 			(width 0)
@@ -2136,7 +2468,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 38.1) (xy 232.41 38.1)
+			(xy 213.36 21.59) (xy 236.22 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2156,7 +2488,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 58.42) (xy 186.69 58.42)
+			(xy 167.64 41.91) (xy 190.5 41.91)
 		)
 		(stroke
 			(width 0)
@@ -2176,7 +2508,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 63.5) (xy 95.25 63.5)
+			(xy 76.2 46.99) (xy 99.06 46.99)
 		)
 		(stroke
 			(width 0)
@@ -2186,7 +2518,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 81.28) (xy 209.55 83.82)
+			(xy 213.36 64.77) (xy 213.36 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2226,7 +2558,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 34.29) (xy 128.27 38.1)
+			(xy 132.08 17.78) (xy 132.08 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2236,7 +2568,7 @@
 	)
 	(wire
 		(pts
-			(xy 217.17 73.66) (xy 224.79 73.66)
+			(xy 220.98 57.15) (xy 228.6 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2246,7 +2578,7 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 73.66) (xy 39.37 99.06)
+			(xy 43.18 57.15) (xy 43.18 82.55)
 		)
 		(stroke
 			(width 0)
@@ -2256,7 +2588,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 40.64) (xy 186.69 38.1)
+			(xy 190.5 24.13) (xy 190.5 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2266,7 +2598,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 55.88) (xy 72.39 58.42)
+			(xy 76.2 39.37) (xy 76.2 41.91)
 		)
 		(stroke
 			(width 0)
@@ -2276,7 +2608,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 109.22) (xy 83.82 109.22)
+			(xy 76.2 92.71) (xy 87.63 92.71)
 		)
 		(stroke
 			(width 0)
@@ -2296,7 +2628,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 106.68) (xy 49.53 109.22)
+			(xy 53.34 90.17) (xy 53.34 92.71)
 		)
 		(stroke
 			(width 0)
@@ -2326,7 +2658,17 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 81.28) (xy 140.97 83.82)
+			(xy 209.55 82.55) (xy 209.55 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "874117d2-5c8c-4176-8aeb-0422341c577f")
+	)
+	(wire
+		(pts
+			(xy 144.78 64.77) (xy 144.78 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2336,7 +2678,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 109.22) (xy 34.29 109.22)
+			(xy 53.34 92.71) (xy 38.1 92.71)
 		)
 		(stroke
 			(width 0)
@@ -2346,7 +2688,7 @@
 	)
 	(wire
 		(pts
-			(xy 262.89 73.66) (xy 265.43 73.66)
+			(xy 266.7 57.15) (xy 269.24 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2356,7 +2698,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 88.9) (xy 95.25 88.9)
+			(xy 76.2 72.39) (xy 99.06 72.39)
 		)
 		(stroke
 			(width 0)
@@ -2366,7 +2708,7 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 55.88) (xy 255.27 58.42)
+			(xy 259.08 39.37) (xy 259.08 41.91)
 		)
 		(stroke
 			(width 0)
@@ -2376,7 +2718,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 40.64) (xy 49.53 38.1)
+			(xy 53.34 24.13) (xy 53.34 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2386,7 +2728,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 40.64) (xy 163.83 38.1)
+			(xy 167.64 24.13) (xy 167.64 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2396,7 +2738,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 63.5) (xy 140.97 63.5)
+			(xy 121.92 46.99) (xy 144.78 46.99)
 		)
 		(stroke
 			(width 0)
@@ -2416,7 +2758,17 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 109.22) (xy 72.39 109.22)
+			(xy 209.55 87.63) (xy 209.55 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8facb9ce-e8ed-4e62-b8ff-77cae0aba9f1")
+	)
+	(wire
+		(pts
+			(xy 53.34 92.71) (xy 76.2 92.71)
 		)
 		(stroke
 			(width 0)
@@ -2426,7 +2778,7 @@
 	)
 	(wire
 		(pts
-			(xy 148.59 48.26) (xy 156.21 48.26)
+			(xy 152.4 31.75) (xy 160.02 31.75)
 		)
 		(stroke
 			(width 0)
@@ -2446,7 +2798,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 83.82) (xy 209.55 83.82)
+			(xy 190.5 67.31) (xy 213.36 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2466,7 +2818,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 99.06) (xy 110.49 99.06)
+			(xy 106.68 82.55) (xy 114.3 82.55)
 		)
 		(stroke
 			(width 0)
@@ -2496,7 +2848,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 55.88) (xy 186.69 58.42)
+			(xy 190.5 39.37) (xy 190.5 41.91)
 		)
 		(stroke
 			(width 0)
@@ -2506,7 +2858,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 40.64) (xy 209.55 38.1)
+			(xy 213.36 24.13) (xy 213.36 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2546,6 +2898,16 @@
 	)
 	(wire
 		(pts
+			(xy 204.47 82.55) (xy 204.47 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9ed78a65-ece2-4f68-9b46-ebda70007990")
+	)
+	(wire
+		(pts
 			(xy 176.53 151.13) (xy 176.53 146.05)
 		)
 		(stroke
@@ -2576,7 +2938,7 @@
 	)
 	(wire
 		(pts
-			(xy 262.89 48.26) (xy 265.43 48.26)
+			(xy 266.7 31.75) (xy 269.24 31.75)
 		)
 		(stroke
 			(width 0)
@@ -2606,7 +2968,7 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 48.26) (xy 201.93 48.26)
+			(xy 198.12 31.75) (xy 205.74 31.75)
 		)
 		(stroke
 			(width 0)
@@ -2626,7 +2988,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 55.88) (xy 209.55 58.42)
+			(xy 213.36 39.37) (xy 213.36 41.91)
 		)
 		(stroke
 			(width 0)
@@ -2636,7 +2998,7 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 40.64) (xy 232.41 38.1)
+			(xy 236.22 24.13) (xy 236.22 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2646,7 +3008,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 38.1) (xy 163.83 38.1)
+			(xy 144.78 21.59) (xy 167.64 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2676,7 +3038,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 58.42) (xy 140.97 58.42)
+			(xy 121.92 41.91) (xy 144.78 41.91)
 		)
 		(stroke
 			(width 0)
@@ -2696,7 +3058,7 @@
 	)
 	(wire
 		(pts
-			(xy 171.45 73.66) (xy 179.07 73.66)
+			(xy 175.26 57.15) (xy 182.88 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2706,7 +3068,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 63.5) (xy 118.11 63.5)
+			(xy 99.06 46.99) (xy 121.92 46.99)
 		)
 		(stroke
 			(width 0)
@@ -2746,7 +3108,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 83.82) (xy 46.99 83.82)
+			(xy 53.34 67.31) (xy 50.8 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2776,7 +3138,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 81.28) (xy 186.69 83.82)
+			(xy 190.5 64.77) (xy 190.5 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2796,7 +3158,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 99.06) (xy 87.63 99.06)
+			(xy 83.82 82.55) (xy 91.44 82.55)
 		)
 		(stroke
 			(width 0)
@@ -2806,7 +3168,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 91.44) (xy 49.53 88.9)
+			(xy 53.34 74.93) (xy 53.34 72.39)
 		)
 		(stroke
 			(width 0)
@@ -2816,7 +3178,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 88.9) (xy 72.39 88.9)
+			(xy 53.34 72.39) (xy 76.2 72.39)
 		)
 		(stroke
 			(width 0)
@@ -2826,7 +3188,7 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 66.04) (xy 255.27 63.5)
+			(xy 259.08 49.53) (xy 259.08 46.99)
 		)
 		(stroke
 			(width 0)
@@ -2836,7 +3198,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 63.5) (xy 232.41 63.5)
+			(xy 213.36 46.99) (xy 236.22 46.99)
 		)
 		(stroke
 			(width 0)
@@ -2846,7 +3208,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 73.66) (xy 110.49 73.66)
+			(xy 106.68 57.15) (xy 114.3 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2856,7 +3218,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 88.9) (xy 95.25 88.9)
+			(xy 121.92 72.39) (xy 99.06 72.39)
 		)
 		(stroke
 			(width 0)
@@ -2876,7 +3238,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 66.04) (xy 49.53 63.5)
+			(xy 53.34 49.53) (xy 53.34 46.99)
 		)
 		(stroke
 			(width 0)
@@ -2886,7 +3248,7 @@
 	)
 	(wire
 		(pts
-			(xy 259.08 63.5) (xy 259.08 58.42)
+			(xy 262.89 46.99) (xy 262.89 41.91)
 		)
 		(stroke
 			(width 0)
@@ -2916,7 +3278,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 83.82) (xy 232.41 83.82)
+			(xy 213.36 67.31) (xy 236.22 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2926,7 +3288,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 83.82) (xy 72.39 83.82)
+			(xy 53.34 67.31) (xy 76.2 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2936,7 +3298,7 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 73.66) (xy 201.93 73.66)
+			(xy 198.12 57.15) (xy 205.74 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2966,7 +3328,7 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 40.64) (xy 255.27 38.1)
+			(xy 259.08 24.13) (xy 259.08 21.59)
 		)
 		(stroke
 			(width 0)
@@ -2976,7 +3338,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 83.82) (xy 163.83 83.82)
+			(xy 144.78 67.31) (xy 167.64 67.31)
 		)
 		(stroke
 			(width 0)
@@ -2986,7 +3348,7 @@
 	)
 	(wire
 		(pts
-			(xy 265.43 48.26) (xy 265.43 73.66)
+			(xy 269.24 31.75) (xy 269.24 57.15)
 		)
 		(stroke
 			(width 0)
@@ -2996,7 +3358,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 58.42) (xy 209.55 58.42)
+			(xy 190.5 41.91) (xy 213.36 41.91)
 		)
 		(stroke
 			(width 0)
@@ -3016,7 +3378,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 40.64) (xy 140.97 38.1)
+			(xy 144.78 24.13) (xy 144.78 21.59)
 		)
 		(stroke
 			(width 0)
@@ -3026,7 +3388,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 38.1) (xy 140.97 38.1)
+			(xy 132.08 21.59) (xy 144.78 21.59)
 		)
 		(stroke
 			(width 0)
@@ -3036,7 +3398,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 83.82) (xy 95.25 83.82)
+			(xy 76.2 67.31) (xy 99.06 67.31)
 		)
 		(stroke
 			(width 0)
@@ -3046,7 +3408,7 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 81.28) (xy 163.83 83.82)
+			(xy 167.64 64.77) (xy 167.64 67.31)
 		)
 		(stroke
 			(width 0)
@@ -3056,7 +3418,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 40.64) (xy 72.39 38.1)
+			(xy 76.2 24.13) (xy 76.2 21.59)
 		)
 		(stroke
 			(width 0)
@@ -3066,7 +3428,7 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 38.1) (xy 273.05 38.1)
+			(xy 259.08 21.59) (xy 276.86 21.59)
 		)
 		(stroke
 			(width 0)
@@ -3076,7 +3438,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 106.68) (xy 118.11 109.22)
+			(xy 121.92 90.17) (xy 121.92 92.71)
 		)
 		(stroke
 			(width 0)
@@ -3086,7 +3448,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 106.68) (xy 95.25 109.22)
+			(xy 99.06 90.17) (xy 99.06 92.71)
 		)
 		(stroke
 			(width 0)
@@ -3116,7 +3478,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 66.04) (xy 72.39 63.5)
+			(xy 76.2 49.53) (xy 76.2 46.99)
 		)
 		(stroke
 			(width 0)
@@ -3136,7 +3498,17 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 83.82) (xy 46.99 88.9)
+			(xy 196.85 110.49) (xy 196.85 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea304024-a259-4f4e-a615-30ac40941eeb")
+	)
+	(wire
+		(pts
+			(xy 50.8 67.31) (xy 50.8 72.39)
 		)
 		(stroke
 			(width 0)
@@ -3166,7 +3538,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 66.04) (xy 209.55 63.5)
+			(xy 213.36 49.53) (xy 213.36 46.99)
 		)
 		(stroke
 			(width 0)
@@ -3176,7 +3548,7 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 81.28) (xy 232.41 83.82)
+			(xy 236.22 64.77) (xy 236.22 67.31)
 		)
 		(stroke
 			(width 0)
@@ -3186,7 +3558,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 81.28) (xy 95.25 83.82)
+			(xy 99.06 64.77) (xy 99.06 67.31)
 		)
 		(stroke
 			(width 0)
@@ -3206,7 +3578,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 66.04) (xy 140.97 63.5)
+			(xy 144.78 49.53) (xy 144.78 46.99)
 		)
 		(stroke
 			(width 0)
@@ -3216,7 +3588,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 55.88) (xy 95.25 58.42)
+			(xy 99.06 39.37) (xy 99.06 41.91)
 		)
 		(stroke
 			(width 0)
@@ -3226,7 +3598,7 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 63.5) (xy 255.27 63.5)
+			(xy 236.22 46.99) (xy 259.08 46.99)
 		)
 		(stroke
 			(width 0)
@@ -3236,7 +3608,7 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 99.06) (xy 41.91 99.06)
+			(xy 43.18 82.55) (xy 45.72 82.55)
 		)
 		(stroke
 			(width 0)
@@ -3246,7 +3618,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 66.04) (xy 186.69 63.5)
+			(xy 190.5 49.53) (xy 190.5 46.99)
 		)
 		(stroke
 			(width 0)
@@ -3256,7 +3628,7 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 106.68) (xy 72.39 109.22)
+			(xy 76.2 90.17) (xy 76.2 92.71)
 		)
 		(stroke
 			(width 0)
@@ -3266,7 +3638,7 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 83.82) (xy 273.05 83.82)
+			(xy 259.08 67.31) (xy 276.86 67.31)
 		)
 		(stroke
 			(width 0)
@@ -3276,7 +3648,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 38.1) (xy 128.27 38.1)
+			(xy 121.92 21.59) (xy 132.08 21.59)
 		)
 		(stroke
 			(width 0)
@@ -3286,7 +3658,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 81.28) (xy 118.11 83.82)
+			(xy 121.92 64.77) (xy 121.92 67.31)
 		)
 		(stroke
 			(width 0)
@@ -3296,7 +3668,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 109.22) (xy 95.25 109.22)
+			(xy 87.63 92.71) (xy 99.06 92.71)
 		)
 		(stroke
 			(width 0)
@@ -3326,7 +3698,7 @@
 	)
 	(wire
 		(pts
-			(xy 118.11 83.82) (xy 140.97 83.82)
+			(xy 121.92 67.31) (xy 144.78 67.31)
 		)
 		(stroke
 			(width 0)
@@ -3336,7 +3708,7 @@
 	)
 	(wire
 		(pts
-			(xy 232.41 66.04) (xy 232.41 63.5)
+			(xy 236.22 49.53) (xy 236.22 46.99)
 		)
 		(stroke
 			(width 0)
@@ -3346,7 +3718,7 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 38.1) (xy 118.11 38.1)
+			(xy 99.06 21.59) (xy 121.92 21.59)
 		)
 		(stroke
 			(width 0)
@@ -3356,7 +3728,7 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 58.42) (xy 163.83 58.42)
+			(xy 144.78 41.91) (xy 167.64 41.91)
 		)
 		(stroke
 			(width 0)
@@ -3365,7 +3737,7 @@
 		(uuid "fe194a8b-65bb-49ea-9094-84d40a1f1aae")
 	)
 	(label "DIN"
-		(at 35.56 48.26 0)
+		(at 39.37 31.75 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3376,7 +3748,29 @@
 	)
 	(global_label "5V Power"
 		(shape input)
-		(at 128.27 34.29 90)
+		(at 204.47 82.55 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "100b2a5e-ca42-4ad8-82e5-9fba458c584b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 192.5948 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "5V Power"
+		(shape input)
+		(at 132.08 17.78 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3386,7 +3780,7 @@
 		)
 		(uuid "1344107c-7bdc-4d6f-b160-dc85d57818f4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 128.27 22.4148 90)
+			(at 143.9552 17.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3398,7 +3792,7 @@
 	)
 	(global_label "5V Power"
 		(shape input)
-		(at 127 138.43 90)
+		(at 127 138.43 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3408,7 +3802,7 @@
 		)
 		(uuid "30849cfe-6162-402c-83a6-45a8387e23ef")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 127 126.5548 90)
+			(at 138.8752 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3418,9 +3812,9 @@
 			)
 		)
 	)
-	(global_label "LED DATA"
+	(global_label "SHIFTED LED DATA"
 		(shape input)
-		(at 30.48 48.26 180)
+		(at 38.1 31.75 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3428,14 +3822,80 @@
 			)
 			(justify right)
 		)
-		(uuid "4963ab41-2045-470d-a46c-74a2cb28cf13")
-		(property "Intersheetrefs" "${LED_DATA}"
-			(at 18.6653 48.26 0)
+		(uuid "b5552b19-c92b-43f6-933b-8a98c048cb6c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 17.6977 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "LED DATA"
+		(shape input)
+		(at 217.17 105.41 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "bfa7f613-0d9e-4fe0-a14c-7ce13c7f088d")
+		(property "Intersheetrefs" "${LED_DATA}"
+			(at 228.9847 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "SHIFTED LED DATA"
+		(shape output)
+		(at 196.85 105.41 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ddfde341-9d42-46de-ad1b-323062ba576b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 176.4477 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3.3V Power"
+		(shape input)
+		(at 209.55 82.55 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "fc16a40a-5ef5-428c-92fa-7f1324a8fbfb")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 223.2395 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -3703,7 +4163,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 255.27 73.66 180)
+		(at 259.08 57.15 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3712,7 +4172,7 @@
 		(fields_autoplaced yes)
 		(uuid "150627b8-8a0e-4308-a127-b7b33ffe5250")
 		(property "Reference" "D11"
-			(at 266.7 68.1638 0)
+			(at 270.51 51.6538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3720,7 +4180,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 266.7 70.7038 0)
+			(at 270.51 54.1938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3728,7 +4188,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 254 66.04 0)
+			(at 257.81 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3738,7 +4198,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 252.73 64.135 0)
+			(at 256.54 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3748,7 +4208,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 255.27 73.66 0)
+			(at 259.08 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3757,7 +4217,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 255.27 73.66 0)
+			(at 259.08 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3766,7 +4226,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 255.27 73.66 0)
+			(at 259.08 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3797,7 +4257,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 209.55 48.26 0)
+		(at 213.36 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3806,7 +4266,7 @@
 		(fields_autoplaced yes)
 		(uuid "15b75eb5-ede2-4878-88e2-026d72e9014b")
 		(property "Reference" "D8"
-			(at 220.98 41.9414 0)
+			(at 224.79 25.4314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3814,7 +4274,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 220.98 44.4814 0)
+			(at 224.79 27.9714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3822,7 +4282,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 210.82 55.88 0)
+			(at 214.63 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3832,7 +4292,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 212.09 57.785 0)
+			(at 215.9 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3842,7 +4302,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 209.55 48.26 0)
+			(at 213.36 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3851,7 +4311,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 209.55 48.26 0)
+			(at 213.36 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3860,7 +4320,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 209.55 48.26 0)
+			(at 213.36 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3978,7 +4438,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 118.11 99.06 0)
+		(at 121.92 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3987,7 +4447,7 @@
 		(fields_autoplaced yes)
 		(uuid "1666980b-f6d6-4426-8827-79401dede13d")
 		(property "Reference" "D24"
-			(at 129.54 92.7414 0)
+			(at 133.35 76.2314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3995,7 +4455,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 129.54 95.2814 0)
+			(at 133.35 78.7714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4003,7 +4463,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 119.38 106.68 0)
+			(at 123.19 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4013,7 +4473,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 120.65 108.585 0)
+			(at 124.46 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4023,7 +4483,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 118.11 99.06 0)
+			(at 121.92 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4032,7 +4492,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 118.11 99.06 0)
+			(at 121.92 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4041,7 +4501,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 118.11 99.06 0)
+			(at 121.92 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4072,7 +4532,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 83.82 115.57 0)
+		(at 87.63 99.06 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4081,7 +4541,7 @@
 		(fields_autoplaced yes)
 		(uuid "1679a686-bfde-49c5-a79b-34d473eddd70")
 		(property "Reference" "#PWR02"
-			(at 83.82 121.92 0)
+			(at 87.63 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4090,7 +4550,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 83.82 120.65 0)
+			(at 87.63 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4098,7 +4558,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 83.82 115.57 0)
+			(at 87.63 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4107,7 +4567,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 83.82 115.57 0)
+			(at 87.63 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4116,7 +4576,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 83.82 115.57 0)
+			(at 87.63 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4138,7 +4598,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 95.25 73.66 180)
+		(at 99.06 57.15 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4147,7 +4607,7 @@
 		(fields_autoplaced yes)
 		(uuid "223d5050-cc16-4b56-ae98-39c62ad7f457")
 		(property "Reference" "D18"
-			(at 106.68 68.1638 0)
+			(at 110.49 51.6538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4155,7 +4615,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 106.68 70.7038 0)
+			(at 110.49 54.1938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4163,7 +4623,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 93.98 66.04 0)
+			(at 97.79 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4173,7 +4633,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 92.71 64.135 0)
+			(at 96.52 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4183,7 +4643,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 95.25 73.66 0)
+			(at 99.06 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4192,7 +4652,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 95.25 73.66 0)
+			(at 99.06 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4201,7 +4661,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 95.25 73.66 0)
+			(at 99.06 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4319,7 +4779,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 118.11 48.26 0)
+		(at 121.92 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4328,7 +4788,7 @@
 		(fields_autoplaced yes)
 		(uuid "2a47c083-8cf6-4671-b332-60927d044168")
 		(property "Reference" "D4"
-			(at 129.54 41.9414 0)
+			(at 133.35 25.4314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4336,7 +4796,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 129.54 44.4814 0)
+			(at 133.35 27.9714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4344,7 +4804,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 119.38 55.88 0)
+			(at 123.19 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4354,7 +4814,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 120.65 57.785 0)
+			(at 124.46 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4364,7 +4824,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 118.11 48.26 0)
+			(at 121.92 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4373,7 +4833,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 118.11 48.26 0)
+			(at 121.92 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4382,7 +4842,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 118.11 48.26 0)
+			(at 121.92 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4413,7 +4873,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 49.53 73.66 180)
+		(at 53.34 57.15 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4422,7 +4882,7 @@
 		(fields_autoplaced yes)
 		(uuid "2f8c973d-8be9-4859-9d65-6c141d229cbf")
 		(property "Reference" "D20"
-			(at 60.96 68.1638 0)
+			(at 64.77 51.6538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4430,7 +4890,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 60.96 70.7038 0)
+			(at 64.77 54.1938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4438,7 +4898,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 48.26 66.04 0)
+			(at 52.07 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4448,7 +4908,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 46.99 64.135 0)
+			(at 50.8 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4458,7 +4918,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 49.53 73.66 0)
+			(at 53.34 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4467,7 +4927,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 49.53 73.66 0)
+			(at 53.34 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4476,7 +4936,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 49.53 73.66 0)
+			(at 53.34 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4507,7 +4967,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 163.83 48.26 0)
+		(at 167.64 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4516,7 +4976,7 @@
 		(fields_autoplaced yes)
 		(uuid "39e4eb29-84c8-4182-8680-4672bdc1d6f6")
 		(property "Reference" "D6"
-			(at 175.26 41.9414 0)
+			(at 179.07 25.4314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4524,7 +4984,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 175.26 44.4814 0)
+			(at 179.07 27.9714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4532,7 +4992,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 165.1 55.88 0)
+			(at 168.91 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4542,7 +5002,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 166.37 57.785 0)
+			(at 170.18 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4552,7 +5012,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 163.83 48.26 0)
+			(at 167.64 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4561,7 +5021,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 163.83 48.26 0)
+			(at 167.64 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4570,7 +5030,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 163.83 48.26 0)
+			(at 167.64 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4601,7 +5061,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 232.41 48.26 0)
+		(at 236.22 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4610,7 +5070,7 @@
 		(fields_autoplaced yes)
 		(uuid "3a820d4b-bed0-4ea6-b7a1-1aa942b56392")
 		(property "Reference" "D9"
-			(at 243.84 41.9414 0)
+			(at 247.65 25.4314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4618,7 +5078,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 243.84 44.4814 0)
+			(at 247.65 27.9714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4626,7 +5086,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 233.68 55.88 0)
+			(at 237.49 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4636,7 +5096,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 234.95 57.785 0)
+			(at 238.76 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4646,7 +5106,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 232.41 48.26 0)
+			(at 236.22 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4655,7 +5115,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 232.41 48.26 0)
+			(at 236.22 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4664,7 +5124,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 232.41 48.26 0)
+			(at 236.22 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4695,7 +5155,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 72.39 73.66 180)
+		(at 76.2 57.15 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4704,7 +5164,7 @@
 		(fields_autoplaced yes)
 		(uuid "3c4d963c-1f48-46bd-86d7-22b2301d8e0e")
 		(property "Reference" "D19"
-			(at 83.82 68.1638 0)
+			(at 87.63 51.6538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4712,7 +5172,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 83.82 70.7038 0)
+			(at 87.63 54.1938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4720,7 +5180,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 71.12 66.04 0)
+			(at 74.93 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4730,7 +5190,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 69.85 64.135 0)
+			(at 73.66 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4740,7 +5200,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 72.39 73.66 0)
+			(at 76.2 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4749,7 +5209,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 72.39 73.66 0)
+			(at 76.2 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4758,7 +5218,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 72.39 73.66 0)
+			(at 76.2 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4789,7 +5249,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 140.97 48.26 0)
+		(at 144.78 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4798,7 +5258,7 @@
 		(fields_autoplaced yes)
 		(uuid "40ef30fa-5826-4846-94da-15d0d55f063b")
 		(property "Reference" "D5"
-			(at 152.4 41.9414 0)
+			(at 156.21 25.4314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4806,7 +5266,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 152.4 44.4814 0)
+			(at 156.21 27.9714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4814,7 +5274,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 142.24 55.88 0)
+			(at 146.05 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4824,7 +5284,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 143.51 57.785 0)
+			(at 147.32 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4834,7 +5294,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 140.97 48.26 0)
+			(at 144.78 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4843,7 +5303,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 140.97 48.26 0)
+			(at 144.78 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4852,7 +5312,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 140.97 48.26 0)
+			(at 144.78 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4883,7 +5343,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 186.69 73.66 180)
+		(at 190.5 57.15 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4892,7 +5352,7 @@
 		(fields_autoplaced yes)
 		(uuid "41bcc148-1879-4c51-ab77-a7a65ba44663")
 		(property "Reference" "D14"
-			(at 198.12 68.1638 0)
+			(at 201.93 51.6538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4900,7 +5360,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 198.12 70.7038 0)
+			(at 201.93 54.1938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4908,7 +5368,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 185.42 66.04 0)
+			(at 189.23 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4918,7 +5378,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 184.15 64.135 0)
+			(at 187.96 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4928,7 +5388,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 186.69 73.66 0)
+			(at 190.5 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4937,7 +5397,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 186.69 73.66 0)
+			(at 190.5 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4946,7 +5406,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 186.69 73.66 0)
+			(at 190.5 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4976,8 +5436,95 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 200.66 87.63 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4810dc0c-2195-411a-87a3-22a2c030df70")
+		(property "Reference" "C37"
+			(at 201.93 93.98 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 201.93 91.44 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 204.47 86.6648 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05B104KO5NNNC_C1525.pdf"
+			(at 200.66 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 200.66 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part Number" ""
+			(at 200.66 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C1525"
+			(at 200.66 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "df023864-316b-4607-9eee-2fd75fe32a64")
+		)
+		(pin "1"
+			(uuid "aaa64a3d-92bf-4c25-b200-87d8f48ee774")
+		)
+		(instances
+			(project "blinky_badge_light"
+				(path "/f33039b1-b38b-4cb6-baf0-07a137773378/1775ac98-70e6-4939-938f-2d1f47505c2b"
+					(reference "C37")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "LED:WS2812B")
-		(at 209.55 73.66 180)
+		(at 213.36 57.15 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4986,7 +5533,7 @@
 		(fields_autoplaced yes)
 		(uuid "4e46368d-c9a2-4410-b47c-b2b9cb14d304")
 		(property "Reference" "D13"
-			(at 220.98 68.1638 0)
+			(at 224.79 51.6538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4994,7 +5541,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 220.98 70.7038 0)
+			(at 224.79 54.1938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5002,7 +5549,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 208.28 66.04 0)
+			(at 212.09 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5012,7 +5559,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 207.01 64.135 0)
+			(at 210.82 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5022,7 +5569,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 209.55 73.66 0)
+			(at 213.36 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5031,7 +5578,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 209.55 73.66 0)
+			(at 213.36 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5040,7 +5587,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 209.55 73.66 0)
+			(at 213.36 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5158,7 +5705,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 95.25 48.26 0)
+		(at 99.06 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5167,7 +5714,7 @@
 		(fields_autoplaced yes)
 		(uuid "54ce2d92-759b-438f-9e03-907ab8b0fcba")
 		(property "Reference" "D3"
-			(at 106.68 41.9414 0)
+			(at 110.49 25.4314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5175,7 +5722,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 106.68 44.4814 0)
+			(at 110.49 27.9714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5183,7 +5730,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 96.52 55.88 0)
+			(at 100.33 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5193,7 +5740,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 97.79 57.785 0)
+			(at 101.6 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5203,7 +5750,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 95.25 48.26 0)
+			(at 99.06 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5212,7 +5759,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 95.25 48.26 0)
+			(at 99.06 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5221,7 +5768,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 95.25 48.26 0)
+			(at 99.06 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5339,7 +5886,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 72.39 48.26 0)
+		(at 76.2 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5348,7 +5895,7 @@
 		(fields_autoplaced yes)
 		(uuid "5d5986e1-dd66-4f98-b389-56bc168e1622")
 		(property "Reference" "D2"
-			(at 83.82 41.9414 0)
+			(at 87.63 25.4314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5356,7 +5903,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 83.82 44.4814 0)
+			(at 87.63 27.9714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5364,7 +5911,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 73.66 55.88 0)
+			(at 77.47 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5374,7 +5921,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 74.93 57.785 0)
+			(at 78.74 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5384,7 +5931,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 72.39 48.26 0)
+			(at 76.2 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5393,7 +5940,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 72.39 48.26 0)
+			(at 76.2 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5402,7 +5949,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 72.39 48.26 0)
+			(at 76.2 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5519,6 +6066,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 217.17 87.63 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "614f8ae2-2977-46ca-b1d6-5fd4a8bc0dac")
+		(property "Reference" "#PWR033"
+			(at 223.52 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 220.98 87.6299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 217.17 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 217.17 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 217.17 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d92bc72e-c1aa-4b0d-85d8-5235516ae69b")
+		)
+		(instances
+			(project ""
+				(path "/f33039b1-b38b-4cb6-baf0-07a137773378/1775ac98-70e6-4939-938f-2d1f47505c2b"
+					(reference "#PWR033")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 25.4 154.94 0)
 		(unit 1)
@@ -5598,7 +6212,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 49.53 99.06 0)
+		(at 53.34 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5607,7 +6221,7 @@
 		(fields_autoplaced yes)
 		(uuid "63b84f9b-915b-429d-a493-5c5540769baf")
 		(property "Reference" "D21"
-			(at 60.96 92.7414 0)
+			(at 64.77 76.2314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5615,7 +6229,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 60.96 95.2814 0)
+			(at 64.77 78.7714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5623,7 +6237,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 50.8 106.68 0)
+			(at 54.61 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5633,7 +6247,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 52.07 108.585 0)
+			(at 55.88 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5643,7 +6257,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 49.53 99.06 0)
+			(at 53.34 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5652,7 +6266,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 49.53 99.06 0)
+			(at 53.34 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5661,7 +6275,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 49.53 99.06 0)
+			(at 53.34 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6039,8 +6653,97 @@
 		)
 	)
 	(symbol
+		(lib_id "Logic_LevelTranslator:SN74LVC1T45DBV")
+		(at 207.01 105.41 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7d8569d5-adf9-4d6a-8b62-61890082637e")
+		(property "Reference" "U6"
+			(at 224.79 99.0914 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SN74LVC1T45DBV"
+			(at 224.79 101.6314 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
+			(at 207.01 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74lvc1t45.pdf"
+			(at 184.15 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Single-Bit Dual-Supply Bus Transceiver With Configurable Voltage Translation and 3-State Outputs, SOT-23-6"
+			(at 207.01 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C7843"
+			(at 207.01 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "6"
+			(uuid "c8b0e210-4831-440a-8037-a748578fc644")
+		)
+		(pin "5"
+			(uuid "6e576738-71d6-4b09-a562-c7d31d166ab5")
+		)
+		(pin "1"
+			(uuid "06c0f375-861b-41c0-bfb6-c6a7f2875ebf")
+		)
+		(pin "2"
+			(uuid "588fded4-c526-449e-82b5-e4abbe81694d")
+		)
+		(pin "3"
+			(uuid "583dc52f-cbf7-4b54-8f12-a695422acafa")
+		)
+		(pin "4"
+			(uuid "d2281c8e-0dbf-4dde-a0ff-6690ed81c8c4")
+		)
+		(instances
+			(project ""
+				(path "/f33039b1-b38b-4cb6-baf0-07a137773378/1775ac98-70e6-4939-938f-2d1f47505c2b"
+					(reference "U6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "LED:WS2812B")
-		(at 140.97 73.66 180)
+		(at 144.78 57.15 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6049,7 +6752,7 @@
 		(fields_autoplaced yes)
 		(uuid "7dfdf2f8-48b2-4e26-bfc9-78f1c6ed0219")
 		(property "Reference" "D16"
-			(at 152.4 68.1638 0)
+			(at 156.21 51.6538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6057,7 +6760,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 152.4 70.7038 0)
+			(at 156.21 54.1938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6065,7 +6768,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 139.7 66.04 0)
+			(at 143.51 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6075,7 +6778,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 138.43 64.135 0)
+			(at 142.24 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6085,7 +6788,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 140.97 73.66 0)
+			(at 144.78 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6094,7 +6797,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 140.97 73.66 0)
+			(at 144.78 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6103,7 +6806,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 140.97 73.66 0)
+			(at 144.78 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6307,8 +7010,141 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 196.85 87.63 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "91950fc0-0e84-4744-8c9c-d7cbef0f106b")
+		(property "Reference" "#PWR034"
+			(at 190.5 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 193.04 87.6299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 196.85 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 196.85 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 196.85 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7fc8505e-95d9-4dc4-bc48-97474a73075e")
+		)
+		(instances
+			(project ""
+				(path "/f33039b1-b38b-4cb6-baf0-07a137773378/1775ac98-70e6-4939-938f-2d1f47505c2b"
+					(reference "#PWR034")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 196.85 115.57 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9963062c-b567-495b-b50a-23e80ae0bbad")
+		(property "Reference" "#PWR032"
+			(at 196.85 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 196.85 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 196.85 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 196.85 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 196.85 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c3479b9a-166c-469f-b77f-ad88f6b669f8")
+		)
+		(instances
+			(project ""
+				(path "/f33039b1-b38b-4cb6-baf0-07a137773378/1775ac98-70e6-4939-938f-2d1f47505c2b"
+					(reference "#PWR032")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "LED:WS2812B")
-		(at 95.25 99.06 0)
+		(at 99.06 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6317,7 +7153,7 @@
 		(fields_autoplaced yes)
 		(uuid "9a7175ed-b03e-48bf-94e4-2933215dfe05")
 		(property "Reference" "D23"
-			(at 106.68 92.7414 0)
+			(at 110.49 76.2314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6325,7 +7161,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 106.68 95.2814 0)
+			(at 110.49 78.7714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6333,7 +7169,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 96.52 106.68 0)
+			(at 100.33 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6343,7 +7179,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 97.79 108.585 0)
+			(at 101.6 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6353,7 +7189,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 95.25 99.06 0)
+			(at 99.06 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6362,7 +7198,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 95.25 99.06 0)
+			(at 99.06 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6371,7 +7207,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 95.25 99.06 0)
+			(at 99.06 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6489,7 +7325,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 186.69 48.26 0)
+		(at 190.5 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6498,7 +7334,7 @@
 		(fields_autoplaced yes)
 		(uuid "a3171c0f-9129-4abe-98ab-c1e4b7f723bf")
 		(property "Reference" "D7"
-			(at 198.12 41.9414 0)
+			(at 201.93 25.4314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6506,7 +7342,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 198.12 44.4814 0)
+			(at 201.93 27.9714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6514,7 +7350,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 187.96 55.88 0)
+			(at 191.77 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6524,7 +7360,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 189.23 57.785 0)
+			(at 193.04 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6534,7 +7370,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 186.69 48.26 0)
+			(at 190.5 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6543,7 +7379,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 186.69 48.26 0)
+			(at 190.5 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6552,7 +7388,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 186.69 48.26 0)
+			(at 190.5 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6757,7 +7593,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 232.41 73.66 180)
+		(at 236.22 57.15 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6766,7 +7602,7 @@
 		(fields_autoplaced yes)
 		(uuid "ac7efe31-577b-41c3-9e37-8787b907e855")
 		(property "Reference" "D12"
-			(at 243.84 68.1638 0)
+			(at 247.65 51.6538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6774,7 +7610,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 243.84 70.7038 0)
+			(at 247.65 54.1938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6782,7 +7618,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 231.14 66.04 0)
+			(at 234.95 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6792,7 +7628,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 229.87 64.135 0)
+			(at 233.68 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6802,7 +7638,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 232.41 73.66 0)
+			(at 236.22 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6811,7 +7647,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 232.41 73.66 0)
+			(at 236.22 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6820,7 +7656,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 232.41 73.66 0)
+			(at 236.22 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7025,7 +7861,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 118.11 73.66 180)
+		(at 121.92 57.15 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7034,7 +7870,7 @@
 		(fields_autoplaced yes)
 		(uuid "bfa07f04-b182-48be-8a9a-9577740f3632")
 		(property "Reference" "D17"
-			(at 129.54 68.1638 0)
+			(at 133.35 51.6538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7042,7 +7878,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 129.54 70.7038 0)
+			(at 133.35 54.1938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7050,7 +7886,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 116.84 66.04 0)
+			(at 120.65 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7060,7 +7896,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 115.57 64.135 0)
+			(at 119.38 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7070,7 +7906,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 118.11 73.66 0)
+			(at 121.92 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7079,7 +7915,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 118.11 73.66 0)
+			(at 121.92 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7088,7 +7924,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 118.11 73.66 0)
+			(at 121.92 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7119,7 +7955,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 255.27 48.26 0)
+		(at 259.08 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7128,7 +7964,7 @@
 		(fields_autoplaced yes)
 		(uuid "c1b3b9da-3a18-4f6a-9cea-8176e409ba9d")
 		(property "Reference" "D10"
-			(at 266.7 41.9414 0)
+			(at 270.51 25.4314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7136,7 +7972,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 266.7 44.4814 0)
+			(at 270.51 27.9714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7144,7 +7980,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 256.54 55.88 0)
+			(at 260.35 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7154,7 +7990,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 257.81 57.785 0)
+			(at 261.62 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7164,7 +8000,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 255.27 48.26 0)
+			(at 259.08 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7173,7 +8009,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 255.27 48.26 0)
+			(at 259.08 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7182,7 +8018,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 255.27 48.26 0)
+			(at 259.08 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7213,7 +8049,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 72.39 99.06 0)
+		(at 76.2 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7222,7 +8058,7 @@
 		(fields_autoplaced yes)
 		(uuid "c232a7a5-e28c-4baf-860c-b78a78077a50")
 		(property "Reference" "D22"
-			(at 83.82 92.7414 0)
+			(at 87.63 76.2314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7230,7 +8066,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 83.82 95.2814 0)
+			(at 87.63 78.7714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7238,7 +8074,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 73.66 106.68 0)
+			(at 77.47 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7248,7 +8084,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 74.93 108.585 0)
+			(at 78.74 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7258,7 +8094,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 72.39 99.06 0)
+			(at 76.2 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7267,7 +8103,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 72.39 99.06 0)
+			(at 76.2 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7276,7 +8112,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 72.39 99.06 0)
+			(at 76.2 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7394,7 +8230,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 163.83 73.66 180)
+		(at 167.64 57.15 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7403,7 +8239,7 @@
 		(fields_autoplaced yes)
 		(uuid "cbee7543-1642-4b68-9d03-14be41cff58d")
 		(property "Reference" "D15"
-			(at 175.26 68.1638 0)
+			(at 179.07 51.6538 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7411,7 +8247,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 175.26 70.7038 0)
+			(at 179.07 54.1938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7419,7 +8255,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 162.56 66.04 0)
+			(at 166.37 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7429,7 +8265,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 161.29 64.135 0)
+			(at 165.1 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7439,7 +8275,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 163.83 73.66 0)
+			(at 167.64 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7448,7 +8284,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 163.83 73.66 0)
+			(at 167.64 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7457,7 +8293,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 163.83 73.66 0)
+			(at 167.64 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7661,6 +8497,93 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 213.36 87.63 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e68e1fe0-edc0-4dd2-87d7-f546dafa8c46")
+		(property "Reference" "C36"
+			(at 212.09 93.98 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 212.09 91.44 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 209.55 88.5952 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05B104KO5NNNC_C1525.pdf"
+			(at 213.36 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 213.36 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part Number" ""
+			(at 213.36 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C1525"
+			(at 213.36 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "3d2c21ff-53e5-4928-8337-c8f21e7285ad")
+		)
+		(pin "1"
+			(uuid "7eb85635-8563-4073-a127-6404d8da76e2")
+		)
+		(instances
+			(project "blinky_badge_light"
+				(path "/f33039b1-b38b-4cb6-baf0-07a137773378/1775ac98-70e6-4939-938f-2d1f47505c2b"
+					(reference "C36")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 127 168.91 0)
 		(unit 1)
@@ -7815,7 +8738,7 @@
 	)
 	(symbol
 		(lib_id "LED:WS2812B")
-		(at 49.53 48.26 0)
+		(at 53.34 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7824,7 +8747,7 @@
 		(fields_autoplaced yes)
 		(uuid "ff96de71-742f-46d1-a5b6-17948c726de7")
 		(property "Reference" "D1"
-			(at 60.96 41.9414 0)
+			(at 64.77 25.4314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7832,7 +8755,7 @@
 			)
 		)
 		(property "Value" "WS2812B"
-			(at 60.96 44.4814 0)
+			(at 64.77 27.9714 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7840,7 +8763,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
-			(at 50.8 55.88 0)
+			(at 54.61 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7850,7 +8773,7 @@
 			)
 		)
 		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8567063204435156992"
-			(at 52.07 57.785 0)
+			(at 55.88 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7860,7 +8783,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller"
-			(at 49.53 48.26 0)
+			(at 53.34 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7869,7 +8792,7 @@
 			)
 		)
 		(property "LCSC Part Number" ""
-			(at 49.53 48.26 0)
+			(at 53.34 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7878,7 +8801,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2761795"
-			(at 49.53 48.26 0)
+			(at 53.34 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
