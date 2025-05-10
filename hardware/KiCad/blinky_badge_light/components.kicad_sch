@@ -5952,73 +5952,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 219.71 96.52 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2fd9bf27-a368-404e-864f-eb42f75d37cf")
-		(property "Reference" "#PWR039"
-			(at 213.36 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 215.9 96.5199 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 219.71 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 219.71 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 219.71 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "014aef2e-d85b-4361-bca2-e4b7c0960405")
-		)
-		(instances
-			(project ""
-				(path "/f33039b1-b38b-4cb6-baf0-07a137773378/a31a264e-f1c4-410a-a175-a81c007586a2"
-					(reference "#PWR039")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 162.56 53.34 270)
 		(unit 1)
@@ -7108,7 +7041,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7da33e3d-d81c-4337-8cec-d8cf2dddb9e5")
-		(property "Reference" "C29"
+		(property "Reference" "C"
 			(at 228.6 41.91 90)
 			(effects
 				(font
