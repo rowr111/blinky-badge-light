@@ -1,4 +1,4 @@
-24749535961435540
+24753030098189037
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -99547,6 +99547,13 @@ SOT-143-4_L2.9-W1.3-P1.92-LS2.4-BL
 4
 4
 footprints
+SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5
+
+
+0
+4
+4
+footprints
 TS-1187A-B-A-B_XKB
 
 TS-1187A-B-A-B 
@@ -99560,6 +99567,13 @@ test point SMD pad
 0
 1
 1
+footprints
+USB-C_SMD-TYPE-C-31-M-12
+
+
+0
+20
+20
 footprints
 USB_C_Receptacle_HRO_TYPE-C-31-M-12
 USB Type-C receptacle for USB 2.0 and PD, http://www.krhro.com/uploads/soft/180320/1-1P320120243.pdf

@@ -2305,7 +2305,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:TestPoint_Pad_D12.0mm"
+		(property "Footprint" "TestPoint:TestPoint_Pad_D4.0mm"
 			(at 234.95 107.95 0)
 			(effects
 				(font
@@ -2574,7 +2574,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 82.8548 59.69 0)
 			(effects
 				(font

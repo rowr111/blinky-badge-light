@@ -7041,7 +7041,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7da33e3d-d81c-4337-8cec-d8cf2dddb9e5")
-		(property "Reference" "C"
+		(property "Reference" "C29"
 			(at 228.6 41.91 90)
 			(effects
 				(font
@@ -7830,7 +7830,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "footprints:TS-1187A-B-A-B_XKB"
+		(property "Footprint" "footprints:SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL_H1.5"
 			(at 43.18 105.41 0)
 			(effects
 				(font
@@ -8436,7 +8436,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12"
+		(property "Footprint" "footprints:USB-C_SMD-TYPE-C-31-M-12"
 			(at 132.08 49.53 0)
 			(effects
 				(font
