@@ -2305,7 +2305,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D4.0mm"
+		(property "Footprint" "footprints:Touch_Pad_StopSign_6mm"
 			(at 234.95 107.95 0)
 			(effects
 				(font
