@@ -2875,7 +2875,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "RF_Module:ESP32-S3-WROOM-1"
+		(property "Footprint" "footprints:ESP32-S3-WROOM-1 - no antenna keep out"
 			(at 148.59 143.51 0)
 			(effects
 				(font
