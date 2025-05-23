@@ -2121,7 +2121,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010130_UNI-ROYAL-Uniroyal-Elec-0603WAF1201T5E_C22765.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706389601501184"
 			(at 170.18 93.98 0)
 			(effects
 				(font
@@ -2139,7 +2139,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C22765"
+		(property "JLCPCB Part #" "C22764"
 			(at 170.18 93.98 90)
 			(effects
 				(font
@@ -2199,7 +2199,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_1912111437_TPOWER-TP4056_C382139.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588879072461508608"
 			(at 165.1 96.52 0)
 			(effects
 				(font
@@ -2218,7 +2218,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C382139"
+		(property "JLCPCB Part #" "C16581"
 			(at 165.1 96.52 0)
 			(effects
 				(font

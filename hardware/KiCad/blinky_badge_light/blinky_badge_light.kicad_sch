@@ -2033,7 +2033,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL31B105KBHNNNE_C1848.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8556213788459761664"
 			(at 88.9 48.26 0)
 			(effects
 				(font
@@ -2051,7 +2051,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C1848"
+		(property "JLCPCB Part #" "C15849"
 			(at 88.9 48.26 0)
 			(effects
 				(font
@@ -2728,7 +2728,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_YAGEO-RC0603FR-0710KL_C98220.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 224.79 63.5 0)
 			(effects
 				(font
@@ -2746,7 +2746,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C98220"
+		(property "JLCPCB Part #" "C25804"
 			(at 224.79 63.5 0)
 			(effects
 				(font
@@ -2805,7 +2805,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_YAGEO-RC0603FR-0710KL_C98220.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 105.41 45.72 0)
 			(effects
 				(font
@@ -2823,7 +2823,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C98220"
+		(property "JLCPCB Part #" "C25804"
 			(at 105.41 45.72 0)
 			(effects
 				(font
@@ -3088,7 +3088,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2208111030_Samsung-Electro-Mechanics-CL10A226MO7JZNC_C2762594.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8555544417670705152"
 			(at 128.27 30.48 0)
 			(effects
 				(font
@@ -3115,7 +3115,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C2762594"
+		(property "JLCPCB Part #" "C59461"
 			(at 128.27 30.48 0)
 			(effects
 				(font
@@ -3174,7 +3174,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2407081117_YAGEO-CC0402KRX5R9BB104_C105882.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706114222985216"
 			(at 218.44 76.2 0)
 			(effects
 				(font
@@ -3201,7 +3201,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C105882"
+		(property "JLCPCB Part #" "C22775"
 			(at 218.44 76.2 0)
 			(effects
 				(font

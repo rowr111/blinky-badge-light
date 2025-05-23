@@ -11792,7 +11792,7 @@
 			(at -10.5 -11.4 90)
 			(unlocked yes)
 			(layer "B.SilkS")
-			(uuid "31ca0d56-398f-4f2d-9f8a-6a5876c930ab")
+			(uuid "b088a163-f6fb-4e64-b7b4-25b10cf77a66")
 			(effects
 				(font
 					(size 1 1)
@@ -11805,7 +11805,7 @@
 			(at 0 -14.6 180)
 			(unlocked yes)
 			(layer "B.Fab")
-			(uuid "b2a3134a-cff9-43b0-911c-8179cc4a6bc7")
+			(uuid "5d53170f-aab9-4347-984c-32251a840923")
 			(effects
 				(font
 					(size 1 1)
@@ -11819,7 +11819,7 @@
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "6ab357ea-2656-4524-b743-1a2e8760c890")
+			(uuid "ca66a554-21d6-4dc1-9017-33ebeadd224d")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11833,7 +11833,7 @@
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "1e42a699-266c-4001-aa60-bfda5f1e8d36")
+			(uuid "ad4be455-b8ff-429c-aa8a-a59c23ef0f7e")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12979,7 +12979,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_YAGEO-RC0603FR-0710KL_C98220.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -13007,7 +13007,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C98220"
+		(property "JLCPCB Part #" "C25804"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -13199,7 +13199,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_1809281124_YAGEO-RC0603FR-07100KL_C14675.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -13227,7 +13227,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C14675"
+		(property "JLCPCB Part #" "C25803"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -13419,7 +13419,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL31B105KBHNNNE_C1848.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8556213788459761664"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -13447,7 +13447,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C1848"
+		(property "JLCPCB Part #" "C15849"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -14079,7 +14079,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2208111030_Samsung-Electro-Mechanics-CL10A226MO7JZNC_C2762594.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8555544417670705152"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -14121,7 +14121,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C2762594"
+		(property "JLCPCB Part #" "C59461"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -14533,7 +14533,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_YAGEO-RC0603FR-0710KL_C98220.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -14561,7 +14561,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C98220"
+		(property "JLCPCB Part #" "C25804"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -15265,7 +15265,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2407081117_YAGEO-CC0402KRX5R9BB104_C105882.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706114222985216"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -15307,7 +15307,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C105882"
+		(property "JLCPCB Part #" "C22775"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -15499,7 +15499,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010130_UNI-ROYAL-Uniroyal-Elec-0603WAF1201T5E_C22765.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706389601501184"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -15527,7 +15527,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C22765"
+		(property "JLCPCB Part #" "C22764"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -15719,7 +15719,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2208111030_Samsung-Electro-Mechanics-CL10A226MO7JZNC_C2762594.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8555544417670705152"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -15761,7 +15761,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C2762594"
+		(property "JLCPCB Part #" "C59461"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -16875,7 +16875,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL10A475KP8NNNC_C1705.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579707103462166528"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -16903,7 +16903,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C1705"
+		(property "JLCPCB Part #" "C19666"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -17797,7 +17797,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL31B105KBHNNNE_C1848.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8556213788459761664"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -17825,7 +17825,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C1848"
+		(property "JLCPCB Part #" "C15849"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -18464,7 +18464,7 @@
 		(property "Reference" "U5"
 			(at 3.323402 -0.353553 225)
 			(layer "B.SilkS")
-			(uuid "7ff81ec1-5192-40c7-b5f8-305bd1a5c491")
+			(uuid "b004bd73-04cb-473e-936d-755305568d9a")
 			(effects
 				(font
 					(size 1 1)
@@ -18476,7 +18476,7 @@
 		(property "Value" "CP2102N-Axx-xQFN24"
 			(at 0 -3.299999 135)
 			(layer "B.Fab")
-			(uuid "b0b34054-8003-4465-b552-1ad0ca782c19")
+			(uuid "564ed071-f74a-43bc-8ffc-7e76dd924df5")
 			(effects
 				(font
 					(size 1 1)
@@ -18489,7 +18489,7 @@
 			(at 0 0 135)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "3aaa7c35-6030-4ca9-bacf-e4a42d8c918c")
+			(uuid "ac0067c2-cc2f-4429-993b-d002ab592fc5")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18502,7 +18502,7 @@
 			(at 0 0 135)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "c11ed8e8-8dd9-4318-8c84-c94f96b3de6c")
+			(uuid "3a2bfeb2-0cf2-4479-953a-2aa5db6a6b1b")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19266,7 +19266,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_1810241812_YAGEO-RC0603JR-075K1L_C14677.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706277024620544"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -19294,7 +19294,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C14677"
+		(property "JLCPCB Part #" "C23186"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -19700,7 +19700,7 @@
 			(at -1.2 -3.3 0)
 			(unlocked yes)
 			(layer "B.SilkS")
-			(uuid "2727fb9f-6a14-4c40-a86d-5278343db7d2")
+			(uuid "a9ca4fc0-636a-4955-bcb6-226746bedf46")
 			(effects
 				(font
 					(size 0.8 0.8)
@@ -19713,7 +19713,7 @@
 			(at 0 -2.9 90)
 			(unlocked yes)
 			(layer "B.Fab")
-			(uuid "32a58947-06ea-42e7-901c-a340f81dc632")
+			(uuid "14590182-4d62-4922-8e67-a0059d3803a1")
 			(effects
 				(font
 					(size 1 1)
@@ -19727,7 +19727,7 @@
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "0321d483-8906-41e2-ad36-3a6185661a7f")
+			(uuid "0d4bc21b-b9d9-4101-8fb3-2c65a6bcaa84")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19741,7 +19741,7 @@
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "483be577-ddff-41fd-94bf-4e2674487014")
+			(uuid "73c0de50-ad51-432d-994e-fa6253a14287")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21126,7 +21126,7 @@
 			(at 6.5 8 0)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "9eb31939-4b2d-4067-a5ec-67ec9be4dc77")
+			(uuid "b9d3dacb-da95-4c9d-9840-0bfc8709b55d")
 			(effects
 				(font
 					(size 1 1)
@@ -21138,7 +21138,7 @@
 		(property "Value" "3.7V - 4.2V"
 			(at 0 -11.300001 0)
 			(layer "B.Fab")
-			(uuid "bbf8ee55-5dba-4b99-bf74-b60ef3712ee5")
+			(uuid "43395d4e-9be2-48a8-aba0-da8dd51f79b0")
 			(effects
 				(font
 					(size 1 1)
@@ -21152,7 +21152,7 @@
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "a24a2271-0746-46df-aa69-083f56fc4f16")
+			(uuid "7508a7a5-3f1a-40e6-8585-67ea11826ada")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21166,7 +21166,7 @@
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "a622121d-7e11-4ae5-8a02-5c6043d80504")
+			(uuid "6bb66a30-cbba-4e2e-afdf-b72bd31c787a")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22232,7 +22232,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_1912111437_TPOWER-TP4056_C382139.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588879072461508608"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -22258,7 +22258,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C382139"
+		(property "JLCPCB Part #" "C16581"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -23004,7 +23004,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL31B105KBHNNNE_C1848.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8556213788459761664"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -23032,7 +23032,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C1848"
+		(property "JLCPCB Part #" "C15849"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -24200,7 +24200,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL31B105KBHNNNE_C1848.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8556213788459761664"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -24228,7 +24228,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C1848"
+		(property "JLCPCB Part #" "C15849"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -24420,7 +24420,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2208111030_Samsung-Electro-Mechanics-CL10A226MO7JZNC_C2762594.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8555544417670705152"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -24462,7 +24462,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C2762594"
+		(property "JLCPCB Part #" "C59461"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -25108,7 +25108,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_1809281124_YAGEO-RC0603FR-07100KL_C14675.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -25136,7 +25136,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C14675"
+		(property "JLCPCB Part #" "C25803"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -25328,7 +25328,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_YAGEO-RC0603FR-0710KL_C98220.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -25356,7 +25356,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C98220"
+		(property "JLCPCB Part #" "C25804"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -29308,7 +29308,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_YAGEO-RC0603FR-0710KL_C98220.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -29336,7 +29336,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C98220"
+		(property "JLCPCB Part #" "C25804"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
