@@ -1,4 +1,4 @@
-24761769241304175
+24763517338103324
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -99532,6 +99532,13 @@ ESP32-S3-WROOM-1 - no antenna keep out
 0
 62
 41
+footprints
+IND-SMD_L4.5-W4.1_IHLP
+
+
+0
+2
+2
 footprints
 SOP8-PP_TPW
 

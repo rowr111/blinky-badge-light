@@ -7915,7 +7915,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_Sunlord_MWSA0402S"
+		(property "Footprint" "footprints:IND-SMD_L4.5-W4.1_IHLP"
 			(at 55.88 156.21 0)
 			(effects
 				(font
@@ -7942,7 +7942,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C2921168"
+		(property "JLCPCB Part #" "C22463808"
 			(at 55.88 156.21 90)
 			(effects
 				(font
