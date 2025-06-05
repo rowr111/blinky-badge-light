@@ -46,7 +46,7 @@ void init_touch() {
     touch_pad_set_voltage(TOUCH_HVOLT_2V7, TOUCH_LVOLT_0V5, TOUCH_HVOLT_ATTEN_1V);
 
     for (int i = 0; i < NUM_TOUCH_PADS; i++) {
-        touch_pad_config(touch_pads[i], TOUCH_THRESH_NO_USE);
+        touch_pad_config(touch_pads[i]);
     }
 
     //ESP_ERROR_CHECK(touch_pad_set_fsm_mode(TOUCH_FSM_MODE_TIMER)); // Enable periodic sampling
@@ -59,8 +59,9 @@ int get_touch_event(int pad_num) {
         return NO_TOUCH;
     }
 
-    uint16_t touch_value = 0;
-    touch_pad_read(touch_pads[pad_num], &touch_value);
+    uint32_t touch_value = 0;
+    touch_pad_read_raw_data(touch_pads[pad_num], &touch_value);
+    //touch_pad_read(touch_pads[pad_num], &touch_value);
 
     if (touch_value < TOUCH_THRESHOLD) { // Touch detected
         if (!is_pressed[pad_num]) {

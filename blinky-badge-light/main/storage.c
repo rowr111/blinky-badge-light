@@ -43,7 +43,7 @@ void save_settings(const badge_settings_t *settings) {
 // Load settings from NVS
 void load_settings(badge_settings_t *settings) {
     nvs_handle_t nvs_handle;
-    esp_err_t err = nvs_open("storage", NVS_READONLY, &nvs_handle);
+    esp_err_t err = nvs_open("storage", NVS_READWRITE, &nvs_handle);
     if (err != ESP_OK) {
         ESP_LOGW(TAG, "No settings found, using defaults");
         settings->pattern_id = 0;    // Default pattern
@@ -77,21 +77,35 @@ void save_genomes_to_storage() {
 
 void load_genomes_from_storage() {
     nvs_handle_t nvs_handle;
-    size_t required_size = sizeof(patterns);
+    ESP_ERROR_CHECK(nvs_open("storage", NVS_READWRITE, &nvs_handle));
 
-    ESP_ERROR_CHECK(nvs_open("storage", NVS_READONLY, &nvs_handle));
-    esp_err_t err = nvs_get_blob(nvs_handle, "genomes", patterns, &required_size);
+    size_t required_size = 0;
+    esp_err_t err = nvs_get_blob(nvs_handle, "genomes", NULL, &required_size);
 
-    if (err == ESP_ERR_NVS_NOT_FOUND) {
-        ESP_LOGW(TAG, "No genomes found in storage. Generating new patterns.");
+    ESP_LOGW(TAG, "No valid genomes found in storage. Generating new patterns.");
+    for (int i = 0; i < NUM_PATTERNS; i++) {
+        generate_gene(&patterns[i]);
+    }
+    save_genomes_to_storage();
+
+    if (err != ESP_OK || required_size != sizeof(patterns)) {
+        ESP_LOGW(TAG, "No valid genomes found in storage. Generating new patterns.");
         for (int i = 0; i < NUM_PATTERNS; i++) {
             generate_gene(&patterns[i]);
         }
         save_genomes_to_storage();
-    } else if (err == ESP_OK) {
-        ESP_LOGI(TAG, "Genomes loaded from storage.");
     } else {
-        ESP_LOGE(TAG, "Failed to load genomes: %s", esp_err_to_name(err));
+        required_size = sizeof(patterns); // Ensure correct size for reading
+        err = nvs_get_blob(nvs_handle, "genomes", patterns, &required_size);
+        if (err == ESP_OK && required_size == sizeof(patterns)) {
+            ESP_LOGI(TAG, "Genomes loaded from storage.");
+        } else {
+            ESP_LOGW(TAG, "Genomes blob corrupted or wrong size. Generating new patterns.");
+            for (int i = 0; i < NUM_PATTERNS; i++) {
+                generate_gene(&patterns[i]);
+            }
+            save_genomes_to_storage();
+        }
     }
 
     nvs_close(nvs_handle);
