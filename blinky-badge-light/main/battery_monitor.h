@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <driver/gpio.h>
 
 // Function declarations
 void init_battery_monitor(void);
@@ -15,7 +16,7 @@ void turn_off(void);
 #define ADC_ATTEN   ADC_ATTEN_DB_12
 #define ADC_UNIT    ADC_UNIT_1
 
-#define MOSFET_GATE_PIN 23
+#define MOSFET_GATE_PIN GPIO_NUM_21
 #define BUTTON_PIN 27
 
 #define BRIGHT_THRESH     3550 // Brightness limiting threshold in mV

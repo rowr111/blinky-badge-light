@@ -68,6 +68,10 @@ void touch_task(void *param) {
                     flash_feedback_pattern();
                     break;
                 }
+                if (i==3) {
+                    // Pad 4: turn off.
+                    turn_off();
+                }
             }
         }
         vTaskDelay(100 / portTICK_PERIOD_MS); // Adjust polling rate
@@ -96,7 +100,8 @@ void app_main() {
     set_brightness(settings.brightness);
 
     // Create tasks
-    xTaskCreate(lighting_task, "Lighting Task", 2048, NULL, 5, NULL);
-    xTaskCreate(touch_task, "Touch Task", 2048, NULL, 5, NULL);
+    xTaskCreate(lighting_task, "Lighting Task", 4096, NULL, 5, NULL);
+    xTaskCreate(touch_task, "Touch Task", 4096, NULL, 5, NULL);
     xTaskCreate(battery_monitor_task, "Battery Monitor Task", 4096, NULL, 5, NULL);
+    //xTaskCreate(&touch_debug_task, "touch_debug_task", 2048, NULL, 5, NULL);
 }
