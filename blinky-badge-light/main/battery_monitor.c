@@ -118,7 +118,7 @@ void init_battery_monitor() {
 
     // Check battery voltage and turn off if it's too low
     int battery_voltage = get_battery_voltage();
-    ESP_LOGI(TAG, "Battery voltage: %d mV", battery_voltage);
+    //ESP_LOGI(TAG, "Battery voltage: %d mV", battery_voltage);
 
     if (battery_voltage < OFF_THRESH) {
         ESP_LOGW(TAG, "Battery extremely low (%d mV). Goodbye, cruel world!!!", battery_voltage);
@@ -137,17 +137,17 @@ void battery_monitor_task(void *param) {
         int battery_voltage = get_battery_voltage();
 
         if (battery_voltage > BRIGHT_THRESH / 1000.0) {
-            ESP_LOGI(TAG, "Battery is normal: %d mV", battery_voltage);
+            //ESP_LOGI(TAG, "Battery is normal: %d mV", battery_voltage);
             //limit_brightness = false;
         } else if (battery_voltage > SAFETY_THRESH / 1000.0) {
-            ESP_LOGW(TAG, "Battery low: %d mV. Limiting brightness.", battery_voltage);
+            //ESP_LOGW(TAG, "Battery low: %d mV. Limiting brightness.", battery_voltage);
             //limit_brightness = true;
         } else if (battery_voltage > OFF_THRESH / 1000.0) {
-            ESP_LOGE(TAG, "Battery critically low: %d mV. Entering safety mode.", battery_voltage);
+            //ESP_LOGE(TAG, "Battery critically low: %d mV. Entering safety mode.", battery_voltage);
             //limit_brightness = true;
             //force_safety_pattern = true;
         } else {
-            ESP_LOGE(TAG, "Battery extremely low: %d mV. Goodbye, cruel world!!!", battery_voltage);
+            //ESP_LOGE(TAG, "Battery extremely low: %d mV. Goodbye, cruel world!!!", battery_voltage);
             //limit_brightness = true;
             //force_safety_pattern = true;
             //turn_off();

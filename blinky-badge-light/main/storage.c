@@ -82,12 +82,6 @@ void load_genomes_from_storage() {
     size_t required_size = 0;
     esp_err_t err = nvs_get_blob(nvs_handle, "genomes", NULL, &required_size);
 
-    ESP_LOGW(TAG, "No valid genomes found in storage. Generating new patterns.");
-    for (int i = 0; i < NUM_PATTERNS; i++) {
-        generate_gene(&patterns[i]);
-    }
-    save_genomes_to_storage();
-
     if (err != ESP_OK || required_size != sizeof(patterns)) {
         ESP_LOGW(TAG, "No valid genomes found in storage. Generating new patterns.");
         for (int i = 0; i < NUM_PATTERNS; i++) {
