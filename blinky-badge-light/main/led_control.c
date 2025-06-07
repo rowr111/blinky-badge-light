@@ -41,6 +41,7 @@ void init_leds() {
 
 // Set the active pattern
 void set_pattern(int pattern_id) {
+    ESP_LOGI(TAG, "Updating LEDs with pattern %d", pattern_id);
     current_pattern = pattern_id % NUM_PATTERNS;
 }
 

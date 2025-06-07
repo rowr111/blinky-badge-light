@@ -6,6 +6,7 @@
 // Function prototypes
 void init_touch();
 int get_touch_event(int pad_num);
+void touch_debug_task(void *pvParameter);
 
 // Touch event definitions
 #define NO_TOUCH 0
@@ -13,6 +14,6 @@ int get_touch_event(int pad_num);
 #define LONG_PRESS 2
 
 // Number of touch pads
-#define NUM_TOUCH_PADS 3
+#define NUM_TOUCH_PADS 4
 
 #endif // TOUCH_INPUT_H
