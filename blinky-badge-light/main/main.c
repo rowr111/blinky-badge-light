@@ -9,6 +9,7 @@
 #include "storage.h"
 #include "genes.h"
 #include "pins.h"
+#include "microphone.h"
 
 // Shared settings
 badge_settings_t settings;
@@ -93,6 +94,7 @@ void app_main() {
     init_battery_monitor();
     init_leds();
     init_touch();
+    init_microphone();
     init_storage();
     load_settings(&settings);
 
@@ -103,5 +105,5 @@ void app_main() {
     xTaskCreate(lighting_task, "Lighting Task", 4096, NULL, 5, NULL);
     xTaskCreate(touch_task, "Touch Task", 4096, NULL, 5, NULL);
     xTaskCreate(battery_monitor_task, "Battery Monitor Task", 4096, NULL, 5, NULL);
-    //xTaskCreate(&touch_debug_task, "touch_debug_task", 2048, NULL, 5, NULL);
+    xTaskCreate(microphone_task, "Microphone Task", 4096, NULL, 5, NULL);
 }
