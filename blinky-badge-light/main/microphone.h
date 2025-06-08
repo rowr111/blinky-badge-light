@@ -3,7 +3,8 @@
 
 #include <stdint.h>
 
-extern volatile bool mic_active;
+extern volatile float current_dB_level;
+extern volatile float dB_brightness_level;
 
 // Function Declarations
 void init_microphone(void);

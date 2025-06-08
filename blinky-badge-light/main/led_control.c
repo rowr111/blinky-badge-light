@@ -9,6 +9,7 @@
 #include "battery_monitor.h"
 #include "genes.h"
 #include "led_control.h"
+#include "microphone.h"
 #include "pins.h"
 
 static const char *TAG = "LED_CONTROL";
@@ -85,22 +86,27 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
     }
 
     for (int i = 0; i < count; i++) {
-        // Calculate hue and base brightness
         hue = (g->hue_base + i * g->hue_ratedir + loop) % 256;
-        uint8_t base_brightness = 127 + (127 * sinf(2 * M_PI * loop / 256));
+        float base_brightness = 127.0f + (127.0f * sinf(2 * M_PI * loop / 256));
+        float eff_brightness = (base_brightness * effective_brightness) / 255.0f;
 
-        // Scale brightness with effective_brightness
-        uint8_t final_brightness = (base_brightness * effective_brightness) / 255;
+        // If sound reactive pattern, replace with dB_brightness_level
+        if (current_pattern == NUM_PATTERNS - 1) {
+            eff_brightness = dB_brightness_level * 255.0f;
+        }
 
-        // Generate color using Wheel function
+        // Clamp before converting to int (optional, avoids overflow)
+        if (eff_brightness > 255.0f) eff_brightness = 255.0f;
+        if (eff_brightness < 0.0f) eff_brightness = 0.0f;
+
         color = Wheel(hue);
 
-        // Adjust RGB values based on final brightness and saturation
-        color.r = (color.r * final_brightness * g->sat) / (255 * 255);
-        color.g = (color.g * final_brightness * g->sat) / (255 * 255);
-        color.b = (color.b * final_brightness * g->sat) / (255 * 255);
+        // Use float math to avoid rounding errors
+        float sat = g->sat / 255.0f;
+        color.r = (uint8_t)((color.r * eff_brightness * sat) / 255.0f);
+        color.g = (uint8_t)((color.g * eff_brightness * sat) / 255.0f);
+        color.b = (uint8_t)((color.b * eff_brightness * sat) / 255.0f);
 
-        // Set the pixel in the framebuffer
         set_pixel(framebuffer, i, color.r, color.g, color.b);
     }
 }
