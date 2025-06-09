@@ -30641,7 +30641,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "1kΩ"
+		(property "Value" "3kΩ"
 			(at 0 -1.43 0)
 			(layer "B.Fab")
 			(uuid "cca7df19-7938-4a59-a9ae-4d16eb36a252")
@@ -30653,7 +30653,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010130_UNI-ROYAL-Uniroyal-Elec-0603WAF1001T5E_C21190.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706243143307264"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -30681,7 +30681,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C21190"
+		(property "JLCPCB Part #" "C4211"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
