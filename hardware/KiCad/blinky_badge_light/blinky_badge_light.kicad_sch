@@ -1822,7 +1822,7 @@
 			)
 		)
 	)
-	(global_label "ESP32 Boot"
+	(global_label "ESP32 Reset"
 		(shape input)
 		(at 228.6 68.58 0)
 		(fields_autoplaced yes)
@@ -1834,7 +1834,7 @@
 		)
 		(uuid "16487e58-302b-4fc1-a682-c1a253a13343")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 242.894 68.58 0)
+			(at 243.8013 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1954,7 +1954,7 @@
 			)
 		)
 	)
-	(global_label "ESP32 Reset"
+	(global_label "ESP32 Boot"
 		(shape input)
 		(at 72.39 59.69 180)
 		(fields_autoplaced yes)
@@ -1966,7 +1966,7 @@
 		)
 		(uuid "dab492b3-6f06-4c27-972d-24a40c75df5b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 57.1887 59.69 0)
+			(at 58.096 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
