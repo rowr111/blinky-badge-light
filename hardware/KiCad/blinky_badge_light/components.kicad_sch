@@ -7924,7 +7924,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2206071616_BC-Bao-Cheng-Elec-BCIHP0420SC-4R7M_C2921168.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8603362267321028608"
 			(at 55.88 156.21 0)
 			(effects
 				(font
