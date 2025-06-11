@@ -22253,6 +22253,80 @@
 		)
 		(embedded_fonts no)
 	)
+	(footprint "labels:minus"
+		(layer "B.Cu")
+		(uuid "8f32e807-517f-4a22-9c87-b705c0dc33fb")
+		(at 119.251036 82.058777)
+		(property "Reference" "G***"
+			(at 0 0 180)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "dd060bc6-2074-4324-8e9d-25ca59cac732")
+			(effects
+				(font
+					(size 1.5 1.5)
+					(thickness 0.3)
+				)
+			)
+		)
+		(property "Value" "LOGO"
+			(at 0.75 0 180)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "280f51ab-4e40-43bb-9046-4d864173b96b")
+			(effects
+				(font
+					(size 1.5 1.5)
+					(thickness 0.3)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "795c2c4c-7f7b-498f-8281-30cdc2918015")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "328d9bdf-6d54-493a-a3d6-b2c1c2d55c49")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
+		(fp_poly
+			(pts
+				(xy -0.286687 -0.690521) (xy 0.090711 -0.696229) (xy 1.390739 -0.719666) (xy 1.515832 -0.942743)
+				(xy 1.593212 -1.119444) (xy 1.569107 -1.263259) (xy 1.495844 -1.387243) (xy 1.350762 -1.608666)
+				(xy 0.053503 -1.608666) (xy -0.449903 -1.606654) (xy -0.811495 -1.598645) (xy -1.058768 -1.581677)
+				(xy -1.219213 -1.552788) (xy -1.320324 -1.509018) (xy -1.383879 -1.453832) (xy -1.510433 -1.211294)
+				(xy -1.479872 -0.965652) (xy -1.366659 -0.815185) (xy -1.284805 -0.760109) (xy -1.163403 -0.722351)
+				(xy -0.97493 -0.699665) (xy -0.691865 -0.689803)
+			)
+			(stroke
+				(width 0)
+				(type solid)
+			)
+			(fill yes)
+			(layer "B.SilkS")
+			(uuid "11236b89-1794-4f1a-98f7-e657e3d178c8")
+		)
+		(embedded_fonts no)
+	)
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "B.Cu")
 		(uuid "90125561-3d8f-414d-9436-4159821fced8")
@@ -25182,6 +25256,87 @@
 				(xyz 0 0 -0)
 			)
 		)
+	)
+	(footprint "labels:plus"
+		(layer "B.Cu")
+		(uuid "b9252396-7a28-4f30-9ac2-03b48c8f9fcb")
+		(at 180.21152 82.063129)
+		(property "Reference" "G***"
+			(at 0 0 180)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "0d377a63-ddf2-4135-b44e-7fa53d6dfa79")
+			(effects
+				(font
+					(size 1.5 1.5)
+					(thickness 0.3)
+				)
+			)
+		)
+		(property "Value" "LOGO"
+			(at 0.75 0 180)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "20dff6cb-53c7-41ac-8f5e-c65ac4d48bb9")
+			(effects
+				(font
+					(size 1.5 1.5)
+					(thickness 0.3)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 180)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "1ee2da1d-6bc5-44b8-8a51-10c8f164340c")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 180)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "689f6b56-f4b0-4c4c-bbf3-ef69bbefb99a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(attr board_only exclude_from_pos_files exclude_from_bom)
+		(fp_poly
+			(pts
+				(xy 0.322711 1.607171) (xy 0.466663 1.523091) (xy 0.562701 1.353457) (xy 0.621675 1.074135) (xy 0.654437 0.660986)
+				(xy 0.663657 0.420523) (xy 0.692314 -0.507999) (xy 1.560701 -0.507999) (xy 1.968384 -0.51241) (xy 2.241811 -0.529217)
+				(xy 2.415912 -0.563784) (xy 2.525616 -0.621474) (xy 2.56921 -0.662833) (xy 2.695614 -0.904885) (xy 2.666152 -1.149983)
+				(xy 2.554499 -1.29921) (xy 2.443165 -1.366708) (xy 2.266689 -1.409464) (xy 1.991479 -1.432114) (xy 1.583946 -1.439288)
+				(xy 1.538499 -1.439333) (xy 0.677333 -1.439333) (xy 0.676084 -2.264833) (xy 0.663726 -2.695063)
+				(xy 0.630758 -3.043722) (xy 0.581262 -3.271525) (xy 0.56832 -3.301999) (xy 0.395917 -3.480139) (xy 0.155788 -3.546055)
+				(xy -0.085557 -3.490747) (xy -0.194827 -3.405274) (xy -0.261988 -3.298771) (xy -0.305231 -3.135068)
+				(xy -0.329105 -2.880577) (xy -0.338158 -2.501709) (xy -0.338667 -2.342832) (xy -0.338667 -1.439333)
+				(xy -1.259634 -1.439333) (xy -1.720069 -1.432163) (xy -2.037288 -1.403587) (xy -2.237063 -1.343005)
+				(xy -2.345167 -1.239817) (xy -2.387371 -1.083422) (xy -2.391834 -0.973666) (xy -2.374402 -0.784292)
+				(xy -2.304924 -0.653822) (xy -2.157627 -0.571656) (xy -1.90674 -0.527193) (xy -1.526491 -0.509835)
+				(xy -1.259634 -0.507999) (xy -0.338667 -0.507999) (xy -0.338667 0.407152) (xy -0.329193 0.894518)
+				(xy -0.294911 1.23673) (xy -0.227037 1.457207) (xy -0.116785 1.57937) (xy 0.044629 1.626638) (xy 0.119995 1.629834)
+			)
+			(stroke
+				(width 0)
+				(type solid)
+			)
+			(fill yes)
+			(layer "B.SilkS")
+			(uuid "56654c67-02c4-488d-a792-a46975493d5c")
+		)
+		(embedded_fonts no)
 	)
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "B.Cu")
