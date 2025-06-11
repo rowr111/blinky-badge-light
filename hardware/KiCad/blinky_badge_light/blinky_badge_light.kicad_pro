@@ -786,6 +786,30 @@
           "label": "LCSC Part Name",
           "name": "LCSC Part Name",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Device",
+          "name": "Sim.Device",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Pins",
+          "name": "Sim.Pins",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Type",
+          "name": "Sim.Type",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "JLCBCB Part #",
+          "name": "JLCBCB Part #",
+          "show": false
         }
       ],
       "filter_string": "",
@@ -858,7 +882,7 @@
     ],
     [
       "ff49f689-50f6-47c9-b665-80ddb7cbc42d",
-      "Charging module"
+      "Charging and Power"
     ]
   ],
   "text_variables": {}

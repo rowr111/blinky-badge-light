@@ -1498,6 +1498,16 @@
 	)
 	(wire
 		(pts
+			(xy 191.77 125.73) (xy 203.2 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6c496176-dd97-4d65-9207-f95fc59ec955")
+	)
+	(wire
+		(pts
 			(xy 228.6 68.58) (xy 224.79 68.58)
 		)
 		(stroke
@@ -1585,6 +1595,16 @@
 			(type default)
 		)
 		(uuid "9234d24f-8686-480c-8d7e-467ceb8d4168")
+	)
+	(wire
+		(pts
+			(xy 191.77 97.79) (xy 199.39 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "975dc76d-db5e-48e3-80c8-abed6ac7d977")
 	)
 	(wire
 		(pts
@@ -1888,6 +1908,28 @@
 			)
 		)
 	)
+	(global_label "ESP32 Battery Monitoring Control"
+		(shape output)
+		(at 203.2 125.73 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "75438ca2-4bca-442b-87e4-ceca9b0d3e3f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 238.6603 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "LED DATA"
 		(shape output)
 		(at 228.6 76.2 0)
@@ -1945,6 +1987,28 @@
 		(uuid "a3a7ef54-3ea8-4dcf-9201-fb5121548495")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 221.7881 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "ESP32 Battery Monitoring"
+		(shape input)
+		(at 199.39 97.79 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d34b90f0-07aa-4097-84e1-913e4ddff858")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 226.9886 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3471,7 +3535,7 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "ff49f689-50f6-47c9-b665-80ddb7cbc42d")
-		(property "Sheetname" "Charging module"
+		(property "Sheetname" "Charging and Power"
 			(at 25.4 151.6884 0)
 			(effects
 				(font
