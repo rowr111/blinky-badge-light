@@ -2,4 +2,5 @@
   (version 7)
   (lib (name "TP4056")(type "KiCad")(uri "C:/Users/Jeanie/Desktop/kicad stuff/ul_TP4056/KiCADv6/2025-02-03_15-24-48.kicad_sym")(options "")(descr ""))
   (lib (name "USB_C")(type "KiCad")(uri "C:/Users/Jeanie/Desktop/kicad stuff/ul_TYPE-C-31-M-12/KiCADv6/2025-02-03_16-19-58.kicad_sym")(options "")(descr ""))
+  (lib (name "blinky_badge_symbols")(type "KiCad")(uri "${KIPRJMOD}/blinky_badge_symbols.kicad_sym")(options "")(descr ""))
 )
