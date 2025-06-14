@@ -1378,6 +1378,16 @@
 	)
 	(wire
 		(pts
+			(xy 191.77 92.71) (xy 196.85 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0fd5a4b6-5295-4552-ad9c-c0afce75a76e")
+	)
+	(wire
+		(pts
 			(xy 92.71 59.69) (xy 100.33 59.69)
 		)
 		(stroke
@@ -2470,6 +2480,73 @@
 			(project "blinky_badge_light"
 				(path "/f33039b1-b38b-4cb6-baf0-07a137773378"
 					(reference "#PWR036")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 196.85 92.71 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8a65be63-dc72-46a3-b567-24f41b14cb34")
+		(property "Reference" "TOUCH_5"
+			(at 201.93 92.71 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 201.93 93.9799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D4.0mm"
+			(at 196.85 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 196.85 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 196.85 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "41f6c463-94f4-47af-9f6e-641e1f461cf9")
+		)
+		(instances
+			(project ""
+				(path "/f33039b1-b38b-4cb6-baf0-07a137773378"
+					(reference "TOUCH_5")
 					(unit 1)
 				)
 			)
