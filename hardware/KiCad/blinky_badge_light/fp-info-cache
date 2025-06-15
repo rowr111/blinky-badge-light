@@ -1,4 +1,4 @@
-24777514131173764
+24779264124925986
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -99588,6 +99588,13 @@ TS-1187A-B-A-B
 0
 4
 4
+footprints
+TestPoint_Pad_D8.0mm
+SMD pad as test Point, diameter 4.0mm
+test point SMD pad
+0
+1
+1
 footprints
 TestPoint_Pad_D12.0mm
 SMD pad as test Point, diameter 4.0mm
