@@ -3393,6 +3393,18 @@
 		)
 		(uuid a55a7592-b6f3-4442-b06a-e02859fb546c)
 	)
+	(text "ECO3: swapped DTR-> EN and RTS->GPIO0 to RTS->EN and DTR->GPIO0"
+		(exclude_from_sim yes)
+		(at 247.65 73.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(color 119 0 255 1)
+			)
+			(justify left)
+		)
+		(uuid "2567dcf0-11f8-4b59-b6a9-78c30f4036db")
+	)
 	(text "USB 2.0 CONTROLLER"
 		(exclude_from_sim yes)
 		(at 198.12 125.73 0)
