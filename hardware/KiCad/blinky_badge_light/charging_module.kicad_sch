@@ -2922,7 +2922,7 @@
 				)
 			)
 		)
-		(property "Value" "100kΩ"
+		(property "Value" "10kΩ"
 			(at 186.69 82.55 90)
 			(effects
 				(font
@@ -2939,7 +2939,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 186.69 86.36 0)
 			(effects
 				(font
@@ -2957,7 +2957,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C25803"
+		(property "JLCPCB Part #" "C25804"
 			(at 186.69 86.36 90)
 			(effects
 				(font
@@ -3242,7 +3242,7 @@
 				)
 			)
 		)
-		(property "Value" "100kΩ"
+		(property "Value" "10kΩ"
 			(at 215.9 97.79 90)
 			(effects
 				(font
@@ -3259,7 +3259,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 215.9 101.6 0)
 			(effects
 				(font
@@ -3277,7 +3277,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C25803"
+		(property "JLCPCB Part #" "C25804"
 			(at 215.9 101.6 90)
 			(effects
 				(font
@@ -3838,7 +3838,7 @@
 				)
 			)
 		)
-		(property "Value" "100kΩ"
+		(property "Value" "10kΩ"
 			(at 199.39 82.55 90)
 			(effects
 				(font
@@ -3855,7 +3855,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 199.39 86.36 0)
 			(effects
 				(font
@@ -3873,7 +3873,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C25803"
+		(property "JLCPCB Part #" "C25804"
 			(at 199.39 86.36 90)
 			(effects
 				(font
