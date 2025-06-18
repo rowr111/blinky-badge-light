@@ -1294,54 +1294,6 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "ECO2: touch pad for 'mystery spot'"
-		(exclude_from_sim yes)
-		(at 212.09 95.25 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 119 0 255 1)
-			)
-			(justify left)
-		)
-		(uuid "3cf6bb3c-5b53-48d4-89ea-1e08517849f6")
-	)
-	(text "ECO1: touch pad to trigger battery monitoring display"
-		(exclude_from_sim yes)
-		(at 212.09 92.71 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 123 0 255 1)
-			)
-			(justify left)
-		)
-		(uuid "6da5096a-66a4-4c00-8d0b-651adcf3aa4f")
-	)
-	(text "ECO6c: let ESP32 turn battery monitoring on and off\n"
-		(exclude_from_sim yes)
-		(at 203.2 129.54 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 119 0 255 1)
-			)
-			(justify left)
-		)
-		(uuid "ca2d9d93-a937-4d3a-b1d8-b3ca9b0c530c")
-	)
-	(text "ECO6b: battery monitoring connection to ESP32"
-		(exclude_from_sim yes)
-		(at 199.39 100.33 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 119 0 255 1)
-			)
-			(justify left)
-		)
-		(uuid "f00332ae-bc99-4489-9189-c94b70892aac")
-	)
 	(junction
 		(at 224.79 68.58)
 		(diameter 0)

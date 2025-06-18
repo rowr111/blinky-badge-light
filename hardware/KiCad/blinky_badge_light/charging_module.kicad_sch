@@ -1515,66 +1515,6 @@
 		)
 		(uuid a83d2f3f-210e-492a-81a5-71b2ad49b29f)
 	)
-	(text "ECO5a: reverse polarity protection circuit:\nused AO3400A transistor."
-		(exclude_from_sim yes)
-		(at 189.23 33.02 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 119 0 255 1)
-			)
-			(justify left)
-		)
-		(uuid "03a46a6a-f51a-419f-8700-f3d91080bd61")
-	)
-	(text "ECO5b: disconnected battery negative\nterminal from direct connection to ground"
-		(exclude_from_sim yes)
-		(at 129.54 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 119 0 255 1)
-			)
-			(justify left)
-		)
-		(uuid "3182ef24-173c-44f1-985b-86979d26f85a")
-	)
-	(text "ECO6c: let ESP32 turn battery\nmonitoring on and off"
-		(exclude_from_sim yes)
-		(at 171.45 91.44 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 119 0 255 1)
-			)
-			(justify left)
-		)
-		(uuid "56b833cb-a55c-450e-acd1-84e79916d35a")
-	)
-	(text "ECO4: swapped 1kΩ to 3kΩ \nresistor R14 on charging \nLED to reduce brightness"
-		(exclude_from_sim yes)
-		(at 26.67 72.39 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 119 0 255 1)
-			)
-			(justify left)
-		)
-		(uuid "8c40fb69-6cf4-4f9e-a134-a86389c19cff")
-	)
-	(text "ECO6b: battery monitoring\nconnection to ESP32"
-		(exclude_from_sim yes)
-		(at 161.29 71.12 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 119 0 255 1)
-			)
-			(justify left)
-		)
-		(uuid "8fe2a4e2-4878-4668-b063-7dc461d60fab")
-	)
 	(text "BATTERY AND CHARGER"
 		(exclude_from_sim yes)
 		(at 29.21 130.81 0)
@@ -1594,18 +1534,6 @@
 			)
 		)
 		(uuid "bcd9bfdb-3345-4441-8822-8e23dda618fd")
-	)
-	(text "ECO6a: battery monitoring circuit\n(using same transistor from ECO5)"
-		(exclude_from_sim yes)
-		(at 185.42 107.95 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-				(color 119 0 255 1)
-			)
-			(justify left)
-		)
-		(uuid "bd885900-4f0d-485f-95a8-baebf73b1cd4")
 	)
 	(text "BATTERY MONITORING"
 		(exclude_from_sim no)
