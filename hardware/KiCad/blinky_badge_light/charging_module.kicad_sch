@@ -3429,7 +3429,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCBCB Part #" "C20917"
+		(property "JLCPCB Part #" "C20917"
 			(at 185.42 29.21 0)
 			(effects
 				(font

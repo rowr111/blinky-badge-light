@@ -21276,20 +21276,6 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCBCB Part #" "C20917"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "B.Fab")
-			(hide yes)
-			(uuid "33e4e204-e2e8-41ae-a47d-be9203e31522")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
 		(property "Sim.Device" "NMOS"
 			(at 0 0 0)
 			(unlocked yes)
@@ -21324,6 +21310,20 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "c07084ed-e9ae-42af-88ad-d5192634fc76")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "JLCPCB Part #" "C20917"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "fba103fd-c769-4b69-a809-6ec9f2caeabd")
 			(effects
 				(font
 					(size 1 1)
