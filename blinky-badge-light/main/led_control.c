@@ -11,14 +11,24 @@
 #include "led_control.h"
 #include "microphone.h"
 #include "pins.h"
+#include "vu_meter.h"
 
 static const char *TAG = "LED_CONTROL";
 
 // Static variables
 static led_strip_handle_t strip;
 static int current_pattern = 0; // Active pattern ID
-static uint8_t brightness = MAX_BRIGHTNESS;
-static const uint8_t brightness_levels[] = {MAX_BRIGHTNESS / 10, MAX_BRIGHTNESS / 5, MAX_BRIGHTNESS / 2, (3 * MAX_BRIGHTNESS) / 4, MAX_BRIGHTNESS, MAX_BRIGHTNESS}; // 10%, 20%, 50%, 75%, 100%, 100%
+uint8_t brightness = MAX_BRIGHTNESS;
+static const uint8_t brightness_levels[] = {
+    (MAX_BRIGHTNESS * 30) / 100, 
+    (MAX_BRIGHTNESS * 42) / 100,
+    (MAX_BRIGHTNESS * 54) / 100,
+    (MAX_BRIGHTNESS * 66) / 100,
+    (MAX_BRIGHTNESS * 78) / 100,
+    (MAX_BRIGHTNESS * 90) / 100
+};
+
+
 static int brightness_index = 0; // Index for the current brightness level
 static int limited_brightness_index = 1; // Index for the limited brightness level
 volatile bool flash_active = false;
@@ -76,6 +86,11 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
     uint8_t hue;
     Color color;
 
+    if (index == NUM_PATTERNS - 1) { 
+        render_vu_meter_pattern(framebuffer, g, loop);
+        return;
+    }
+
     // Determine the effective brightness
     uint8_t effective_brightness = brightness;
     if (limit_brightness) {
@@ -91,7 +106,7 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
         float eff_brightness = (base_brightness * effective_brightness) / 255.0f;
 
         // If sound reactive pattern, replace with dB_brightness_level
-        if (current_pattern == NUM_PATTERNS - 1) {
+        if (current_pattern == NUM_PATTERNS - 2) {
             eff_brightness = dB_brightness_level * 255.0f;
         }
 
@@ -117,7 +132,7 @@ void flash_feedback_pattern() {
 
     // Flash all LEDs with white light for a brief moment
     for (int i = 0; i < LED_COUNT; i++) {
-        set_pixel(framebuffer, i, 80, 80, 80); // White but lets not blind people
+        set_pixel(framebuffer, i, 50, 50, 50); // White but lets not blind people
     }
     update_leds(framebuffer);
     vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms flash
