@@ -5,6 +5,7 @@
 
 extern volatile float current_dB_level;
 extern volatile float dB_brightness_level;
+extern volatile float smooth_dB_brightness_level;
 
 // Function Declarations
 void init_microphone(void);

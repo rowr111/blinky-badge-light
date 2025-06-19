@@ -22,6 +22,7 @@ volatile float current_dB_level = 0.0f;
 static float dbHistory[DB_HISTORY_LEN];
 static int dbHistoryIdx = 0;
 volatile float dB_brightness_level = 0.0f; 
+volatile float smooth_dB_brightness_level = 0.0f;
 float avg_low_db = 30.0f;
 float avg_high_db = 150.0f;
 
@@ -103,15 +104,15 @@ void calculate_sound_brightness(void)
     static int idx = 0;
     avgs[idx++ % 2] = level;
     dB_brightness_level = (avgs[0] + avgs[1]) / 2.0f;
-
-    // let's make it a leeeeetle "punchy"
-    dB_brightness_level = powf(dB_brightness_level, 1.2f);
+    
+    // make it more uniform
+    smooth_dB_brightness_level = powf(dB_brightness_level, 1.4f);
+    //printf("Raw dB Brightness Level: %.2f\n", smooth_dB_brightness_level);
 
     // Clamp to [0.05, 0.8] for brightness so it won't be completely dark or too bright
     float min_bright = 0.05f;
     float max_bright = 0.8f;
     dB_brightness_level = min_bright + (max_bright - min_bright) * dB_brightness_level;
-
     //printf("dB Brightness Level: %.2f\n", dB_brightness_level);
 }
 

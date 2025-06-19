@@ -17,6 +17,7 @@ void flash_feedback_pattern(void);
 void safety_pattern(uint8_t *framebuffer, int count, int loop);
 
 extern volatile bool flash_active; 
+extern uint8_t brightness;
 
 
 // Constants
