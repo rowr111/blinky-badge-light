@@ -19,28 +19,32 @@ Hello!  Welcome to the github repo for Blinky Badge "light".
    
 ## Features
 ### Patterns:
- - three unique patterns generated on initial startup for each badge
-    - the first pattern will also be sound reactive
- - fourth sound reactive pattern whose color indicates dB level
+ - three unique patterns generated on initial startup for each badge (not sound reactive)
+ - two sound reactive patterns with a base same as ^
+    - flashes the whole badge
+    - fills up the badge from the bottom
  - one 'safety' pattern
     - not in the normal pattern list
     - forced when battery level is very low
+- future pattern ideas:
+    - sound reactive pattern whose color indicates dB level?  tbd..
+
 
 ### Capacitive Touch Buttons:
 1. iterate through unique patterns (wraps around when gets to the end)
 2. change brightness level (wraps around after brightest)
 3. replace current pattern with new unique pattern
-    - doesn't work on fourth pattern or safety pattern
+    - for sound reactive patterns changes the base pattern, not sound reactivity
     - small flash on pattern change for visual indicator of change
+4. off (hold)
+5. check battery level
+6. ? (mystery spot. does nothing for now. use it to add a feature!)
 
 ### Power Button (physical button):
  - press to turn badge on
- - long press to turn badge off
 
-### Power Indicator LED (small, yellow):
- - off during normal operation with good battery charge
- - on (solid) when power is starting to get low
- - blinking during charging
+### Power Indicator LED (small, green):
+ - on during charging
 
 
 ## Physical Structure/Components
@@ -61,11 +65,14 @@ The form is similar to the original blinky badge, but there are differences:
    - USB-C port for:
      - charging batteries
      - programming the microcontroller
-   - 3 capacitive touch buttons
+   - 6 capacitive touch buttons
      - change pattern
      - change brightness
      - replace current pattern with new unique pattern
-   - power button for On/Off
+     - off
+     - battery check
+     - ? mystery spot
+   - power button for On
    - small led for lower battery charge/currently charging indicator
    - battery holder attached to the back
       - requires two 18650 lithium-ion rechargeable batteries
