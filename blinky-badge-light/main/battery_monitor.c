@@ -53,7 +53,7 @@ float get_battery_voltage() {
     int voltage_mv = 0;
     ESP_ERROR_CHECK(adc_cali_raw_to_voltage(cali_handle, raw_adc, &voltage_mv));
 
-    ESP_LOGI(TAG, "Battery voltage: %d mV", voltage_mv);
+    //ESP_LOGI(TAG, "Battery voltage: %d mV", voltage_mv);
 
     return voltage_mv;
 }
@@ -121,7 +121,7 @@ void init_battery_monitor() {
     //ESP_LOGI(TAG, "Battery voltage: %d mV", battery_voltage);
 
     if (battery_voltage < OFF_THRESH) {
-        ESP_LOGW(TAG, "Battery extremely low (%d mV). Goodbye, cruel world!!!", battery_voltage);
+        //ESP_LOGW(TAG, "Battery extremely low (%d mV). Goodbye, cruel world!!!", battery_voltage);
         //turn_off();
     }
 

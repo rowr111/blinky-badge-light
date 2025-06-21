@@ -2,6 +2,7 @@
 #include <stdbool.h>
 
 #include "driver/rmt_tx.h"
+#include "esp_timer.h"
 #include "esp_log.h"
 #include "led_strip.h"
 #include "led_utils.h"
@@ -81,17 +82,12 @@ void update_leds(uint8_t *framebuffer) {
     ESP_ERROR_CHECK(led_strip_refresh(strip));
 }
 
+
 void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
     genome *g = &patterns[index];
-    uint8_t hue;
-    Color color;
+    static uint8_t sat_offset = 0;
 
-    if (index == NUM_PATTERNS - 1) { 
-        render_vu_meter_pattern(framebuffer, g, loop);
-        return;
-    }
-
-    // Determine the effective brightness
+    // Effective brightness logic
     uint8_t effective_brightness = brightness;
     if (limit_brightness) {
         uint8_t limited_brightness = brightness_levels[limited_brightness_index];
@@ -100,31 +96,75 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
         }
     }
 
-    for (int i = 0; i < count; i++) {
-        hue = (g->hue_base + i * g->hue_ratedir + loop) % 256;
-        float base_brightness = 127.0f + (127.0f * sinf(2 * M_PI * loop / 256));
-        float eff_brightness = (base_brightness * effective_brightness) / 255.0f;
+    // VU meter pattern shortcut
+    if (index == NUM_PATTERNS - 1) {
+        render_vu_meter_pattern(framebuffer, g, loop);
+        return;
+    }
 
-        // If sound reactive pattern, replace with dB_brightness_level
-        if (current_pattern == NUM_PATTERNS - 2) {
-            eff_brightness = dB_brightness_level * 255.0f;
+    // Main pattern loop
+    int tau = map_16(g->cd_rate, 0, 255, 700, 8000); // ms
+    int64_t curtime = esp_timer_get_time() / 1000; // ms
+    float twopi = 2.0f * (float)M_PI;
+    float anim = twopi * ((float)(curtime % tau) / tau);
+
+
+    if ((loop % 2) == 0 && sat_offset > 0) { // Decay every other frame
+        sat_offset = satsub_8(sat_offset, 1);
+    }
+
+    for (int i = 0; i < count; i++) {
+        // ---- HUE calculation ----
+        uint32_t hue_temp;
+        uint8_t hue;
+
+        if (!g->hue_dir) { // 0 for clockwise, 1 for counter-clockwise
+            hue_temp = ((256U / count) * i + (loop * g->hue_rate));
+        } else {
+            hue_temp = ((256U / count) * i - (loop * g->hue_rate));
         }
 
-        // Clamp before converting to int (optional, avoids overflow)
-        if (eff_brightness > 255.0f) eff_brightness = 255.0f;
-        if (eff_brightness < 0.0f) eff_brightness = 0.0f;
+        hue_temp &= 0x1FF;
+        if (hue_temp <= 0xFF)
+            hue = (uint8_t)hue_temp;
+        else
+            hue = (uint8_t)(511 - hue_temp);
 
-        color = Wheel(hue);
+        // Map to user color span
+        hue = (uint8_t)map_16((int16_t)hue, 0, 255, (int16_t)g->hue_base, (int16_t)g->hue_bound);
 
-        // Use float math to avoid rounding errors
-        float sat = g->sat / 255.0f;
-        color.r = (uint8_t)((color.r * eff_brightness * sat) / 255.0f);
-        color.g = (uint8_t)((color.g * eff_brightness * sat) / 255.0f);
-        color.b = (uint8_t)((color.b * eff_brightness * sat) / 255.0f);
+        // ---- SATURATION ----
+        uint8_t sat = satadd_8(g->sat, sat_offset);
 
-        set_pixel(framebuffer, i, color.r, color.g, color.b);
+        // ---- VALUE (brightness sinusoid) ----
+        float t = (float)i / (float)(count - 1);
+        float phase = twopi * g->cd_period * t;
+        float spacetime = (g->cd_dir > 128) ? (phase + anim) : (phase - anim);
+        float base_val = 127.0f * (1.0f + cosf(spacetime)); // 0..254
+        uint8_t val = (uint8_t)base_val;
+
+        // ---- NONLINEARITY/GAMMA ----
+        if (g->nonlin > 127)
+            val = (uint8_t)(((uint16_t)val * (uint16_t)val) >> 8);
+
+        // ---- APPLY EFFECTIVE BRIGHTNESS ----
+        // Sound-reactive pattern brightness + effective_brightness for basic sound reactive pattern
+        if (index == NUM_PATTERNS - 2) {
+            // Scale brightness by dB_brightness_level and effective_brightness
+            val = (uint8_t)(dB_brightness_level * effective_brightness);
+        } else {
+            val = (uint8_t)((val * effective_brightness) / 255);
+        }
+        
+        // ---- HSV to RGB ----
+        uint8_t r, gr, b;
+        hsv_to_rgb(hue, sat, val, &r, &gr, &b);
+
+        // ---- Write to framebuffer ----
+        set_pixel(framebuffer, i, r, gr, b);
     }
 }
+
 
 void flash_feedback_pattern() {
     flash_active = true; // Pause the lighting task

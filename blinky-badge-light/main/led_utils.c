@@ -72,3 +72,23 @@ void hsv_to_rgb(uint8_t h, uint8_t s, uint8_t v, uint8_t *r, uint8_t *g, uint8_t
             break;
     }
 }    
+
+
+// Simple map utility for 16-bit linear mapping
+int16_t map_16(int16_t x, int16_t in_min, int16_t in_max, int16_t out_min, int16_t out_max) {
+    return (int16_t)(((int32_t)(x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min);
+}
+
+// Clamp value between 0–255
+uint8_t clamp8(int x) { return (x < 0) ? 0 : (x > 255) ? 255 : x; }
+
+
+uint8_t satadd_8(uint8_t a, uint8_t b) {
+    int16_t res = (int16_t)a + (int16_t)b;
+    return (res > 255) ? 255 : (uint8_t)res;
+}
+
+uint8_t satsub_8(uint8_t a, uint8_t b) {
+    int16_t res = (int16_t)a - (int16_t)b;
+    return (res < 0) ? 0 : (uint8_t)res;
+}
