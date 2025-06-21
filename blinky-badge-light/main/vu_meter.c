@@ -83,7 +83,7 @@ void render_vu_meter_pattern(uint8_t *framebuffer, const genome *g, int loop) {
     for (int lvl = 0; lvl < levels; lvl++) {
         uint8_t r = 0, g_col = 0, b = 0;
         if (lvl < num_lit_levels) {
-            uint8_t hue = (g->hue_base + lvl * g->hue_ratedir + loop) % 256;
+            uint8_t hue = (g->hue_base + lvl * g->hue_rate + loop) % 256;
             Color color = Wheel(hue);
             float sat = g->sat / 255.0f;
             float per_level = (levels > 1) ? (0.7f + 0.3f * ((float)lvl / (levels - 1))) : 1.0f;

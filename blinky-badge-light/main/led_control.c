@@ -82,51 +82,6 @@ void update_leds(uint8_t *framebuffer) {
     ESP_ERROR_CHECK(led_strip_refresh(strip));
 }
 
-// void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
-//     genome *g = &patterns[index];
-//     uint8_t hue;
-//     Color color;
-
-//     if (index == NUM_PATTERNS - 1) { 
-//         render_vu_meter_pattern(framebuffer, g, loop);
-//         return;
-//     }
-
-//     // Determine the effective brightness
-//     uint8_t effective_brightness = brightness;
-//     if (limit_brightness) {
-//         uint8_t limited_brightness = brightness_levels[limited_brightness_index];
-//         if (limited_brightness < brightness) {
-//             effective_brightness = limited_brightness;
-//         }
-//     }
-
-//     for (int i = 0; i < count; i++) {
-//         hue = (g->hue_base + i * g->hue_ratedir + loop) % 256;
-//         float base_brightness = 127.0f + (127.0f * sinf(2 * M_PI * loop / 256));
-//         float eff_brightness = (base_brightness * effective_brightness) / 255.0f;
-
-//         // If basic sound reactive pattern, replace with dB_brightness_level
-//         if (current_pattern == NUM_PATTERNS - 2) {
-//             eff_brightness = dB_brightness_level * effective_brightness;
-//         }
-
-//         // Clamp before converting to int (optional, avoids overflow)
-//         if (eff_brightness > 255.0f) eff_brightness = 255.0f;
-//         if (eff_brightness < 0.0f) eff_brightness = 0.0f;
-
-//         color = Wheel(hue);
-
-//         // Use float math to avoid rounding errors
-//         float sat = g->sat / 255.0f;
-//         color.r = (uint8_t)((color.r * eff_brightness * sat) / 255.0f);
-//         color.g = (uint8_t)((color.g * eff_brightness * sat) / 255.0f);
-//         color.b = (uint8_t)((color.b * eff_brightness * sat) / 255.0f);
-
-//         set_pixel(framebuffer, i, color.r, color.g, color.b);
-//     }
-// }
-
 
 void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
     genome *g = &patterns[index];
@@ -147,22 +102,6 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
         return;
     }
 
-    // Sound-reactive pattern shortcut
-    if (index == NUM_PATTERNS - 2) {
-        float eff_brightness = dB_brightness_level * (effective_brightness / 255.0f);
-        uint8_t hue = (g->hue_base + loop) % 256;
-        Color color = Wheel(hue);
-        float sat = g->sat / 255.0f;
-        uint8_t r = (uint8_t)(color.r * sat * eff_brightness);
-        uint8_t g_col = (uint8_t)(color.g * sat * eff_brightness);
-        uint8_t b = (uint8_t)(color.b * sat * eff_brightness);
-        for (int i = 0; i < count; i++) {
-            set_pixel(framebuffer, i, r, g_col, b);
-        }
-        return;
-    }
-
-
     // Main pattern loop
     int tau = map_16(g->cd_rate, 0, 255, 700, 8000); // ms
     int64_t curtime = esp_timer_get_time() / 1000; // ms
@@ -176,16 +115,15 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
 
     for (int i = 0; i < count; i++) {
         // ---- HUE calculation ----
-        uint32_t hue_rate = g->hue_ratedir & 0xF;
-        uint32_t hue_dir = (((g->hue_ratedir >> 4) & 0xF) > 10) ? 1 : 0;
         uint32_t hue_temp;
         uint8_t hue;
 
-        if (!hue_dir) {
-            hue_temp = ((256U / count) * i + (loop * hue_rate));
+        if (!g->hue_dir) { // 0 for clockwise, 1 for counter-clockwise
+            hue_temp = ((256U / count) * i + (loop * g->hue_rate));
         } else {
-            hue_temp = ((256U / count) * i - (loop * hue_rate));
+            hue_temp = ((256U / count) * i - (loop * g->hue_rate));
         }
+
         hue_temp &= 0x1FF;
         if (hue_temp <= 0xFF)
             hue = (uint8_t)hue_temp;
@@ -210,8 +148,14 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
             val = (uint8_t)(((uint16_t)val * (uint16_t)val) >> 8);
 
         // ---- APPLY EFFECTIVE BRIGHTNESS ----
-        val = (uint8_t)((val * effective_brightness) / 255);
-
+        // Sound-reactive pattern brightness + effective_brightness for basic sound reactive pattern
+        if (index == NUM_PATTERNS - 2) {
+            // Scale brightness by dB_brightness_level and effective_brightness
+            val = (uint8_t)(dB_brightness_level * effective_brightness);
+        } else {
+            val = (uint8_t)((val * effective_brightness) / 255);
+        }
+        
         // ---- HSV to RGB ----
         uint8_t r, gr, b;
         hsv_to_rgb(hue, sat, val, &r, &gr, &b);

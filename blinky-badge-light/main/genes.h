@@ -13,11 +13,10 @@ typedef struct {
     uint8_t cd_dir;          // Direction for certain effects
     uint8_t sat;             // Saturation level
     uint8_t hue_base;        // Base hue
-    uint8_t hue_ratedir;     // Hue change rate/direction
+    uint8_t hue_rate;        // Hue change rate
+    uint8_t hue_dir;         // Direction of hue change
     uint8_t hue_bound;       // Maximum hue
     uint8_t lin;             // Linear brightness modifier
-    uint8_t strobe;          // Strobe effect intensity
-    uint8_t accel;           // Acceleration for dynamic effects
     uint8_t nonlin;          // Nonlinearity (gamma correction or other tweaks)
     char name[GENE_NAMELENGTH]; // Pattern name
 } genome;
