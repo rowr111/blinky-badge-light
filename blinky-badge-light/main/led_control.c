@@ -16,7 +16,6 @@
 
 static const char *TAG = "LED_CONTROL";
 
-// Static variables
 static led_strip_handle_t strip;
 static int current_pattern = 0; // Active pattern ID
 uint8_t brightness = MAX_BRIGHTNESS;
@@ -85,7 +84,6 @@ void update_leds(uint8_t *framebuffer) {
 
 void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
     genome *g = &patterns[index];
-    static uint8_t sat_offset = 0;
 
     // Effective brightness logic
     uint8_t effective_brightness = brightness;
@@ -108,11 +106,6 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
     float twopi = 2.0f * (float)M_PI;
     float anim = twopi * ((float)(curtime % tau) / tau);
 
-
-    if ((loop % 2) == 0 && sat_offset > 0) { // Decay every other frame
-        sat_offset = satsub_8(sat_offset, 1);
-    }
-
     for (int i = 0; i < count; i++) {
         // ---- HUE calculation ----
         uint32_t hue_temp;
@@ -132,9 +125,6 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
 
         // Map to user color span
         hue = (uint8_t)map_16((int16_t)hue, 0, 255, (int16_t)g->hue_base, (int16_t)g->hue_bound);
-
-        // ---- SATURATION ----
-        uint8_t sat = satadd_8(g->sat, sat_offset);
 
         // ---- VALUE (brightness sinusoid) ----
         float t = (float)i / (float)(count - 1);
@@ -158,7 +148,7 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
         
         // ---- HSV to RGB ----
         uint8_t r, gr, b;
-        hsv_to_rgb(hue, sat, val, &r, &gr, &b);
+        hsv_to_rgb(hue, g->sat, val, &r, &gr, &b);
 
         // ---- Write to framebuffer ----
         set_pixel(framebuffer, i, r, gr, b);
