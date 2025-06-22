@@ -12,6 +12,6 @@ extern int battery_meter_start_time;
 #define BATTERY_HOLD_MS      3000
 #define BATTERY_TOTAL_MS     (BATTERY_FILL_ANIM_MS + BATTERY_HOLD_MS)
 
-void render_battery_level_pattern(uint8_t *framebuffer, int elapsed_ms, uint8_t effective_brightness);
+void render_battery_level_pattern(uint8_t *framebuffer, int elapsed_ms);
 
 #endif // BATTERY_LEVEL_PATTERN_H

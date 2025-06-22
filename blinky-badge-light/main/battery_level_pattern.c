@@ -8,7 +8,7 @@ volatile bool show_battery_meter = false;
 int battery_meter_start_time = 0;
 
 
-void render_battery_level_pattern(uint8_t *framebuffer, int elapsed_ms, uint8_t effective_brightness) {
+void render_battery_level_pattern(uint8_t *framebuffer, int elapsed_ms) {
     int levels = 13;
 
     // Calculate battery fill fraction (0.0 to 1.0)

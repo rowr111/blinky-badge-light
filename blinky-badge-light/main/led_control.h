@@ -14,10 +14,10 @@ void update_leds(uint8_t *framebuffer);
 void render_pattern(int index, uint8_t *framebuffer, int count, int loop);
 
 void flash_feedback_pattern(void);
-void safety_pattern(uint8_t *framebuffer, int count, int loop);
+void safety_pattern(uint8_t *framebuffer);
 
 extern volatile bool flash_active; 
-extern uint8_t brightness;
+extern uint8_t effective_brightness;
 
 
 // Constants

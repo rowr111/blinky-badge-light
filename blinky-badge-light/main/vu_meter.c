@@ -26,7 +26,7 @@ void render_vu_meter_pattern(uint8_t *framebuffer, const genome *g, int loop) {
     if (num_lit_levels < 0) num_lit_levels = 0;
     if (num_lit_levels > levels) num_lit_levels = levels;
 
-    float global_brightness = brightness / 255.0f;
+    float global_brightness = effective_brightness / 255.0f;
 
     // Uncomment this block to draw base color at 20% brightness on all LEDs
     // 1. Draw base color at 20% brightness on all LEDs
@@ -70,7 +70,7 @@ void render_vu_meter_pattern(uint8_t *framebuffer, const genome *g, int loop) {
             Color color = Wheel(hue);
             float sat = g->sat / 255.0f;
             float per_level = (levels > 1) ? (0.7f + 0.3f * ((float)lvl / (levels - 1))) : 1.0f;
-            float pos_brightness = per_level * smooth_dB_brightness_level;  // (or dB_brightness_level, depending on your choice)
+            float pos_brightness = per_level * smooth_dB_brightness_level;
             if (pos_brightness < 0.2f) pos_brightness = 0.2f;
             if (pos_brightness > 1.0f) pos_brightness = 1.0f;
 

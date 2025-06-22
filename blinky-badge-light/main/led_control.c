@@ -20,6 +20,7 @@ static const char *TAG = "LED_CONTROL";
 static led_strip_handle_t strip;
 static int current_pattern = 0; // Active pattern ID
 uint8_t brightness = MAX_BRIGHTNESS;
+uint8_t effective_brightness = MAX_BRIGHTNESS;
 static const uint8_t brightness_levels[] = {
     (MAX_BRIGHTNESS * 30) / 100, 
     (MAX_BRIGHTNESS * 42) / 100,
@@ -31,7 +32,6 @@ static const uint8_t brightness_levels[] = {
 
 
 static int brightness_index = 0; // Index for the current brightness level
-static int limited_brightness_index = 1; // Index for the limited brightness level
 volatile bool flash_active = false;
 
 // Initialize LED strip
@@ -86,13 +86,9 @@ void update_leds(uint8_t *framebuffer) {
 void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
     genome *g = &patterns[index];
 
-    // Effective brightness logic
-    uint8_t effective_brightness = brightness;
+    // Limit brightness if battery is low but not critical
     if (limit_brightness) {
-        uint8_t limited_brightness = brightness_levels[limited_brightness_index];
-        if (limited_brightness < brightness) {
-            effective_brightness = limited_brightness;
-        }
+        effective_brightness = brightness_levels[0];
     }
 
     // Show battery meter patern if enabled and timer didn't run out, otherwise, turn it off
@@ -102,7 +98,7 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
             show_battery_meter = false;
         }
         else {
-            render_battery_level_pattern(framebuffer, elapsed, effective_brightness);
+            render_battery_level_pattern(framebuffer, elapsed);
             return;
         }
     }
@@ -186,34 +182,27 @@ void flash_feedback_pattern() {
     flash_active = false; // Resume the lighting task
 }
 
-void safety_pattern(uint8_t *framebuffer, int count, int loop) {
-    // Set brightness to 10% of MAX_BRIGHTNESS
+void safety_pattern(uint8_t *framebuffer) {
     uint8_t safety_brightness = MAX_BRIGHTNESS / 10;
+    uint8_t dim_red = safety_brightness * 0.2f;
+    uint8_t full_red = safety_brightness;
 
-    // Define color intensities
-    uint8_t lower_red = safety_brightness / 6; // Lower brightness red
-    uint8_t full_red = safety_brightness;     // Full brightness red
+    int64_t ms = esp_timer_get_time() / 1000;
+    int slowdown_factor = 150; // Adjust for speed
+    int shifted = (ms / slowdown_factor);
 
-    // Slow down the pattern cycle
-    int slowdown_factor = 7;  // Adjust this to change the speed (higher = slower)
-    int slowed_loop = loop / slowdown_factor;
-
-    // Create the safety pattern
-    for (int i = 0; i < count; i++) {
-        int pattern_index = (i + slowed_loop) % 4; // Cycle through 4-step pattern
-
+    for (int i = 0; i < LED_COUNT; i++) {
+        int pattern_index = (i + shifted) % 4;
         switch (pattern_index) {
-            case 0: // Black
+            case 0: // Off
                 set_pixel(framebuffer, i, 0, 0, 0);
                 break;
-            case 1: // Lower brightness red
-                set_pixel(framebuffer, i, lower_red, 0, 0);
+            case 1: // Dim
+            case 3: // Dim
+                set_pixel(framebuffer, i, dim_red, 0, 0);
                 break;
-            case 2: // Full brightness red
+            case 2: // Bright
                 set_pixel(framebuffer, i, full_red, 0, 0);
-                break;
-            case 3: // Lower brightness red
-                set_pixel(framebuffer, i, lower_red, 0, 0);
                 break;
         }
     }
