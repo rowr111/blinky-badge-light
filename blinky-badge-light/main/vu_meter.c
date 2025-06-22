@@ -6,23 +6,6 @@
 #include "led_control.h"
 #include "esp_log.h"
 
-// Example: Order LEDs from bottom tip up both sides to top center
-static const uint8_t vu_order[13][2] = {
-    {12, 12},
-    {11, 13}, 
-    {10, 14},
-    {9, 15},
-    {8, 16},
-    {7, 17},
-    {6, 18},
-    {5, 19},    
-    {4, 20},
-    {3, 21},
-    {2, 22},
-    {1, 23},
-    {0, 0},   
-};
-
 static float vu_display_level = 0.0f;
 #define VU_ATTACK_RATE 0.25f  // How fast it can rise
 #define VU_DECAY_RATE 0.02f   // How slow it falls
@@ -37,7 +20,7 @@ void render_vu_meter_pattern(uint8_t *framebuffer, const genome *g, int loop) {
         if (vu_display_level < 0.0f) vu_display_level = 0.0f;
     }
 
-    int levels = sizeof(vu_order) / sizeof(vu_order[0]);
+    int levels = sizeof(heart_fill_order) / sizeof(heart_fill_order[0]);
     int num_lit_levels = (int)ceilf(vu_display_level * levels);
 
     if (num_lit_levels < 0) num_lit_levels = 0;
@@ -95,9 +78,9 @@ void render_vu_meter_pattern(uint8_t *framebuffer, const genome *g, int loop) {
             g_col = (uint8_t)(color.g * sat * pos_brightness * global_brightness);
             b = (uint8_t)(color.b * sat * pos_brightness * global_brightness);
         }
-        set_pixel(framebuffer, vu_order[lvl][0], r, g_col, b);
-        if (vu_order[lvl][1] != vu_order[lvl][0]) {
-            set_pixel(framebuffer, vu_order[lvl][1], r, g_col, b);
+        set_pixel(framebuffer, heart_fill_order[lvl][0], r, g_col, b);
+        if (heart_fill_order[lvl][1] != heart_fill_order[lvl][0]) {
+            set_pixel(framebuffer, heart_fill_order[lvl][1], r, g_col, b);
         }
     }
 

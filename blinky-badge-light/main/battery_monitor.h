@@ -16,6 +16,7 @@ void turn_off(void);
 #define ADC_ATTEN   ADC_ATTEN_DB_12
 #define ADC_UNIT    ADC_UNIT_1
 
+#define MAX_BATTERY_VOLTAGE 4200 // Maximum battery voltage in mV
 #define BRIGHT_THRESH     3550 // Brightness limiting threshold in mV
 #define SAFETY_THRESH     3470 // Safety mode threshold in mV
 #define OFF_THRESH        3330 // Turn off mode threshold in mV

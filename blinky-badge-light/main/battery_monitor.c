@@ -104,6 +104,7 @@ void battery_monitor_task(void *param) {
     while (1) {
         int battery_voltage = get_battery_voltage();
         current_battery_voltage = (uint16_t)battery_voltage;
+        //current_battery_voltage = 4200; // For testing purposes, set a fixed value
 
         if (battery_voltage > BRIGHT_THRESH) {
             //ESP_LOGI(TAG, "Battery is normal: %d mV", battery_voltage);

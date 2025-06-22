@@ -1,9 +1,11 @@
 #include "esp_log.h"
+#include "esp_timer.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "nvs_flash.h"
 
 #include "battery_monitor.h"
+#include "battery_level_pattern.h"
 #include "led_control.h"
 #include "touch_input.h"
 #include "storage.h"
@@ -59,6 +61,11 @@ void touch_task(void *param) {
                     set_brightness(settings.brightness);
                     save_settings(&settings);
                     break;
+                } else if (i == 4) {
+                    // Pad 5: Toggle battery meter
+                    show_battery_meter = true;
+                    battery_meter_start_time = esp_timer_get_time() / 1000;
+                    break;
                 }
             } else if (event == LONG_PRESS) {
                 ESP_LOGI("MAIN", "Long press on pad %d", i);
@@ -67,6 +74,10 @@ void touch_task(void *param) {
                     generate_gene(&patterns[settings.pattern_id]);
                     save_genomes_to_storage();
                     flash_feedback_pattern();
+
+                    // use this for testing battery meter pattern
+                    //show_battery_meter = true;
+                    //battery_meter_start_time = esp_timer_get_time() / 1000;
                     break;
                 }
                 if (i==3) {

@@ -7,6 +7,7 @@ idf_component_register(
         "genes.c"
         "led_utils.c"
         "battery_monitor.c"
+        "battery_level_pattern.c"
         "microphone.c"
         "vu_meter.c"
     INCLUDE_DIRS

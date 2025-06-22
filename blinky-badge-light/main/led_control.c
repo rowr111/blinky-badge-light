@@ -13,6 +13,7 @@
 #include "microphone.h"
 #include "pins.h"
 #include "vu_meter.h"
+#include "battery_level_pattern.h"
 
 static const char *TAG = "LED_CONTROL";
 
@@ -91,6 +92,18 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
         uint8_t limited_brightness = brightness_levels[limited_brightness_index];
         if (limited_brightness < brightness) {
             effective_brightness = limited_brightness;
+        }
+    }
+
+    // Show battery meter patern if enabled and timer didn't run out, otherwise, turn it off
+    if (show_battery_meter) {
+        int elapsed = (esp_timer_get_time() / 1000) - battery_meter_start_time;
+        if (elapsed >= BATTERY_TOTAL_MS) {
+            show_battery_meter = false;
+        }
+        else {
+            render_battery_level_pattern(framebuffer, elapsed, effective_brightness);
+            return;
         }
     }
 
