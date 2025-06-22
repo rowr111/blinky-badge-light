@@ -12,16 +12,13 @@ void cleanup_battery_monitor();  // Clean up ADC resources
 void turn_off(void);
 
 // Constants
-#define VOLTAGE_DIVIDER_RATIO 1.4545 // Adjust based on resistors used (using 10k and 22k during testing)
+#define VOLTAGE_DIVIDER_RATIO 2 // Using two 10k resistors
 #define ADC_ATTEN   ADC_ATTEN_DB_12
 #define ADC_UNIT    ADC_UNIT_1
 
-#define MOSFET_GATE_PIN GPIO_NUM_21
-#define BUTTON_PIN 27
-
 #define BRIGHT_THRESH     3550 // Brightness limiting threshold in mV
 #define SAFETY_THRESH     3470 // Safety mode threshold in mV
-#define OFF_THRESH   3330 // Turn off mode threshold in mV
+#define OFF_THRESH        3330 // Turn off mode threshold in mV
 
 extern volatile bool limit_brightness; // Flag to limit brightness when battery is low but not critical
 extern volatile bool force_safety_pattern; // Flag to force safety pattern when battery is critically low

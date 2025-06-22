@@ -26,14 +26,6 @@ static bool long_press_detected[NUM_TOUCH_PADS] = {false};
 // Array to store if a short press has been detected
 static bool short_press_detected[NUM_TOUCH_PADS] = {false};
 
-// Array of touch pad numbers
-static const touch_pad_t touch_pads[NUM_TOUCH_PADS] = {
-    TOUCH_PAD_NUM5,
-    TOUCH_PAD_NUM6,
-    TOUCH_PAD_NUM3,
-    TOUCH_PAD_NUM4,
-};
-
 void touch_debug_task(void *pvParameter) {
     while (1) {
         for (int i = 0; i < NUM_TOUCH_PADS; i++) {

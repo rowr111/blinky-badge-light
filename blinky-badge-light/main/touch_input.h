@@ -13,7 +13,4 @@ void touch_debug_task(void *pvParameter);
 #define SHORT_PRESS 1
 #define LONG_PRESS 2
 
-// Number of touch pads
-#define NUM_TOUCH_PADS 4
-
 #endif // TOUCH_INPUT_H
