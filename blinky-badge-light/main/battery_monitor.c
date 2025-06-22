@@ -17,7 +17,7 @@ static adc_cali_handle_t cali_handle;
 
 volatile bool limit_brightness = false;
 volatile bool force_safety_pattern = false;
-
+volatile uint16_t current_battery_voltage = 0;
 
 uint16_t get_battery_voltage() {
     // Enable battery monitor n-MOSFET
