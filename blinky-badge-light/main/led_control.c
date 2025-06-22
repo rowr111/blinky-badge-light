@@ -89,6 +89,8 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
     // Limit brightness if battery is low but not critical
     if (limit_brightness) {
         effective_brightness = brightness_levels[0];
+    } else {
+        effective_brightness = brightness;
     }
 
     // Show battery meter patern if enabled and timer didn't run out, otherwise, turn it off
