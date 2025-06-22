@@ -22,5 +22,6 @@ void turn_off(void);
 
 extern volatile bool limit_brightness; // Flag to limit brightness when battery is low but not critical
 extern volatile bool force_safety_pattern; // Flag to force safety pattern when battery is critically low
+extern volatile uint16_t current_battery_voltage; // Current battery voltage in mV
 
 #endif // BATTERY_MONITOR_H

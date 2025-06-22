@@ -10,43 +10,16 @@
 #include "battery_monitor.h"
 #include "pins.h"
 
-#define LONG_PRESS_THRESHOLD_MS 3000 // 3 seconds
-#define BUTTON_INIT_IGNORE_TIME_MS 10000 // 10 seconds - Ignore button presses during this time after boot
-
 static const char *TAG = "BATTERY_MONITOR";
 
 static adc_oneshot_unit_handle_t adc_handle;
 static adc_cali_handle_t cali_handle;
-static uint32_t button_press_time = 0;
-static uint32_t power_on_time = 0;
 
 volatile bool limit_brightness = false;
 volatile bool force_safety_pattern = false;
 
 
-// Interrupt handler for the button
-void IRAM_ATTR button_isr_handler(void *arg) {
-    uint32_t current_time = esp_timer_get_time() / 1000; // Convert to milliseconds
-
-    // Ignore button presses during the ignore window
-    if ((current_time - power_on_time) < BUTTON_INIT_IGNORE_TIME_MS) {
-        ESP_LOGI(TAG, "Ignoring button press during power-on window.");
-        return;
-    }
-
-    if (gpio_get_level(BUTTON_PIN) == 0) { // Button pressed
-        button_press_time = current_time;
-    } else { // Button released
-        if (button_press_time != 0 && (current_time - button_press_time) >= LONG_PRESS_THRESHOLD_MS) {
-            ESP_LOGI(TAG, "Long press detected, shutting down.");
-            turn_off();
-        }
-        button_press_time = 0; // Reset the press time
-    }
-}
-
-
-float get_battery_voltage() {
+uint16_t get_battery_voltage() {
     // Enable battery monitor n-MOSFET
     gpio_set_level(BATTERY_MONITOR_ENABLE_PIN, 1);
 
@@ -60,7 +33,7 @@ float get_battery_voltage() {
     gpio_set_level(BATTERY_MONITOR_ENABLE_PIN, 0);
 
     // Calculate actual battery voltage
-    float battery_voltage = voltage_mv * VOLTAGE_DIVIDER_RATIO;
+    uint16_t battery_voltage = (uint16_t)(voltage_mv * VOLTAGE_DIVIDER_RATIO);
 
     //ESP_LOGI(TAG, "Battery voltage: %d mV", battery_voltage);
 
@@ -117,14 +90,11 @@ void init_battery_monitor() {
     ESP_ERROR_CHECK(adc_cali_create_scheme_curve_fitting(&cali_cfg, &cali_handle));
 
     // Check battery voltage and turn off if it's too low
-    int battery_voltage = get_battery_voltage();
+    uint16_t battery_voltage = get_battery_voltage();
     if (battery_voltage < OFF_THRESH) {
         //ESP_LOGW(TAG, "Battery extremely low (%d mV). Goodbye, cruel world!!!", battery_voltage);
         //turn_off();
     }
-
-    // Record the power-on time - will be used to ignore button presses during boot
-    power_on_time = esp_timer_get_time() / 1000; // Convert to milliseconds
 
     ESP_LOGI(TAG, "Battery monitor initialized");
 }
@@ -133,6 +103,7 @@ void init_battery_monitor() {
 void battery_monitor_task(void *param) {
     while (1) {
         int battery_voltage = get_battery_voltage();
+        current_battery_voltage = (uint16_t)battery_voltage;
 
         if (battery_voltage > BRIGHT_THRESH) {
             //ESP_LOGI(TAG, "Battery is normal: %d mV", battery_voltage);
