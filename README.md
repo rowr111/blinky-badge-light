@@ -55,7 +55,7 @@ The form is similar to the original blinky badge, but there are differences:
  - the original has 36 LEDs, this badge has 24.
  - the original has a screen and antenna, this badge does not.
  - the original has 8 capacitive touch buttons, this badge has 3 big and 3 small ones.
- - this badge uses user-supplied, removeable batteries.
+ - this badge uses a user-supplied, removeable battery.
 
 ### Structural Components (WIP!)
  - PCB with these main components:
@@ -75,7 +75,7 @@ The form is similar to the original blinky badge, but there are differences:
    - power button for On
    - small led for lower battery charge/currently charging indicator
    - battery holder attached to the back
-      - requires two 18650 lithium-ion rechargeable batteries
+      - requires one 18650 lithium-ion rechargeable battery
  - Case:
    - heart shaped ring on the front, same as the original blinky badge
    - back fully covers the back of the PCB as well as protects the battery holder
