@@ -54,7 +54,7 @@ The badge is a heart shaped PCB with LEDs outlining the heart.  The LEDs are cov
 The form is similar to the original blinky badge, but there are differences:
  - the original has 36 LEDs, this badge has 24.
  - the original has a screen and antenna, this badge does not.
- - the original has 8 capacitive touch buttons, this badge has 3.
+ - the original has 8 capacitive touch buttons, this badge has 3 big and 3 small ones.
  - this badge uses user-supplied, removeable batteries.
 
 ### Structural Components (WIP!)
