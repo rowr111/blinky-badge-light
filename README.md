@@ -81,3 +81,36 @@ The form is similar to the original blinky badge, but there are differences:
    - back fully covers the back of the PCB as well as protects the battery holder
    - will have various points for attaching/hanging the badge
 
+## How to write code for the badge!
+ - Visual Studio Code
+ - Espressif IDF extension
+ - set up the extension:  install idf 5.4.1 (MUST USE THIS VERSION)
+ - plug in badge to computer using USB-C cable that *supports data transmission*
+ - update code on badge using ESP-IDF:
+   - FIRST TIME: 
+     - go to ESP-IDF: EXPLORER (list of commands) from  icon in VS Code's left-hand icon menu
+     - select current ESP-IDF version (5.4.1 that you just installed)
+     - select flash method - UART
+     - 'Select Port to Use (COM, tty, usbserial)'
+       - hold down 'ON' button on badge (or just make sure the badge is on)
+       - click 'Select Port to Use (COM, tty, usbserial)'
+       - pick the port that matches your badge (check in device manager if you're not sure)
+     - 'Select Monitor Port to Use (COM, tty, usbserial)'
+       - repeat ^ process and pick the same port
+     - Full Clean
+     - Build Project
+     - Flash Device
+       - ON button must be held down while flash happens
+     - after flash is complete, release ON, then press and hold ON to start the badge
+     - once badge has started, you can use 'Monitor Device' to see the serial monitor.
+   - BUILDING AFTER THIS FIRST SETUP BUILD:
+     - just do build/flash steps!
+     - if you have problems:
+       - check if the com port changed for some reason and reset them
+       - full clean before rebuilding
+ - Now that you know how to update the code, add your own fun stuff!
+ - Code Ideas:
+   - something using the antenna? 
+   - cool new lighting patterns?
+   - use the ? mystery spot capacitive touch pad to do something cool?
+
