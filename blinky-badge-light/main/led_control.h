@@ -23,6 +23,6 @@ extern uint8_t effective_brightness;
 // Constants
 #define MAX_BRIGHTNESS 255      // Maximum brightness level
 #define NUM_PATTERNS 5          // Number of lighting patterns
-#define NUM_BRIGHTNESS_LEVELS 6 // Number of brightness levels
+#define NUM_BRIGHTNESS_LEVELS 5 // Number of brightness levels
 
 #endif // LED_CONTROL_H

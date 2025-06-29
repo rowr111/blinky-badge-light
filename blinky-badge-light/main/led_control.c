@@ -21,13 +21,12 @@ static led_strip_handle_t strip;
 static int current_pattern = 0; // Active pattern ID
 uint8_t brightness = MAX_BRIGHTNESS;
 uint8_t effective_brightness = MAX_BRIGHTNESS;
-static const uint8_t brightness_levels[] = {
-    (MAX_BRIGHTNESS * 30) / 100, 
-    (MAX_BRIGHTNESS * 42) / 100,
-    (MAX_BRIGHTNESS * 54) / 100,
-    (MAX_BRIGHTNESS * 66) / 100,
-    (MAX_BRIGHTNESS * 78) / 100,
-    (MAX_BRIGHTNESS * 90) / 100
+static const uint8_t brightness_levels[] = { //gamma corrected brightness levels for better perceived change between levels
+    9,    // 20% 
+    34,   // 37.5%
+    78,   // 55%
+    148,  // 72.5%
+    209   // 90% (max bc I feel like limiting a bit)
 };
 
 
