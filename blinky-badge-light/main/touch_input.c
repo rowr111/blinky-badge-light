@@ -9,10 +9,9 @@
 static const char *TAG = "TOUCH_INPUT";
 
 // Configuration
-#define TOUCH_THRESHOLD 40000 // Adjust based on your hardware
+#define TOUCH_THRESHOLD 30000
 #define DEBOUNCE_DELAY_MS 50 // Debounce delay in milliseconds
 #define LONG_PRESS_THRESHOLD 100 // Long press threshold in milliseconds
-#define TOUCH_THRESH_NO_USE   (0)
 
 // Array to store the press duration for each pad
 static int press_durations[NUM_TOUCH_PADS] = {0};
@@ -26,28 +25,24 @@ static bool long_press_detected[NUM_TOUCH_PADS] = {false};
 // Array to store if a short press has been detected
 static bool short_press_detected[NUM_TOUCH_PADS] = {false};
 
-void touch_debug_task(void *pvParameter) {
-    while (1) {
-        for (int i = 0; i < NUM_TOUCH_PADS; i++) {
-            uint32_t touch_value = 0;
-            touch_pad_read_raw_data(touch_pads[i], &touch_value);
-            ESP_LOGI(TAG, "[DEBUG] Touch pad %d raw: %lu", i, (unsigned long)touch_value);
+
+bool any_pad_pressed() {
+    for (int i = 0; i < NUM_TOUCH_PADS; i++) {
+        uint32_t value = 0;
+        touch_pad_filter_read_smooth(touch_pads[i], &value);
+        if (value > TOUCH_THRESHOLD) {
+            return true; // At least one pad is pressed
         }
-        vTaskDelay(pdMS_TO_TICKS(1000)); // 1 second delay
     }
+    return false; // No pads are pressed
 }
+
 
 // Initialize touch input
 void init_touch() {
     ESP_LOGI(TAG, "Initializing touch input");
     ESP_ERROR_CHECK(touch_pad_init());
     ESP_LOGI(TAG, "Initializing touch input, threshold: %d", TOUCH_THRESHOLD);
-    // Set reference voltage for charging/discharging
-    // In this case, the high reference valtage will be 2.7V - 1V = 1.7V
-    // The low reference voltage will be 0.5
-    // The larger the range, the larger the pulse count value.
-    touch_pad_set_voltage(TOUCH_HVOLT_2V7, TOUCH_LVOLT_0V5, TOUCH_HVOLT_ATTEN_1V);
-
     touch_filter_config_t filter_info = {
         .mode = TOUCH_PAD_FILTER_IIR_4,    // Or _IIR_8, _IIR_16, etc. for more smoothing
         .debounce_cnt = 1,
@@ -104,4 +99,43 @@ int get_touch_event(int pad_num) {
     }
 
     return NO_TOUCH;
+}
+
+
+void periodic_touch_recalibration_task(void *pvParameter) {
+    while (1) {
+        // Wait until all pads are released before recalibrating
+        while (any_pad_pressed()) {
+            vTaskDelay(pdMS_TO_TICKS(500)); // Wait 0.5 sec, then check again
+        }
+
+        // Once all pads are released, recalibrate
+        for (int i = 0; i < NUM_TOUCH_PADS; i++) {
+            touch_pad_config(touch_pads[i]);
+        }
+        // Wait the main interval before trying again
+        vTaskDelay(pdMS_TO_TICKS(30 * 60 * 1000)); // 30 minutes
+    }
+}
+
+
+
+void touch_debug_task(void *pvParameter) {
+    uint32_t raw, filtered;
+    while (1) {
+        ESP_LOGI(TAG, "\n[TOUCH DEBUG] ---------------------\n");
+        for (int i = 0; i < NUM_TOUCH_PADS; i++) {
+            touch_pad_read_raw_data(touch_pads[i], &raw);
+            touch_pad_filter_read_smooth(touch_pads[i], &filtered);
+
+            const char *state = "untouched";
+            if (is_pressed[i]) {
+                state = long_press_detected[i] ? "long" : (short_press_detected[i] ? "short" : "pressed");
+            }
+
+            ESP_LOGI(TAG, "Pad %d: RAW=%6lu  FILTER=%6lu  State: %s\n", i, (unsigned long)raw, (unsigned long)filtered, state);
+        }
+        ESP_LOGI(TAG, "[Threshold] Using: %lu\n", (unsigned long)TOUCH_THRESHOLD);
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
 }

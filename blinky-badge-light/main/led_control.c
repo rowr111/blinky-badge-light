@@ -173,16 +173,17 @@ void flash_feedback_pattern() {
 
     // Flash all LEDs with white light for a brief moment
     for (int i = 0; i < LED_COUNT; i++) {
-        set_pixel(framebuffer, i, 50, 50, 50); // White but lets not blind people
+        set_pixel(framebuffer, i, 60, 60, 60); // White but lets not blind people
     }
     update_leds(framebuffer);
-    vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms flash
+    vTaskDelay(125 / portTICK_PERIOD_MS); // 125ms flash
 
     // Turn off LEDs
     memset(framebuffer, 0, sizeof(framebuffer));
     update_leds(framebuffer);
     flash_active = false; // Resume the lighting task
 }
+
 
 void safety_pattern(uint8_t *framebuffer) {
     uint8_t safety_brightness = MAX_BRIGHTNESS / 10;
