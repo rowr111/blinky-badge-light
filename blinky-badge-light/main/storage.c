@@ -47,7 +47,7 @@ void load_settings(badge_settings_t *settings) {
     if (err != ESP_OK) {
         ESP_LOGW(TAG, "No settings found, using defaults");
         settings->pattern_id = 0;    // Default pattern
-        settings->brightness = 128; // Default brightness
+        settings->brightness = 1; // Default brightness - let's start with a low (but now lowest) brightness
         return;
     }
 

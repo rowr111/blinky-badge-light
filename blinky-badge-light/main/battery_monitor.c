@@ -22,6 +22,7 @@ volatile uint16_t current_battery_voltage = 0;
 uint16_t get_battery_voltage() {
     // Enable battery monitor n-MOSFET
     gpio_set_level(BATTERY_MONITOR_ENABLE_PIN, 1);
+    vTaskDelay(pdMS_TO_TICKS(10));
 
     int raw_adc = 0;
     ESP_ERROR_CHECK(adc_oneshot_read(adc_handle, ADC_CHANNEL, &raw_adc));
@@ -34,8 +35,6 @@ uint16_t get_battery_voltage() {
 
     // Calculate actual battery voltage
     uint16_t battery_voltage = (uint16_t)(voltage_mv * VOLTAGE_DIVIDER_RATIO);
-
-    //ESP_LOGI(TAG, "Battery voltage: %d mV", battery_voltage);
 
     return battery_voltage;
 }
@@ -103,8 +102,6 @@ void init_battery_monitor() {
 void battery_monitor_task(void *param) {
     while (1) {
         current_battery_voltage = get_battery_voltage();
-        //current_battery_voltage = (uint16_t)battery_voltage;
-        current_battery_voltage = 4200; // Until we actually have a battery monitoring circuit, set a fixed value
 
         if (current_battery_voltage > BRIGHT_THRESH) {
             ESP_LOGI(TAG, "Battery is normal: %d mV", current_battery_voltage);
@@ -120,9 +117,9 @@ void battery_monitor_task(void *param) {
             ESP_LOGE(TAG, "Battery extremely low: %d mV. Goodbye, cruel world!!!", current_battery_voltage);
             limit_brightness = true;
             force_safety_pattern = true;
-            //turn_off();
+            turn_off();
         }
 
-        vTaskDelay(pdMS_TO_TICKS(5000)); // Check every 5 seconds
+        vTaskDelay(pdMS_TO_TICKS(30000)); // Check every 30 seconds
     }
 }

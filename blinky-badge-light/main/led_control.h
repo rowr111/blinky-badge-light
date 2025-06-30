@@ -7,7 +7,7 @@
 // Function to initialize LEDs
 void init_leds(void);
 void set_pattern(int pattern_id);
-void set_brightness();
+void set_brightness(int index);
 // Function to update LEDs with the framebuffer
 void update_leds(uint8_t *framebuffer);
 // Function to render a pattern based on the index and loop

@@ -113,9 +113,9 @@ void app_main() {
     set_brightness(settings.brightness);
 
     // Create tasks
-    xTaskCreate(lighting_task, "Lighting Task", 4096, NULL, 5, NULL);
-    xTaskCreate(touch_task, "Touch Task", 4096, NULL, 5, NULL);
-    xTaskCreate(periodic_touch_recalibration_task, "Periodic Touch Recalibration Task", 2048, NULL, 1, NULL);
-    xTaskCreate(battery_monitor_task, "Battery Monitor Task", 4096, NULL, 5, NULL);
-    xTaskCreate(microphone_task, "Microphone Task", 4096, NULL, 5, NULL);
+    xTaskCreatePinnedToCore(lighting_task, "Lighting Task", 4096, NULL, 5, NULL, 1);
+    xTaskCreatePinnedToCore(touch_task, "Touch Task", 4096, NULL, 5, NULL, 0);
+    xTaskCreatePinnedToCore(periodic_touch_recalibration_task, "Periodic Touch Recalibration Task", 2048, NULL, 5, NULL, 0);
+    xTaskCreatePinnedToCore(battery_monitor_task, "Battery Monitor Task", 4096, NULL, 5, NULL, 0);
+    xTaskCreatePinnedToCore(microphone_task, "Microphone Task", 4096, NULL, 5, NULL, 0);
 }

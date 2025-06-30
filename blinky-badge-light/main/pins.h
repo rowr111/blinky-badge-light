@@ -9,7 +9,7 @@
 #define LED_COUNT 24 // Number of LEDs
 
 // Battery monitoring pins
-#define ADC_CHANNEL ADC_CHANNEL_8   // GPIO17 on ADC1
+#define ADC_CHANNEL ADC_CHANNEL_8   // GPIO9 on ADC1
 #define ADC_GPIO    GPIO_NUM_17
 #define BATTERY_MONITOR_ENABLE_PIN GPIO_NUM_46 // GPIO46 controls battery monitor transistor
 
