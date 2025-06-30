@@ -103,18 +103,44 @@ void battery_monitor_task(void *param) {
     while (1) {
         current_battery_voltage = get_battery_voltage();
 
-        if (current_battery_voltage > BRIGHT_THRESH) {
-            ESP_LOGI(TAG, "Battery is normal: %d mV", current_battery_voltage);
-            limit_brightness = false;
-        } else if (current_battery_voltage > SAFETY_THRESH) {
-            ESP_LOGW(TAG, "Battery low: %d mV. Limiting brightness.", current_battery_voltage);
-            limit_brightness = true;
-        } else if (current_battery_voltage > OFF_THRESH) {
-            ESP_LOGE(TAG, "Battery critically low: %d mV. Entering safety mode.", current_battery_voltage);
-            limit_brightness = true;
-            force_safety_pattern = true;
+        // --- Brightness limiting buffer zone ---
+        if (limit_brightness) {
+            if (current_battery_voltage > RECOVERY_THRESH) {
+                limit_brightness = false; // Yay! Battery voltage is back to normal
+                ESP_LOGI(TAG, "Battery recovered: %d mV. Returning to normal brightness.", current_battery_voltage);
+            }  else {
+                ESP_LOGW(TAG, "Battery low: %d mV. Limiting brightness.", current_battery_voltage);
+            }
         } else {
-            ESP_LOGE(TAG, "Battery extremely low: %d mV. Goodbye, cruel world!!!", current_battery_voltage);
+            if (current_battery_voltage < BRIGHT_THRESH) {
+                limit_brightness = true; // Limit brightness to extend battery life
+                ESP_LOGW(TAG, "Battery low: %d mV. Limiting brightness.", current_battery_voltage);
+            }
+            else if (current_battery_voltage > BRIGHT_THRESH) {
+                limit_brightness = false; // Just in case..
+                ESP_LOGI(TAG, "Battery is normal: %d mV", current_battery_voltage);
+            }
+        }
+
+
+        // --- Safety mode buffer zone ---
+        if (force_safety_pattern) {
+            if (current_battery_voltage > SAFETY_RECOVERY_THRESH) {
+                force_safety_pattern = false;
+                ESP_LOGI(TAG, "Battery recovered: %d mV. Exiting safety mode.", current_battery_voltage);
+            } else {
+                ESP_LOGE(TAG, "Battery critically low: %d mV. In safety mode.", current_battery_voltage);
+            }
+        } else {
+            if (current_battery_voltage < SAFETY_THRESH) {
+                force_safety_pattern = true; // Force safety pattern
+                ESP_LOGE(TAG, "Battery critically low: %d mV. Entering safety mode.", current_battery_voltage);
+            }
+        }
+
+        // --- Off threshold - immediate! ---
+        if (current_battery_voltage < OFF_THRESH) {
+            ESP_LOGE(TAG, "Battery extremely low: %d mV. Shutting down.", current_battery_voltage);
             limit_brightness = true;
             force_safety_pattern = true;
             turn_off();

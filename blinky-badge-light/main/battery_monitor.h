@@ -18,7 +18,9 @@ void turn_off(void);
 
 #define MAX_BATTERY_VOLTAGE 4200 // Maximum battery voltage in mV
 #define BRIGHT_THRESH     3550 // Brightness limiting threshold in mV
+#define RECOVERY_THRESH   3700 // Must recover to 3.7V before turning off brightness limit
 #define SAFETY_THRESH     3470 // Safety mode threshold in mV
+#define SAFETY_RECOVERY_THRESH  3600 // Must recover to 3.6V before exiting safety mode
 #define OFF_THRESH        3330 // Turn off mode threshold in mV
 
 extern volatile bool limit_brightness; // Flag to limit brightness when battery is low but not critical
