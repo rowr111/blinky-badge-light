@@ -9752,7 +9752,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "100kΩ"
+		(property "Value" "10kΩ"
 			(at 0 -1.43 90)
 			(layer "B.Fab")
 			(uuid "54d68032-2aab-49f4-976a-b8f8f67d4288")
@@ -9764,7 +9764,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -9792,7 +9792,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C25803"
+		(property "JLCPCB Part #" "C25804"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -15598,7 +15598,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "100kΩ"
+		(property "Value" "10kΩ"
 			(at 0 -1.43 90)
 			(layer "B.Fab")
 			(uuid "b51d20ea-2d7f-41f2-846c-79bec90a5f12")
@@ -15610,7 +15610,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -15638,7 +15638,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C25803"
+		(property "JLCPCB Part #" "C25804"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -25803,7 +25803,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "100kΩ"
+		(property "Value" "10kΩ"
 			(at 0 -1.43 0)
 			(layer "B.Fab")
 			(uuid "f996816d-aada-441c-a14b-004458d951dd")
@@ -25815,7 +25815,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -25843,7 +25843,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C25803"
+		(property "JLCPCB Part #" "C25804"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -27398,7 +27398,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "100kΩ"
+		(property "Value" "10kΩ"
 			(at 0 -1.43 90)
 			(layer "B.Fab")
 			(uuid "0b9a7060-7ebb-40d4-a724-f64a5096159b")
@@ -27410,7 +27410,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -27438,7 +27438,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C25803"
+		(property "JLCPCB Part #" "C25804"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")

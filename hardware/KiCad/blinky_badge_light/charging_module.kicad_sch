@@ -1802,6 +1802,20 @@
 		)
 		(uuid a83d2f3f-210e-492a-81a5-71b2ad49b29f)
 	)
+	(text "ECO1"
+		(exclude_from_sim yes)
+		(at 200.66 115.57 0)
+		(effects
+			(font
+				(face "KiCad Font")
+				(size 2.54 2.54)
+				(thickness 0.508)
+				(bold yes)
+				(color 137 36 255 1)
+			)
+		)
+		(uuid "0c53ffe3-d478-400c-89d5-a364c87f90aa")
+	)
 	(text "BATTERY AND CHARGER"
 		(exclude_from_sim yes)
 		(at 29.21 130.81 0)
@@ -3346,7 +3360,7 @@
 				)
 			)
 		)
-		(property "Value" "100kΩ"
+		(property "Value" "10kΩ"
 			(at 198.755 81.28 90)
 			(effects
 				(font
@@ -3363,7 +3377,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 198.755 85.09 0)
 			(effects
 				(font
@@ -3381,7 +3395,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C25803"
+		(property "JLCPCB Part #" "C25804"
 			(at 198.755 85.09 90)
 			(effects
 				(font
@@ -3665,7 +3679,7 @@
 				)
 			)
 		)
-		(property "Value" "100kΩ"
+		(property "Value" "10kΩ"
 			(at 207.01 104.14 90)
 			(effects
 				(font
@@ -3682,7 +3696,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 207.645 107.315 0)
 			(effects
 				(font
@@ -3700,7 +3714,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C25803"
+		(property "JLCPCB Part #" "C25804"
 			(at 207.645 107.315 90)
 			(effects
 				(font
@@ -4261,7 +4275,7 @@
 				)
 			)
 		)
-		(property "Value" "100kΩ"
+		(property "Value" "10kΩ"
 			(at 211.455 81.28 90)
 			(effects
 				(font
@@ -4278,7 +4292,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 211.455 85.09 0)
 			(effects
 				(font
@@ -4296,7 +4310,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C25803"
+		(property "JLCPCB Part #" "C25804"
 			(at 211.455 85.09 90)
 			(effects
 				(font
@@ -4338,7 +4352,7 @@
 				)
 			)
 		)
-		(property "Value" "100kΩ"
+		(property "Value" "10kΩ"
 			(at 178.435 92.71 90)
 			(effects
 				(font
@@ -4355,7 +4369,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706381320323072"
 			(at 178.435 96.52 0)
 			(effects
 				(font
@@ -4373,7 +4387,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C25803"
+		(property "JLCPCB Part #" "C25804"
 			(at 178.435 96.52 90)
 			(effects
 				(font
