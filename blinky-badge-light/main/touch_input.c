@@ -114,7 +114,7 @@ void periodic_touch_recalibration_task(void *pvParameter) {
             touch_pad_config(touch_pads[i]);
         }
         // Wait the main interval before trying again
-        vTaskDelay(pdMS_TO_TICKS(30 * 60 * 1000)); // 30 minutes
+        vTaskDelay(pdMS_TO_TICKS(2 * 60 * 1000)); // 2 minutes
     }
 }
 

@@ -59,7 +59,7 @@ void load_settings(badge_settings_t *settings) {
     } else {
         ESP_LOGW(TAG, "Failed to load settings, using defaults");
         settings->pattern_id = 0;
-        settings->brightness = 128;
+        settings->brightness = 1;
     }
 
     nvs_close(nvs_handle);
