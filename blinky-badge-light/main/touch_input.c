@@ -37,14 +37,18 @@ bool any_pad_pressed() {
     return false; // No pads are pressed
 }
 
-
-// Initialize touch input
-void init_touch() {
-    ESP_LOGI(TAG, "Initializing touch input");
+// Initialize touch hardware and configure pads helper
+void touch_init_and_configure(void) {
     ESP_ERROR_CHECK(touch_pad_init());
-    ESP_LOGI(TAG, "Initializing touch input, threshold: %d", TOUCH_THRESHOLD);
+    for (int i = 0; i < NUM_TOUCH_PADS; i++) {
+        touch_pad_config(touch_pads[i]);
+        is_pressed[i] = false;
+        press_durations[i] = 0;
+        long_press_detected[i] = false;
+        short_press_detected[i] = false;
+    }
     touch_filter_config_t filter_info = {
-        .mode = TOUCH_PAD_FILTER_IIR_4,    // Or _IIR_8, _IIR_16, etc. for more smoothing
+        .mode = TOUCH_PAD_FILTER_IIR_4,
         .debounce_cnt = 1,
         .noise_thr = 0,
         .jitter_step = 4,
@@ -52,13 +56,16 @@ void init_touch() {
     };
     ESP_ERROR_CHECK(touch_pad_filter_set_config(&filter_info));
     ESP_ERROR_CHECK(touch_pad_filter_enable());
-
-    for (int i = 0; i < NUM_TOUCH_PADS; i++) {
-        touch_pad_config(touch_pads[i]);
-    }
-
-    ESP_ERROR_CHECK(touch_pad_set_fsm_mode(TOUCH_FSM_MODE_TIMER)); // Enable periodic sampling
+    ESP_ERROR_CHECK(touch_pad_set_fsm_mode(TOUCH_FSM_MODE_TIMER));
     ESP_ERROR_CHECK(touch_pad_fsm_start());
+}
+
+
+// Initialize touch input
+void init_touch() {
+    ESP_LOGI(TAG, "Initializing touch input");
+    touch_init_and_configure();
+    ESP_LOGI(TAG, "Initializing touch input, threshold: %d", TOUCH_THRESHOLD);
 }
 
 // Get touch event for a specific pad
@@ -104,20 +111,52 @@ int get_touch_event(int pad_num) {
 
 void periodic_touch_recalibration_task(void *pvParameter) {
     while (1) {
-        // Wait until all pads are released before recalibrating
-        while (any_pad_pressed()) {
-            vTaskDelay(pdMS_TO_TICKS(500)); // Wait 0.5 sec, then check again
+        bool any_stuck = false;
+
+        // 1. Check for stuck pads (4194303 = max filter value)
+        for (int i = 0; i < NUM_TOUCH_PADS; i++) {
+            uint32_t filtered = 0;
+            touch_pad_filter_read_smooth(touch_pads[i], &filtered);
+
+            if (filtered == 4194303 || filtered > (TOUCH_THRESHOLD * 30)) { // TODO: Adjust threshold multiplier as needed, this is a guess
+                any_stuck = true;
+                ESP_LOGW(TAG, "Pad %d stuck high (FILTER=%lu), will force full recalibration!", i, (unsigned long)filtered);
+                break; // No need to check others; force reset if any are stuck
+            }
         }
 
-        // Once all pads are released, recalibrate
-        for (int i = 0; i < NUM_TOUCH_PADS; i++) {
-            touch_pad_config(touch_pads[i]);
+        if (any_stuck) {
+            ESP_LOGW(TAG, "Forcing immediate full touch reset due to stuck pads!");
+            touch_pad_filter_disable();
+            touch_pad_deinit();
+            vTaskDelay(pdMS_TO_TICKS(50));
+            touch_init_and_configure();
+            ESP_LOGW(TAG, "Touch pads fully reset and recalibrated after stuck pad!");
         }
-        // Wait the main interval before trying again
-        vTaskDelay(pdMS_TO_TICKS(2 * 60 * 1000)); // 2 minutes
+        // ..not sure if I want this or not but keeping the code around just in case
+        // } else {
+        //     // Recalibrate if pads are held too long
+        //     int wait_time = 0;
+        //     while (any_pad_pressed()) {
+        //         vTaskDelay(pdMS_TO_TICKS(500));
+        //         wait_time += 500;
+        //         if (wait_time > 10000) {
+        //             ESP_LOGW(TAG, "Pads held for >10s, recalibrating pads.");
+        //             for (int i = 0; i < NUM_TOUCH_PADS; i++) {
+        //                 touch_pad_config(touch_pads[i]);
+        //                 is_pressed[i] = false;
+        //                 press_durations[i] = 0;
+        //                 long_press_detected[i] = false;
+        //                 short_press_detected[i] = false;
+        //             }
+        //             break;
+        //         }
+        //     }
+        // }
+
+        vTaskDelay(pdMS_TO_TICKS(5000)); // Run every 5 seconds
     }
 }
-
 
 
 void touch_debug_task(void *pvParameter) {
