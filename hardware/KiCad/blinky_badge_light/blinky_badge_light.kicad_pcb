@@ -14690,7 +14690,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "1.2kΩ"
+		(property "Value" "2kΩ"
 			(at 0 -1.43 90)
 			(layer "B.Fab")
 			(uuid "e3952cf5-b31c-487d-8058-7bd1d65f1dd5")
@@ -14702,7 +14702,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706389601501184"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706189568917504"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -14730,7 +14730,7 @@
 				(justify mirror)
 			)
 		)
-		(property "JLCPCB Part #" "C22764"
+		(property "JLCPCB Part #" "C22975"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")

@@ -4089,7 +4089,7 @@
 				)
 			)
 		)
-		(property "Value" "1.2kΩ"
+		(property "Value" "2kΩ"
 			(at 111.76 83.82 90)
 			(effects
 				(font
@@ -4106,7 +4106,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706389601501184"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706189568917504"
 			(at 111.76 87.63 0)
 			(effects
 				(font
@@ -4124,7 +4124,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C22764"
+		(property "JLCPCB Part #" "C22975"
 			(at 111.76 87.63 90)
 			(effects
 				(font
