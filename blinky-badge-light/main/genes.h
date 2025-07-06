@@ -4,7 +4,6 @@
 #include <stdint.h>
 #include <string.h>
 
-#define NUM_PATTERNS 5
 #define GENE_NAMELENGTH 16
 
 typedef struct {
@@ -20,8 +19,6 @@ typedef struct {
     uint8_t nonlin;          // Nonlinearity (gamma correction or other tweaks)
     char name[GENE_NAMELENGTH]; // Pattern name
 } genome;
-
-extern genome patterns[NUM_PATTERNS];
 
 void generate_gene(genome *g);
 

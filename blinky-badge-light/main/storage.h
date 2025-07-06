@@ -2,12 +2,17 @@
 #define STORAGE_H
 
 #include <stdint.h>
+#include "genes.h"
+#include "led_control.h"
 
 // Settings structure
 typedef struct {
     int pattern_id;       // Current pattern ID
     uint8_t brightness;   // Current brightness level
 } badge_settings_t;
+
+extern badge_settings_t settings;
+extern genome patterns[NUM_PATTERNS];
 
 // Function prototypes
 void init_storage();

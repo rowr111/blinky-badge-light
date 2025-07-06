@@ -2,9 +2,15 @@
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "esp_timer.h"
 
 #include "pins.h"
 #include "touch_input.h"
+#include "led_control.h"
+#include "storage.h"
+#include "genes.h"
+#include "battery_level_pattern.h"
+#include "battery_monitor.h"
 
 static const char *TAG = "TOUCH_INPUT";
 
@@ -133,26 +139,6 @@ void periodic_touch_recalibration_task(void *pvParameter) {
             touch_init_and_configure();
             ESP_LOGW(TAG, "Touch pads fully reset and recalibrated after stuck pad!");
         }
-        // ..not sure if I want this or not but keeping the code around just in case
-        // } else {
-        //     // Recalibrate if pads are held too long
-        //     int wait_time = 0;
-        //     while (any_pad_pressed()) {
-        //         vTaskDelay(pdMS_TO_TICKS(500));
-        //         wait_time += 500;
-        //         if (wait_time > 10000) {
-        //             ESP_LOGW(TAG, "Pads held for >10s, recalibrating pads.");
-        //             for (int i = 0; i < NUM_TOUCH_PADS; i++) {
-        //                 touch_pad_config(touch_pads[i]);
-        //                 is_pressed[i] = false;
-        //                 press_durations[i] = 0;
-        //                 long_press_detected[i] = false;
-        //                 short_press_detected[i] = false;
-        //             }
-        //             break;
-        //         }
-        //     }
-        // }
 
         vTaskDelay(pdMS_TO_TICKS(5000)); // Run every 5 seconds
     }
@@ -176,5 +162,55 @@ void touch_debug_task(void *pvParameter) {
         }
         ESP_LOGI(TAG, "[Threshold] Using: %lu\n", (unsigned long)TOUCH_THRESHOLD);
         vTaskDelay(pdMS_TO_TICKS(500));
+    }
+}
+
+
+// Touch input task
+void touch_task(void *param) {
+    while (1) {
+        for (int i = 0; i < NUM_TOUCH_PADS; i++) {
+            int event = get_touch_event(i);
+            if (event == SHORT_PRESS) {
+                if (i == 0) {
+                    // Pad 1: Cycle patterns
+                    settings.pattern_id = (settings.pattern_id + 1) % NUM_PATTERNS;
+                    set_pattern(settings.pattern_id);
+                    ESP_LOGI("MAIN", "Current pattern: %d", settings.pattern_id);
+                    // Save the updated settings
+                    save_settings(&settings);
+                    break;
+                } else if (i == 1) {
+                    // Pad 2: Adjust brightness
+                    settings.brightness = (settings.brightness + 1) % NUM_BRIGHTNESS_LEVELS;
+                    set_brightness(settings.brightness);
+                    save_settings(&settings);
+                    break;
+                } else if (i == 4) {
+                    // Pad 5: Toggle battery meter
+                    show_battery_meter = true;
+                    battery_meter_start_time = esp_timer_get_time() / 1000;
+                    break;
+                }
+            } else if (event == LONG_PRESS) {
+                ESP_LOGI("MAIN", "Long press on pad %d", i);
+                if (i == 2) {
+                    // Pad 3: Generate new genome for current pattern
+                    generate_gene(&patterns[settings.pattern_id]);
+                    save_genomes_to_storage();
+                    flash_feedback_pattern();
+
+                    // use this for testing battery meter pattern
+                    //show_battery_meter = true;
+                    //battery_meter_start_time = esp_timer_get_time() / 1000;
+                    break;
+                }
+                if (i==3) {
+                    // Pad 4: turn off.
+                    turn_off();
+                }
+            }
+        }
+        vTaskDelay(100 / portTICK_PERIOD_MS); // Adjust polling rate
     }
 }

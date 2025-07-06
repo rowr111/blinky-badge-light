@@ -3,11 +3,11 @@
 
 #include <stdint.h>
 
-// Function prototypes
 void init_touch();
 int get_touch_event(int pad_num);
 void touch_debug_task(void *pvParameter);
 void periodic_touch_recalibration_task(void *pvParameter);
+void touch_task(void *param);
 
 // Touch event definitions
 #define NO_TOUCH 0

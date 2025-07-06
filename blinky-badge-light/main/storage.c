@@ -6,6 +6,7 @@
 
 static const char *TAG = "STORAGE";
 
+badge_settings_t settings;
 genome patterns[NUM_PATTERNS];
 
 // Initialize NVS

@@ -14,6 +14,7 @@
 #include "pins.h"
 #include "vu_meter.h"
 #include "battery_level_pattern.h"
+#include "storage.h"
 
 static const char *TAG = "LED_CONTROL";
 
@@ -206,6 +207,31 @@ void safety_pattern(uint8_t *framebuffer) {
             case 2: // Bright
                 set_pixel(framebuffer, i, full_red, 0, 0);
                 break;
+        }
+    }
+}
+
+// Lighting task
+void lighting_task(void *param) {
+    int loop = 0;
+    uint8_t framebuffer[LED_COUNT * 3];
+
+    while (1) { 
+        if (!flash_active) { // Only render patterns if no feedback is active
+            // Render the current pattern 
+            if (force_safety_pattern) {
+                safety_pattern(framebuffer);
+            } else {
+                render_pattern(settings.pattern_id, framebuffer, LED_COUNT, loop);
+            }
+            // Update LEDs
+            update_leds(framebuffer);
+
+            // Increment loop counter for animation
+            loop = (loop + 1) % 256;
+
+            // Delay for smooth animation (adjust as needed)
+            vTaskDelay(20 / portTICK_PERIOD_MS);
         }
     }
 }
