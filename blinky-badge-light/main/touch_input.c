@@ -75,10 +75,10 @@ void init_touch() {
 }
 
 // Get touch event for a specific pad
-int get_touch_event(int pad_num) {
+bool get_touch_event(int pad_num) {
     if (pad_num < 0 || pad_num >= NUM_TOUCH_PADS) {
         ESP_LOGI(TAG, "Invalid touch pad number: %d", pad_num);
-        return NO_TOUCH;
+        return false;
     }
 
     uint32_t touch_value = 0;
@@ -88,30 +88,23 @@ int get_touch_event(int pad_num) {
         if (!is_pressed[pad_num]) {
             is_pressed[pad_num] = true; // Mark pad as pressed
             press_durations[pad_num] = 0; // Reset press duration
-            long_press_detected[pad_num] = false; // Reset long press detection
             short_press_detected[pad_num] = false; // Reset short press detection
         }
         press_durations[pad_num]++;
-        if (press_durations[pad_num] > (LONG_PRESS_THRESHOLD / portTICK_PERIOD_MS)) {
-            if (!long_press_detected[pad_num]) {
-                long_press_detected[pad_num] = true;
-                ESP_LOGI(TAG, "Long press detected on pad %d", pad_num);
-                return LONG_PRESS;
-            }
-        } else if (press_durations[pad_num] > (DEBOUNCE_DELAY_MS / portTICK_PERIOD_MS)) {
+        if (press_durations[pad_num] > (DEBOUNCE_DELAY_MS / portTICK_PERIOD_MS)) {
             if (!short_press_detected[pad_num]) {
                 short_press_detected[pad_num] = true;
-                ESP_LOGI(TAG, "Short press detected on pad %d", pad_num);
-                return SHORT_PRESS;
+                ESP_LOGI(TAG, "Press detected on pad %d", pad_num);
+                return true;
             }
         }
     } else { // No touch detected
         is_pressed[pad_num] = false; // Reset state for the next touch
         press_durations[pad_num] = 0; // Reset press duration
-        short_press_detected[pad_num] = false; // Reset short press detection
+        short_press_detected[pad_num] = false; // Reset press detection
     }
 
-    return NO_TOUCH;
+    return false;
 }
 
 
@@ -166,51 +159,44 @@ void touch_debug_task(void *pvParameter) {
 }
 
 
+static void handle_touch_action(int pad) {
+    switch (pad) {
+        case 0:
+            settings.pattern_id = (settings.pattern_id + 1) % NUM_PATTERNS;
+            set_pattern(settings.pattern_id);
+            ESP_LOGI(TAG, "Current pattern: %d", settings.pattern_id);
+            save_settings(&settings);
+            break;
+        case 1:
+            settings.brightness = (settings.brightness + 1) % NUM_BRIGHTNESS_LEVELS;
+            set_brightness(settings.brightness);
+            save_settings(&settings);
+            break;
+        case 2:
+            generate_gene(&patterns[settings.pattern_id]);
+            save_genomes_to_storage();
+            flash_feedback_pattern();
+            break;
+        case 3:
+            turn_off();
+            break;
+        case 4:
+            show_battery_meter = true;
+            battery_meter_start_time = esp_timer_get_time() / 1000;
+            break;
+    }
+}
+
+
 // Touch input task
 void touch_task(void *param) {
     while (1) {
         for (int i = 0; i < NUM_TOUCH_PADS; i++) {
-            int event = get_touch_event(i);
-            if (event == SHORT_PRESS) {
-                if (i == 0) {
-                    // Pad 1: Cycle patterns
-                    settings.pattern_id = (settings.pattern_id + 1) % NUM_PATTERNS;
-                    set_pattern(settings.pattern_id);
-                    ESP_LOGI("MAIN", "Current pattern: %d", settings.pattern_id);
-                    // Save the updated settings
-                    save_settings(&settings);
-                    break;
-                } else if (i == 1) {
-                    // Pad 2: Adjust brightness
-                    settings.brightness = (settings.brightness + 1) % NUM_BRIGHTNESS_LEVELS;
-                    set_brightness(settings.brightness);
-                    save_settings(&settings);
-                    break;
-                } else if (i == 4) {
-                    // Pad 5: Toggle battery meter
-                    show_battery_meter = true;
-                    battery_meter_start_time = esp_timer_get_time() / 1000;
-                    break;
-                }
-            } else if (event == LONG_PRESS) {
-                ESP_LOGI("MAIN", "Long press on pad %d", i);
-                if (i == 2) {
-                    // Pad 3: Generate new genome for current pattern
-                    generate_gene(&patterns[settings.pattern_id]);
-                    save_genomes_to_storage();
-                    flash_feedback_pattern();
-
-                    // use this for testing battery meter pattern
-                    //show_battery_meter = true;
-                    //battery_meter_start_time = esp_timer_get_time() / 1000;
-                    break;
-                }
-                if (i==3) {
-                    // Pad 4: turn off.
-                    turn_off();
-                }
+            if (get_touch_event(i)) {
+                handle_touch_action(i);
+                break;
             }
         }
-        vTaskDelay(100 / portTICK_PERIOD_MS); // Adjust polling rate
+        vTaskDelay(50 / portTICK_PERIOD_MS);
     }
 }
