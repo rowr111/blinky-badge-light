@@ -21,15 +21,8 @@ static const char *TAG = "TOUCH_INPUT";
 
 // Array to store the press duration for each pad
 static int press_durations[NUM_TOUCH_PADS] = {0};
-
 // Array to store the press state for each pad
 static bool is_pressed[NUM_TOUCH_PADS] = {false};
-
-// Array to store if a long press has been detected
-static bool long_press_detected[NUM_TOUCH_PADS] = {false};
-
-// Array to store if a short press has been detected
-static bool short_press_detected[NUM_TOUCH_PADS] = {false};
 
 
 bool any_pad_pressed() {
@@ -50,8 +43,6 @@ void touch_init_and_configure(void) {
         touch_pad_config(touch_pads[i]);
         is_pressed[i] = false;
         press_durations[i] = 0;
-        long_press_detected[i] = false;
-        short_press_detected[i] = false;
     }
     touch_filter_config_t filter_info = {
         .mode = TOUCH_PAD_FILTER_IIR_4,
@@ -86,22 +77,19 @@ bool get_touch_event(int pad_num) {
 
     if (touch_value > TOUCH_THRESHOLD) { // Touch detected
         if (!is_pressed[pad_num]) {
-            is_pressed[pad_num] = true; // Mark pad as pressed
-            press_durations[pad_num] = 0; // Reset press duration
-            short_press_detected[pad_num] = false; // Reset short press detection
+            is_pressed[pad_num] = true;
+            press_durations[pad_num] = 0;
         }
         press_durations[pad_num]++;
         if (press_durations[pad_num] > (DEBOUNCE_DELAY_MS / portTICK_PERIOD_MS)) {
-            if (!short_press_detected[pad_num]) {
-                short_press_detected[pad_num] = true;
+            if (press_durations[pad_num] == (DEBOUNCE_DELAY_MS / portTICK_PERIOD_MS) + 1) {
                 ESP_LOGI(TAG, "Press detected on pad %d", pad_num);
                 return true;
             }
         }
-    } else { // No touch detected
-        is_pressed[pad_num] = false; // Reset state for the next touch
-        press_durations[pad_num] = 0; // Reset press duration
-        short_press_detected[pad_num] = false; // Reset press detection
+    } else {
+        is_pressed[pad_num] = false;
+        press_durations[pad_num] = 0;
     }
 
     return false;
@@ -146,12 +134,10 @@ void touch_debug_task(void *pvParameter) {
             touch_pad_read_raw_data(touch_pads[i], &raw);
             touch_pad_filter_read_smooth(touch_pads[i], &filtered);
 
-            const char *state = "untouched";
-            if (is_pressed[i]) {
-                state = long_press_detected[i] ? "long" : (short_press_detected[i] ? "short" : "pressed");
-            }
+            const char *state = is_pressed[i] ? "pressed" : "untouched";
 
-            ESP_LOGI(TAG, "Pad %d: RAW=%6lu  FILTER=%6lu  State: %s\n", i, (unsigned long)raw, (unsigned long)filtered, state);
+            ESP_LOGI(TAG, "Pad %d: RAW=%6lu  FILTER=%6lu  State: %s\n",
+                i, (unsigned long)raw, (unsigned long)filtered, state);
         }
         ESP_LOGI(TAG, "[Threshold] Using: %lu\n", (unsigned long)TOUCH_THRESHOLD);
         vTaskDelay(pdMS_TO_TICKS(500));
