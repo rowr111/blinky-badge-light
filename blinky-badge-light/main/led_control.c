@@ -23,11 +23,11 @@ static int current_pattern = 0; // Active pattern ID
 uint8_t brightness = MAX_BRIGHTNESS;
 uint8_t effective_brightness = MAX_BRIGHTNESS;
 static const uint8_t brightness_levels[] = { //gamma corrected brightness levels for better perceived change between levels
-    9,    // 20% 
-    34,   // 37.5%
-    78,   // 55%
-    148,  // 72.5%
-    209   // 90% (max bc I feel like limiting a bit)
+    20,    
+    35,   
+    69,   
+    121, 
+    200  
 };
 
 
@@ -186,9 +186,8 @@ void flash_feedback_pattern() {
 
 
 void safety_pattern(uint8_t *framebuffer) {
-    uint8_t safety_brightness = MAX_BRIGHTNESS / 10;
-    uint8_t dim_red = safety_brightness * 0.2f;
-    uint8_t full_red = safety_brightness;
+    uint8_t dim_red = brightness_levels[0] * 0.2f;
+    uint8_t full_red = brightness_levels[0];;
 
     int64_t ms = esp_timer_get_time() / 1000;
     int slowdown_factor = 150; // Adjust for speed
