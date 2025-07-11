@@ -12,7 +12,7 @@ void generate_gene(genome *g) {
     g->cd_dir = esp_random() & 0xFF;
     g->sat = 200 + (esp_random() % 56); // even more vivid
     // Occasionally force full rainbow
-    if ((esp_random() % 3) == 0) {
+    if ((esp_random() % 6) == 0) {
         g->hue_base = 1;
         g->hue_bound = 254;
     } else {
@@ -22,7 +22,7 @@ void generate_gene(genome *g) {
         g->hue_bound = (a > b) ? a : b;
         if (g->hue_base == g->hue_bound) g->hue_bound++; // ensure at least 1 span
     }
-    g->hue_rate = esp_random() % 8;
+    g->hue_rate = 1 + (esp_random() % 4);
     g->hue_dir = esp_random() % 2; // 0 or 1 for direction
     g->nonlin = esp_random() & 0xFF;
 

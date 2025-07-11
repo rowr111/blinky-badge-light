@@ -83,7 +83,7 @@ void update_leds(uint8_t *framebuffer) {
 }
 
 
-void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
+void render_pattern(int index, uint8_t *framebuffer, int loop) {
     genome *g = &patterns[index];
 
     // Limit brightness if battery is low but not critical
@@ -115,30 +115,20 @@ void render_pattern(int index, uint8_t *framebuffer, int count, int loop) {
     int tau = map_16(g->cd_rate, 0, 255, 700, 8000); // ms
     int64_t curtime = esp_timer_get_time() / 1000; // ms
     float twopi = 2.0f * (float)M_PI;
-    float anim = twopi * ((float)(curtime % tau) / tau);
+    float anim = twopi * ((float)(curtime) / tau);
 
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < LED_COUNT; i++) {
         // ---- HUE calculation ----
-        uint32_t hue_temp;
-        uint8_t hue;
-
-        if (!g->hue_dir) { // 0 for clockwise, 1 for counter-clockwise
-            hue_temp = ((256U / count) * i + (loop * g->hue_rate));
-        } else {
-            hue_temp = ((256U / count) * i - (loop * g->hue_rate));
-        }
-
-        hue_temp &= 0x1FF;
-        if (hue_temp <= 0xFF)
-            hue = (uint8_t)hue_temp;
-        else
-            hue = (uint8_t)(511 - hue_temp);
+        uint32_t base_hue = (255 * i) / LED_COUNT;
+        int dir = (g->hue_dir == 0) ? 1 : -1;
+        int32_t animated_hue = base_hue + dir * (loop * g->hue_rate);
+        uint8_t hue = (uint8_t)(((animated_hue % 256) + 256) % 256);
 
         // Map to user color span
         hue = (uint8_t)map_16((int16_t)hue, 0, 255, (int16_t)g->hue_base, (int16_t)g->hue_bound);
 
         // ---- VALUE (brightness sinusoid) ----
-        float t = (float)i / (float)(count - 1);
+        float t = (float)i / (float)(LED_COUNT - 1);
         float phase = twopi * g->cd_period * t;
         float spacetime = (g->cd_dir > 128) ? (phase + anim) : (phase - anim);
         float base_val = 127.0f * (1.0f + cosf(spacetime)); // 0..254
@@ -221,7 +211,7 @@ void lighting_task(void *param) {
             if (force_safety_pattern) {
                 safety_pattern(framebuffer);
             } else {
-                render_pattern(settings.pattern_id, framebuffer, LED_COUNT, loop);
+                render_pattern(settings.pattern_id, framebuffer, loop);
             }
             // Update LEDs
             update_leds(framebuffer);

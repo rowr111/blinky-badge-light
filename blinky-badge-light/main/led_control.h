@@ -8,7 +8,7 @@ void init_leds(void);
 void set_pattern(int pattern_id);
 void set_brightness(int index);
 void update_leds(uint8_t *framebuffer);
-void render_pattern(int index, uint8_t *framebuffer, int count, int loop);
+void render_pattern(int index, uint8_t *framebuffer, int loop);
 void lighting_task(void *param);
 
 void flash_feedback_pattern(void);
