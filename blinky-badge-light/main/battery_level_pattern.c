@@ -24,18 +24,18 @@ void render_battery_level_pattern(uint8_t *framebuffer, int elapsed_ms) {
         fill_progress = battery_frac;
     }
 
-    int num_lit_levels = (int)(fill_progress * levels + 0.5f);
-
     for (int lvl = 0; lvl < levels; lvl++) {
         uint8_t s = 255, v = effective_brightness;
         uint8_t h = 0;
-        if (lvl < num_lit_levels) {
+        uint8_t r, g, b;
+        
+        float led_end_frac = (float)lvl / (float)levels;
+        if (fill_progress >= led_end_frac) {
             float frac = (float)lvl / (levels - 1);
             h = (uint8_t)(frac * 85.0f); // Gradient from red (0) to green (85)
         } else {
             v = 0; // Off
         }
-        uint8_t r, g, b;
         hsv_to_rgb(h, s, v, &r, &g, &b);
         set_pixel(framebuffer, heart_fill_order[lvl][0], r, g, b);
         if (heart_fill_order[lvl][1] != heart_fill_order[lvl][0]) {
