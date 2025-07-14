@@ -35,6 +35,7 @@ uint16_t get_battery_voltage() {
 
     // Calculate actual battery voltage
     uint16_t battery_voltage = (uint16_t)(voltage_mv * VOLTAGE_DIVIDER_RATIO);
+    vTaskDelay(pdMS_TO_TICKS(10));
 
     return battery_voltage;
 }
@@ -88,16 +89,13 @@ void init_battery_monitor() {
 
     ESP_ERROR_CHECK(adc_cali_create_scheme_curve_fitting(&cali_cfg, &cali_handle));
 
-    // Check battery voltage and turn off if it's too low
+    // Check battery voltage
     uint16_t battery_voltage = get_battery_voltage();
-    if (battery_voltage < OFF_THRESH) {
-        //ESP_LOGW(TAG, "Battery extremely low (%d mV). Goodbye, cruel world!!!", battery_voltage);
-        //turn_off();
-    }
-
+    ESP_LOGI(TAG, "initial battery voltage: %d mV.", battery_voltage); // Somehow, writing this line causes the battery_monitor_task to not get a low voltage the first time it runs.. a mystery.
     ESP_LOGI(TAG, "Battery monitor initialized");
 }
 
+static int off_thresh_count = 0;
 
 void battery_monitor_task(void *param) {
     while (1) {
@@ -138,12 +136,18 @@ void battery_monitor_task(void *param) {
             }
         }
 
-        // --- Off threshold - immediate! ---
+        // --- Off threshold - off after 3 checks of passing the threshold! ---
         if (current_battery_voltage < OFF_THRESH) {
-            ESP_LOGE(TAG, "Battery extremely low: %d mV. Shutting down.", current_battery_voltage);
-            limit_brightness = true;
-            force_safety_pattern = true;
-            turn_off();
+            off_thresh_count++;
+            ESP_LOGE(TAG, "Battery extremely low: %d mV. OFF threshold count: %d", current_battery_voltage, off_thresh_count);
+            if (off_thresh_count >= 3) {
+                ESP_LOGE(TAG, "Battery extremely low: %d mV. Shutting down.", current_battery_voltage);
+                limit_brightness = true;
+                force_safety_pattern = true;
+                turn_off();
+            }
+        } else {
+            off_thresh_count = 0; // Reset count if voltage recovers
         }
 
         vTaskDelay(pdMS_TO_TICKS(30000)); // Check every 30 seconds
