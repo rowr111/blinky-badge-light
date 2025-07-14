@@ -33,6 +33,7 @@ static const uint8_t brightness_levels[] = { //gamma corrected brightness levels
 
 static int brightness_index = 0; // Index for the current brightness level
 volatile bool flash_active = false;
+int64_t flash_end_time = 0;
 
 // Initialize LED strip
 void init_leds() {
@@ -69,17 +70,23 @@ void update_leds(uint8_t *framebuffer) {
         ESP_LOGE(TAG, "LED strip not initialized");
         return;
     }
-
+    esp_err_t err;
     // Update each pixel in the LED strip
     for (int i = 0; i < LED_COUNT; i++) {
         uint8_t g = framebuffer[i * 3 + 0]; // Green
         uint8_t r = framebuffer[i * 3 + 1]; // Red
         uint8_t b = framebuffer[i * 3 + 2]; // Blue
-        ESP_ERROR_CHECK(led_strip_set_pixel(strip, i, r, g, b));
+        err = led_strip_set_pixel(strip, i, r, g, b);
+        if (err != ESP_OK) {
+            ESP_LOGE(TAG, "Failed to set pixel %d: %s", i, esp_err_to_name(err));
+        }
     }
 
     // Refresh the strip to apply the changes
-    ESP_ERROR_CHECK(led_strip_refresh(strip));
+    err = led_strip_refresh(strip);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to refresh LED strip: %s", esp_err_to_name(err));
+    }
 }
 
 
@@ -158,20 +165,8 @@ void render_pattern(int index, uint8_t *framebuffer, int loop) {
 
 
 void flash_feedback_pattern() {
-    flash_active = true; // Pause the lighting task
-    uint8_t framebuffer[LED_COUNT * 3] = {0};
-
-    // Flash all LEDs with white light for a brief moment
-    for (int i = 0; i < LED_COUNT; i++) {
-        set_pixel(framebuffer, i, 60, 60, 60); // White but lets not blind people
-    }
-    update_leds(framebuffer);
-    vTaskDelay(125 / portTICK_PERIOD_MS); // 125ms flash
-
-    // Turn off LEDs
-    memset(framebuffer, 0, sizeof(framebuffer));
-    update_leds(framebuffer);
-    flash_active = false; // Resume the lighting task
+    flash_active = true;
+    flash_end_time = esp_timer_get_time() / 1000 + 125; // 125ms from now
 }
 
 
@@ -205,22 +200,30 @@ void lighting_task(void *param) {
     int loop = 0;
     uint8_t framebuffer[LED_COUNT * 3];
 
-    while (1) { 
-        if (!flash_active) { // Only render patterns if no feedback is active
-            // Render the current pattern 
+    while (1) {
+        if (flash_active) {
+            // Render flash pattern
+            for (int i = 0; i < LED_COUNT; i++) {
+                set_pixel(framebuffer, i, 50, 50, 50);
+            }
+            update_leds(framebuffer);
+
+            // Check if flash duration has passed
+            int64_t now = esp_timer_get_time() / 1000;
+            if (now >= flash_end_time) {
+                flash_active = false;
+            }
+        } else {
+            // Normal rendering
             if (force_safety_pattern) {
                 safety_pattern(framebuffer);
             } else {
                 render_pattern(settings.pattern_id, framebuffer, loop);
             }
-            // Update LEDs
             update_leds(framebuffer);
 
-            // Increment loop counter for animation
             loop = (loop + 1) % 256;
-
-            // Delay for smooth animation (adjust as needed)
-            vTaskDelay(20 / portTICK_PERIOD_MS);
         }
+        vTaskDelay(20 / portTICK_PERIOD_MS);
     }
 }
