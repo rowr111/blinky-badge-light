@@ -46,9 +46,7 @@ void load_settings(badge_settings_t *settings) {
     nvs_handle_t nvs_handle;
     esp_err_t err = nvs_open("storage", NVS_READWRITE, &nvs_handle);
     if (err != ESP_OK) {
-        ESP_LOGW(TAG, "No settings found, using defaults");
-        settings->pattern_id = 0;    // Default pattern
-        settings->brightness = 1; // Default brightness - let's start with a low (but now lowest) brightness
+        ESP_LOGW(TAG, "Storage error, opening NVS failed: %s", esp_err_to_name(err));
         return;
     }
 
@@ -61,6 +59,7 @@ void load_settings(badge_settings_t *settings) {
         ESP_LOGW(TAG, "Failed to load settings, using defaults");
         settings->pattern_id = 0;
         settings->brightness = 1;
+        save_settings(settings);
     }
 
     nvs_close(nvs_handle);
