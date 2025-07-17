@@ -1802,20 +1802,6 @@
 		)
 		(uuid a83d2f3f-210e-492a-81a5-71b2ad49b29f)
 	)
-	(text "ECO1"
-		(exclude_from_sim yes)
-		(at 200.66 115.57 0)
-		(effects
-			(font
-				(face "KiCad Font")
-				(size 2.54 2.54)
-				(thickness 0.508)
-				(bold yes)
-				(color 137 36 255 1)
-			)
-		)
-		(uuid "0c53ffe3-d478-400c-89d5-a364c87f90aa")
-	)
 	(text "BATTERY AND CHARGER"
 		(exclude_from_sim yes)
 		(at 29.21 130.81 0)
