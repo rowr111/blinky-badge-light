@@ -99,6 +99,8 @@ static int off_thresh_count = 0;
 
 void battery_monitor_task(void *param) {
     while (1) {
+        vTaskDelay(pdMS_TO_TICKS(30000)); // Check every 30 seconds
+
         current_battery_voltage = get_battery_voltage();
 
         // --- Brightness limiting buffer zone ---
@@ -150,6 +152,5 @@ void battery_monitor_task(void *param) {
             off_thresh_count = 0; // Reset count if voltage recovers
         }
 
-        vTaskDelay(pdMS_TO_TICKS(30000)); // Check every 30 seconds
     }
 }
