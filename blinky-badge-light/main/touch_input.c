@@ -65,6 +65,17 @@ void init_touch() {
     ESP_LOGI(TAG, "Initializing touch input, threshold: %d", TOUCH_THRESHOLD);
 }
 
+// Used to check if pad is pressed at startup to trigger test sequence
+bool get_is_touched(int pad_num) {
+    uint32_t value = 0;
+    touch_pad_filter_read_smooth(touch_pads[0], &value);
+    if (value > TOUCH_THRESHOLD) {
+        return true;
+    }
+    return false;
+}
+
+
 // Get touch event for a specific pad
 bool get_touch_event(int pad_num) {
     if (pad_num < 0 || pad_num >= NUM_TOUCH_PADS) {

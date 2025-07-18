@@ -3,6 +3,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "nvs_flash.h"
+#include "esp_system.h"
 
 #include "battery_monitor.h"
 #include "battery_level_pattern.h"
@@ -12,8 +13,12 @@
 #include "genes.h"
 #include "pins.h"
 #include "microphone.h"
+#include "testing_routine.h"
 
 void app_main() {
+    esp_reset_reason_t reason = esp_reset_reason();
+    ESP_LOGI("MAIN", "Reset reason: %s", reset_reason_str(reason));
+
     // Initialize NVS
     esp_err_t ret = nvs_flash_init();
     if (ret != ESP_OK) {
@@ -35,6 +40,15 @@ void app_main() {
     set_pattern(settings.pattern_id);
     set_brightness(settings.brightness);
 
+    vTaskDelay(pdMS_TO_TICKS(50)); // give touch pads a little time to settle
+    if (get_is_touched(0)) { // Check if pad 0 is touched on startup
+        ESP_LOGI("TOUCH", "Touch detected on pad 0 on startup, starting testing routine.");
+        testing_routine();
+    } else {
+        ESP_LOGI("TOUCH", "No testing on startup, starting normal operation.");
+    }
+
+    ESP_LOGI("MAIN", "System initialized. Starting tasks...");
     // Create tasks
     xTaskCreatePinnedToCore(lighting_task, "Lighting Task", 4096, NULL, 5, NULL, 1);
     xTaskCreatePinnedToCore(touch_task, "Touch Task", 4096, NULL, 5, NULL, 0);

@@ -90,8 +90,8 @@ void init_battery_monitor() {
     ESP_ERROR_CHECK(adc_cali_create_scheme_curve_fitting(&cali_cfg, &cali_handle));
 
     // Check battery voltage
-    uint16_t battery_voltage = get_battery_voltage();
-    ESP_LOGI(TAG, "initial battery voltage: %d mV.", battery_voltage); // Somehow, writing this line causes the battery_monitor_task to not get a low voltage the first time it runs.. a mystery.
+    uint16_t current_battery_voltage = get_battery_voltage();
+    ESP_LOGI(TAG, "initial battery voltage: %d mV.", current_battery_voltage); 
     ESP_LOGI(TAG, "Battery monitor initialized");
 }
 

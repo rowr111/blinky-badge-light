@@ -10,6 +10,7 @@ idf_component_register(
         "battery_level_pattern.c"
         "microphone.c"
         "vu_meter.c"
+        "testing_routine.c"
     INCLUDE_DIRS
         "."
 )
