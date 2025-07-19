@@ -122,6 +122,13 @@ void test_microphone() {
 
         vTaskDelay(pdMS_TO_TICKS(interval_ms));
     }
+    
+    // Turn off all LEDs briefly before final result
+    for (int i = 0; i < LED_COUNT; i++) {
+        set_pixel(framebuffer, i, 0, 0, 0);
+    }
+    update_leds(framebuffer);
+    vTaskDelay(pdMS_TO_TICKS(500)); 
 
     // Final result: solid green (pass) or solid red (fail)
     uint8_t r = 0, g = 0, b = 0;
