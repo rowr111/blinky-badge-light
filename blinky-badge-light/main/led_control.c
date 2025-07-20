@@ -149,7 +149,8 @@ void render_pattern(int index, uint8_t *framebuffer, int loop) {
         // Sound-reactive pattern brightness + effective_brightness for basic sound reactive pattern
         if (index == NUM_PATTERNS - 2) {
             // Scale brightness by smooth_dB_brightness_level and effective_brightness
-            val = (uint8_t)(smooth_dB_brightness_level * effective_brightness);
+            // also set a minimum to prevent low light level flickering effect (slightly lower than the vu meter minimum of 0.2)
+            val = (uint8_t)(fmaxf(smooth_dB_brightness_level, 0.12f) * effective_brightness);
         } else {
             val = (uint8_t)((val * effective_brightness) / 255);
         }
