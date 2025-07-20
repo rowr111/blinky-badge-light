@@ -174,7 +174,7 @@ void microphone_task(void *param) {
         dbHistory_add(current_dB_level); 
         db_get_low_high(); // Update low and high averages
         calculate_sound_brightness(); // Update dB brightness level
-        //ESP_LOGI(TAG, "Sound Level: %.2f dB", sound_level);
+        //ESP_LOGI(TAG, "Sound Level: %.2f dB", current_dB_level);
         vTaskDelay(pdMS_TO_TICKS(20));
     }
 }

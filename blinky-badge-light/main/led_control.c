@@ -148,8 +148,8 @@ void render_pattern(int index, uint8_t *framebuffer, int loop) {
         // ---- APPLY EFFECTIVE BRIGHTNESS ----
         // Sound-reactive pattern brightness + effective_brightness for basic sound reactive pattern
         if (index == NUM_PATTERNS - 2) {
-            // Scale brightness by dB_brightness_level and effective_brightness
-            val = (uint8_t)(dB_brightness_level * effective_brightness);
+            // Scale brightness by smooth_dB_brightness_level and effective_brightness
+            val = (uint8_t)(smooth_dB_brightness_level * effective_brightness);
         } else {
             val = (uint8_t)((val * effective_brightness) / 255);
         }
