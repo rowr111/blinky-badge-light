@@ -29,7 +29,8 @@ void set_pixel(uint8_t *framebuffer, int index, uint8_t r, uint8_t g, uint8_t b)
 
 // Function to convert HSV to RGB
 void hsv_to_rgb(uint8_t h, uint8_t s, uint8_t v, uint8_t *r, uint8_t *g, uint8_t *b) {
-    float hf = h / 255.0f * 360.0f;
+    float hf = h / 256.0f * 360.0f;
+    if (hf >= 360.0f) hf -= 360.0f; // Ensure hue is in [0, 360)
     float sf = s / 255.0f;
     float vf = v / 255.0f;
 

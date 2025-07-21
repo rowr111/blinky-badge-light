@@ -123,11 +123,11 @@ void render_pattern(int index, uint8_t *framebuffer, int loop) {
     int64_t curtime = esp_timer_get_time() / 1000; // ms
     float twopi = 2.0f * (float)M_PI;
     float anim = twopi * ((float)(curtime) / tau);
+    int dir = (g->hue_dir == 0) ? 1 : -1;
 
     for (int i = 0; i < LED_COUNT; i++) {
         // ---- HUE calculation ----
         uint32_t base_hue = (255 * i) / LED_COUNT;
-        int dir = (g->hue_dir == 0) ? 1 : -1;
         int32_t animated_hue = base_hue + dir * (loop * g->hue_rate);
         uint8_t hue = (uint8_t)(((animated_hue % 256) + 256) % 256);
 
