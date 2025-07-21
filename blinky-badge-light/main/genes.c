@@ -13,8 +13,8 @@ void generate_gene(genome *g) {
     g->sat = 200 + (esp_random() % 56); // even more vivid
     // Occasionally force full rainbow
     if ((esp_random() % 6) == 0) {
-        g->hue_base = 1;
-        g->hue_bound = 254;
+        g->hue_base = 0;
+        g->hue_bound = 255;
     } else {
         uint8_t a = 1 + (esp_random() % 255);
         uint8_t b = 1 + (esp_random() % 255);
@@ -26,9 +26,7 @@ void generate_gene(genome *g) {
     g->hue_dir = esp_random() % 2; // 0 or 1 for direction
     g->nonlin = esp_random() & 0xFF;
 
-    // Generate a name for the pattern
-    snprintf(g->name, GENE_NAMELENGTH, "Pattern %d", (int)(esp_random() % 100));
-
     // Log the generated pattern
-    ESP_LOGI(TAG, "Generated genome: %s", g->name);
+    ESP_LOGI(TAG, "Generated genome: cd_period=%d cd_rate=%d cd_dir=%d sat=%d hue_base=%d hue_bound=%d hue_rate=%d hue_dir=%d nonlin=%d",
+        g->cd_period, g->cd_rate, g->cd_dir, g->sat, g->hue_base, g->hue_bound, g->hue_rate, g->hue_dir, g->nonlin);
 }

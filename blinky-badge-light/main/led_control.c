@@ -157,13 +157,22 @@ void render_pattern(int index, uint8_t *framebuffer, int loop) {
 
     for (int i = 0; i < LED_COUNT; i++) {
         // ---- HUE calculation ----
-        float shifted = (i + frac_offset);
-        int idx0 = ((int)shifted) % LED_COUNT;
-        int idx1 = (idx0 + 1) % LED_COUNT;
-        float frac = shifted - (int)shifted;
-        // Linear interpolation between hue_table[idx0] and hue_table[idx1]
-        uint8_t base_hue = (uint8_t)((1.0f - frac) * hue_table[idx0] + frac * hue_table[idx1]);
-        uint8_t hue = map_16(base_hue, 0, 255, g->hue_base, g->hue_bound);
+        uint8_t hue; 
+        if ((g->hue_base == 0) && (g->hue_bound == 255)) {
+            // if it's a full rainbow we can use a simple linear hue calculation
+            uint32_t base_hue = (255 * i) / LED_COUNT;
+            int32_t animated_hue = base_hue + dir * (loop * g->hue_rate);
+            hue = (uint8_t)(((animated_hue % 256) + 256) % 256);
+        } else { 
+            // if it's a limited hue range, we need to make the triangle wave from base-bound-base and smoothly rotate it
+            float shifted = (i + frac_offset);
+            int idx0 = ((int)shifted) % LED_COUNT;
+            int idx1 = (idx0 + 1) % LED_COUNT;
+            float frac = shifted - (int)shifted;
+            // Linear interpolation between hue_table[idx0] and hue_table[idx1]
+            uint8_t base_hue = (uint8_t)((1.0f - frac) * hue_table[idx0] + frac * hue_table[idx1]);
+            hue = map_16(base_hue, 0, 255, g->hue_base, g->hue_bound);
+        }
 
         // ---- VALUE (brightness sinusoid) ----
         float t = (float)i / (float)(LED_COUNT - 1);

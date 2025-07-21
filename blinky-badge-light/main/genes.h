@@ -4,8 +4,6 @@
 #include <stdint.h>
 #include <string.h>
 
-#define GENE_NAMELENGTH 16
-
 typedef struct {
     uint8_t cd_period;       // Controls period of sine wave (e.g., pattern speed)
     uint8_t cd_rate;         // Amplitude or "volume" of brightness modulation
@@ -17,7 +15,6 @@ typedef struct {
     uint8_t hue_bound;       // Maximum hue
     uint8_t lin;             // Linear brightness modifier
     uint8_t nonlin;          // Nonlinearity (gamma correction or other tweaks)
-    char name[GENE_NAMELENGTH]; // Pattern name
 } genome;
 
 void generate_gene(genome *g);
