@@ -90,6 +90,33 @@ void update_leds(uint8_t *framebuffer) {
 }
 
 
+uint8_t hue_table[24] = {
+      0,   // 0
+     21,   // 1
+     42,   // 2
+     63,   // 3
+     85,   // 4
+    106,   // 5
+    127,   // 6
+    148,   // 7
+    170,   // 8
+    191,   // 9
+    212,   // 10
+    233,   // 11
+    255,   // 12  
+    233,   // 13
+    212,   // 14
+    191,   // 15
+    170,   // 16
+    148,   // 17
+    127,   // 18
+    106,   // 19
+     85,   // 20
+     63,   // 21
+     42,   // 22
+     21    // 23
+};
+
 void render_pattern(int index, uint8_t *framebuffer, int loop) {
     genome *g = &patterns[index];
 
@@ -124,15 +151,19 @@ void render_pattern(int index, uint8_t *framebuffer, int loop) {
     float twopi = 2.0f * (float)M_PI;
     float anim = twopi * ((float)(curtime) / tau);
     int dir = (g->hue_dir == 0) ? 1 : -1;
+    float frac_offset = ((float)(dir * loop * g->hue_rate) / 256.0f) * LED_COUNT;
+    while (frac_offset < 0) frac_offset += LED_COUNT; // ensure positive
+    while (frac_offset >= LED_COUNT) frac_offset -= LED_COUNT;
 
     for (int i = 0; i < LED_COUNT; i++) {
         // ---- HUE calculation ----
-        uint32_t base_hue = (255 * i) / LED_COUNT;
-        int32_t animated_hue = base_hue + dir * (loop * g->hue_rate);
-        uint8_t hue = (uint8_t)(((animated_hue % 256) + 256) % 256);
-
-        // Map to user color span
-        hue = (uint8_t)map_16((int16_t)hue, 0, 255, (int16_t)g->hue_base, (int16_t)g->hue_bound);
+        float shifted = (i + frac_offset);
+        int idx0 = ((int)shifted) % LED_COUNT;
+        int idx1 = (idx0 + 1) % LED_COUNT;
+        float frac = shifted - (int)shifted;
+        // Linear interpolation between hue_table[idx0] and hue_table[idx1]
+        uint8_t base_hue = (uint8_t)((1.0f - frac) * hue_table[idx0] + frac * hue_table[idx1]);
+        uint8_t hue = map_16(base_hue, 0, 255, g->hue_base, g->hue_bound);
 
         // ---- VALUE (brightness sinusoid) ----
         float t = (float)i / (float)(LED_COUNT - 1);
