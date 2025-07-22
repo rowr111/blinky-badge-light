@@ -3,11 +3,13 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "genes.h"
 
 void init_leds(void);
 void set_pattern(int pattern_id);
 void set_brightness(int index);
 void update_leds(uint8_t *framebuffer);
+uint8_t calculate_pattern_hue(const genome *g, int led_index, int loop);
 void render_pattern(int index, uint8_t *framebuffer, int loop);
 void lighting_task(void *param);
 
