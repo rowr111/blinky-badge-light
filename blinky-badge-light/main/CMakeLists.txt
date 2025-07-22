@@ -1,6 +1,7 @@
 idf_component_register(
     SRCS
         "main.c"
+        "ble.c"
         "led_control.c"
         "touch_input.c"
         "storage.c"
@@ -11,6 +12,7 @@ idf_component_register(
         "microphone.c"
         "vu_meter.c"
         "testing_routine.c"
+        "firework_notification_pattern.c"
     INCLUDE_DIRS
         "."
 )

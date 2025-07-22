@@ -14,6 +14,7 @@
 #include "pins.h"
 #include "vu_meter.h"
 #include "battery_level_pattern.h"
+#include "firework_notification_pattern.h"
 #include "storage.h"
 
 static const char *TAG = "LED_CONTROL";
@@ -151,6 +152,17 @@ void render_pattern(int index, uint8_t *framebuffer, int loop) {
         effective_brightness = brightness_levels[0];
     } else {
         effective_brightness = brightness;
+    }
+
+    // notification from ble pattern
+    if (show_firework_notification) {
+        int elapsed = (esp_timer_get_time() / 1000) - firework_notification_start_time;
+        if (elapsed >= FIREWORK_NOTIFICATION_TOTAL_MS) {
+            show_firework_notification = false;
+        } else {
+            render_firework_notification_pattern(framebuffer, elapsed);
+            return;
+        }
     }
 
     // Show battery meter patern if enabled and timer didn't run out, otherwise, turn it off
