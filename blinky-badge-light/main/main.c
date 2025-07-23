@@ -5,7 +5,6 @@
 #include "nvs_flash.h"
 #include "esp_system.h"
 
-#include "ble.h"
 #include "battery_monitor.h"
 #include "battery_level_pattern.h"
 #include "led_control.h"
@@ -14,6 +13,7 @@
 #include "genes.h"
 #include "pins.h"
 #include "microphone.h"
+#include "now.h"
 #include "testing_routine.h"
 
 void app_main() {
@@ -35,7 +35,7 @@ void app_main() {
     init_leds();
     init_touch();
     init_microphone();
-    ble_init();
+    now_init();
     init_storage();
     load_settings(&settings);
 
@@ -58,5 +58,4 @@ void app_main() {
     xTaskCreatePinnedToCore(periodic_touch_recalibration_task, "Periodic Touch Recalibration Task", 4096, NULL, 5, NULL, 0);
     xTaskCreatePinnedToCore(battery_monitor_task, "Battery Monitor Task", 4096, NULL, 5, NULL, 0);
     xTaskCreatePinnedToCore(microphone_task, "Microphone Task", 4096, NULL, 5, NULL, 0);
-    xTaskCreatePinnedToCore(ble_advertise_task, "ble_adv_task", 4096, NULL, 5, &ble_adv_task_handle, 0);
 }
