@@ -11,6 +11,8 @@ idf_component_register(
         "microphone.c"
         "vu_meter.c"
         "testing_routine.c"
+        "firework_notification_pattern.c"
+        "now.c"
     INCLUDE_DIRS
         "."
 )

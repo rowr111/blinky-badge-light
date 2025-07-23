@@ -11,6 +11,7 @@
 #include "genes.h"
 #include "battery_level_pattern.h"
 #include "battery_monitor.h"
+#include "now.h"
 
 static const char *TAG = "TOUCH_INPUT";
 
@@ -180,6 +181,9 @@ static void handle_touch_action(int pad) {
         case 4:
             show_battery_meter = true;
             battery_meter_start_time = esp_timer_get_time() / 1000;
+            break;
+        case 5:
+            now_send_firework();
             break;
     }
 }

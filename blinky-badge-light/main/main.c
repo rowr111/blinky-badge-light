@@ -13,6 +13,7 @@
 #include "genes.h"
 #include "pins.h"
 #include "microphone.h"
+#include "now.h"
 #include "testing_routine.h"
 
 void app_main() {
@@ -34,6 +35,7 @@ void app_main() {
     init_leds();
     init_touch();
     init_microphone();
+    now_init();
     init_storage();
     load_settings(&settings);
 
