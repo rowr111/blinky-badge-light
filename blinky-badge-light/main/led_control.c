@@ -160,7 +160,7 @@ void render_pattern(int index, uint8_t *framebuffer, int loop) {
         if (elapsed >= FIREWORK_NOTIFICATION_TOTAL_MS) {
             show_firework_notification = false;
         } else {
-            render_firework_notification_pattern(framebuffer, elapsed);
+            render_firework_notification_pattern(framebuffer, elapsed, g, loop);
             return;
         }
     }
