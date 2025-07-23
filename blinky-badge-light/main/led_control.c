@@ -154,7 +154,7 @@ void render_pattern(int index, uint8_t *framebuffer, int loop) {
         effective_brightness = brightness;
     }
 
-    // notification from ble pattern
+    // notification from esp-now pattern
     if (show_firework_notification) {
         int elapsed = (esp_timer_get_time() / 1000) - firework_notification_start_time;
         if (elapsed >= FIREWORK_NOTIFICATION_TOTAL_MS) {
