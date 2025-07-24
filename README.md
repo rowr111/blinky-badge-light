@@ -83,13 +83,18 @@ The form is similar to the original blinky badge, but there are differences:
 
 ## How to write code for the badge!
  - Visual Studio Code
- - Espressif IDF extension
- - set up the extension:  install idf 5.4.1 (MUST USE THIS VERSION)
+ - add the Espressif IDF extension
+ - set up the extension
+   - configure ESP-IDF extension, I recommend Express mode:  
+     - install idf release version 5.5 (can prob use later versions too, but use at least this version)
+     - no other configuration needed!
+ - install CP210x Universal Windows Driver (or appropriate driver for your OS) from [CP2102N USB to UART Bridge Controller](https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads)
  - plug in badge to computer using USB-C cable that *supports data transmission*
+ - open the blinky-badge-light/blinky-badge-light folder in VSCode
  - update code on badge using ESP-IDF:
    - FIRST TIME: 
-     - go to ESP-IDF: EXPLORER (list of commands) from  icon in VS Code's left-hand icon menu
-     - select current ESP-IDF version (5.4.1 that you just installed)
+     - go to ESP-IDF: EXPLORER (list of commands) from  icon in VS Code's plugin icon menu
+     - select current ESP-IDF version (5.5 that you just installed)
      - select flash method - UART
      - 'Select Port to Use (COM, tty, usbserial)'
        - hold down 'ON' button on badge (or just make sure the badge is on)
