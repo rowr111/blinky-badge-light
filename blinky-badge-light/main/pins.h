@@ -1,7 +1,6 @@
 #ifndef PINS_H
 #define PINS_H
 
-#include "driver/touch_pad.h"
 #include <driver/gpio.h>
 
 // LED pins
@@ -21,16 +20,5 @@
 #define I2S_SCK_PIN GPIO_NUM_40  // Clock Pin (BCLK), pin 33
 #define I2S_WS_PIN  GPIO_NUM_39  // Word Select (LRCLK), pin 32
 #define I2S_DI_PIN  GPIO_NUM_38  // Data In (DOUT), pin 31
-
-
-#define NUM_TOUCH_PADS 6
-static const touch_pad_t touch_pads[NUM_TOUCH_PADS] = {
-    TOUCH_PAD_NUM5, // Next pattern touchpad
-    TOUCH_PAD_NUM6, // Brightness level touchpad
-    TOUCH_PAD_NUM3, // Replace pattern touchpad
-    TOUCH_PAD_NUM4, // OFF touchpad
-    TOUCH_PAD_NUM7, // Battery check touchpad
-    TOUCH_PAD_NUM8,  // ? spot touchpad (future use)
-};
 
 #endif // PINS_H

@@ -53,9 +53,7 @@ void app_main() {
     ESP_LOGI("MAIN", "System initialized. Starting tasks...");
     // Create tasks
     xTaskCreatePinnedToCore(lighting_task, "Lighting Task", 4096, NULL, 5, NULL, 1);
-    xTaskCreatePinnedToCore(touch_task, "Touch Task", 4096, NULL, 5, NULL, 0);
-    //xTaskCreatePinnedToCore(touch_debug_task, "Touch Debug Task", 4096, NULL, 5, NULL, 0);
-    xTaskCreatePinnedToCore(periodic_touch_recalibration_task, "Periodic Touch Recalibration Task", 4096, NULL, 5, NULL, 0);
     xTaskCreatePinnedToCore(battery_monitor_task, "Battery Monitor Task", 4096, NULL, 5, NULL, 0);
     xTaskCreatePinnedToCore(microphone_task, "Microphone Task", 4096, NULL, 5, NULL, 0);
+    xTaskCreatePinnedToCore(touch_task, "Touch Task", 4096, NULL, 5, NULL, 0);
 }
