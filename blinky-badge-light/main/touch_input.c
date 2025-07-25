@@ -1,10 +1,13 @@
-#include "driver/touch_pad.h"
-#include "esp_log.h"
+#include <stdio.h>
+#include <inttypes.h>
+#include <driver/gpio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "freertos/queue.h"
+#include "esp_log.h"
 #include "esp_timer.h"
+#include "driver/touch_sens.h"
 
-#include "pins.h"
 #include "touch_input.h"
 #include "led_control.h"
 #include "storage.h"
@@ -13,191 +16,144 @@
 #include "battery_monitor.h"
 #include "now.h"
 
+#define NUM_TOUCH_PADS 6
 static const char *TAG = "TOUCH_INPUT";
 
-// Configuration
-#define TOUCH_THRESHOLD 30000
-#define DEBOUNCE_DELAY_MS 50 // Debounce delay in milliseconds
-#define LONG_PRESS_THRESHOLD 100 // Long press threshold in milliseconds
-
-// Array to store the press duration for each pad
-static int press_durations[NUM_TOUCH_PADS] = {0};
-// Array to store the press state for each pad
 static bool is_pressed[NUM_TOUCH_PADS] = {false};
+static touch_sensor_handle_t touch_handle = NULL;
+static touch_channel_handle_t chan_handles[NUM_TOUCH_PADS];
 
+static const int pad_ids[NUM_TOUCH_PADS] = {
+    5, // Next pattern touchpad
+    6, // Brightness level touchpad
+    3, // Replace pattern touchpad
+    4, // OFF touchpad
+    7, // Battery check touchpad
+    8  // ? spot notification touchpad
+};
 
-bool any_pad_pressed() {
-    for (int i = 0; i < NUM_TOUCH_PADS; i++) {
-        uint32_t value = 0;
-        touch_pad_filter_read_smooth(touch_pads[i], &value);
-        if (value > TOUCH_THRESHOLD) {
-            return true; // At least one pad is pressed
-        }
-    }
-    return false; // No pads are pressed
-}
+static float thresh2bm_ratio[NUM_TOUCH_PADS] = {0.012f,0.012f,0.012f,0.012f,0.012f,0.012f};
 
-// Initialize touch hardware and configure pads helper
-void touch_init_and_configure(void) {
-    ESP_ERROR_CHECK(touch_pad_init());
-    for (int i = 0; i < NUM_TOUCH_PADS; i++) {
-        touch_pad_config(touch_pads[i]);
-        is_pressed[i] = false;
-        press_durations[i] = 0;
-    }
-    touch_filter_config_t filter_info = {
-        .mode = TOUCH_PAD_FILTER_IIR_4,
-        .debounce_cnt = 1,
-        .noise_thr = 0,
-        .jitter_step = 4,
-        .smh_lvl = 2,
-    };
-    ESP_ERROR_CHECK(touch_pad_filter_set_config(&filter_info));
-    ESP_ERROR_CHECK(touch_pad_filter_enable());
-    ESP_ERROR_CHECK(touch_pad_set_fsm_mode(TOUCH_FSM_MODE_TIMER));
-    ESP_ERROR_CHECK(touch_pad_fsm_start());
-}
+#define TOUCH_SAMPLE_CFG_DEFAULT() ((touch_sensor_sample_config_t[]){TOUCH_SENSOR_V2_DEFAULT_SAMPLE_CONFIG(500, TOUCH_VOLT_LIM_L_0V5, TOUCH_VOLT_LIM_H_2V2)})
+#define TOUCH_CHAN_CFG_DEFAULT() ((touch_channel_config_t){ \
+    .active_thresh = {2000}, \
+    .charge_speed = TOUCH_CHARGE_SPEED_7, \
+    .init_charge_volt = TOUCH_INIT_CHARGE_VOLT_DEFAULT, \
+})
 
+touch_sensor_sample_config_t sample_cfg[TOUCH_SAMPLE_CFG_NUM] = TOUCH_SAMPLE_CFG_DEFAULT();
+touch_channel_config_t chan_cfg = TOUCH_CHAN_CFG_DEFAULT();
 
-// Initialize touch input
-void init_touch() {
-    ESP_LOGI(TAG, "Initializing touch input");
-    touch_init_and_configure();
-    ESP_LOGI(TAG, "Initializing touch input, threshold: %d", TOUCH_THRESHOLD);
-}
+// Action queue for pad press events
+static QueueHandle_t touch_action_queue = NULL;
 
-// Used to check if pad is pressed at startup to trigger test sequence
-bool get_is_touched(int pad_num) {
-    uint32_t value = 0;
-    touch_pad_filter_read_smooth(touch_pads[0], &value);
-    if (value > TOUCH_THRESHOLD) {
-        return true;
-    }
-    return false;
-}
-
-
-// Get touch event for a specific pad
-bool get_touch_event(int pad_num) {
-    if (pad_num < 0 || pad_num >= NUM_TOUCH_PADS) {
-        ESP_LOGI(TAG, "Invalid touch pad number: %d", pad_num);
-        return false;
-    }
-
-    uint32_t touch_value = 0;
-    touch_pad_filter_read_smooth(touch_pads[pad_num], &touch_value);
-
-    if (touch_value > TOUCH_THRESHOLD) { // Touch detected
-        if (!is_pressed[pad_num]) {
-            is_pressed[pad_num] = true;
-            press_durations[pad_num] = 0;
-        }
-        press_durations[pad_num]++;
-        if (press_durations[pad_num] > (DEBOUNCE_DELAY_MS / portTICK_PERIOD_MS)) {
-            if (press_durations[pad_num] == (DEBOUNCE_DELAY_MS / portTICK_PERIOD_MS) + 1) {
-                ESP_LOGI(TAG, "Press detected on pad %d", pad_num);
-                return true;
-            }
-        }
-    } else {
-        is_pressed[pad_num] = false;
-        press_durations[pad_num] = 0;
-    }
-
-    return false;
-}
-
-
-void periodic_touch_recalibration_task(void *pvParameter) {
-    while (1) {
-        bool any_stuck = false;
-
-        // 1. Check for stuck pads (4194303 = max filter value)
-        for (int i = 0; i < NUM_TOUCH_PADS; i++) {
-            uint32_t filtered = 0;
-            touch_pad_filter_read_smooth(touch_pads[i], &filtered);
-
-            if (filtered == 4194303 || filtered > (TOUCH_THRESHOLD * 30)) { // TODO: Adjust threshold multiplier as needed, this is a guess
-                any_stuck = true;
-                ESP_LOGW(TAG, "Pad %d stuck high (FILTER=%lu), will force full recalibration!", i, (unsigned long)filtered);
-                break; // No need to check others; force reset if any are stuck
-            }
-        }
-
-        if (any_stuck) {
-            ESP_LOGW(TAG, "Forcing immediate full touch reset due to stuck pads!");
-            touch_pad_filter_disable();
-            touch_pad_deinit();
-            vTaskDelay(pdMS_TO_TICKS(50));
-            touch_init_and_configure();
-            ESP_LOGW(TAG, "Touch pads fully reset and recalibrated after stuck pad!");
-        }
-
-        vTaskDelay(pdMS_TO_TICKS(5000)); // Run every 5 seconds
-    }
-}
-
-
-void touch_debug_task(void *pvParameter) {
-    uint32_t raw, filtered;
-    while (1) {
-        ESP_LOGI(TAG, "\n[TOUCH DEBUG] ---------------------\n");
-        for (int i = 0; i < NUM_TOUCH_PADS; i++) {
-            touch_pad_read_raw_data(touch_pads[i], &raw);
-            touch_pad_filter_read_smooth(touch_pads[i], &filtered);
-
-            const char *state = is_pressed[i] ? "pressed" : "untouched";
-
-            ESP_LOGI(TAG, "Pad %d: RAW=%6lu  FILTER=%6lu  State: %s\n",
-                i, (unsigned long)raw, (unsigned long)filtered, state);
-        }
-        ESP_LOGI(TAG, "[Threshold] Using: %lu\n", (unsigned long)TOUCH_THRESHOLD);
-        vTaskDelay(pdMS_TO_TICKS(500));
-    }
-}
-
-
-static void handle_touch_action(int pad) {
+void handle_touch_action(int pad) {
     switch (pad) {
-        case 0:
-            settings.pattern_id = (settings.pattern_id + 1) % NUM_PATTERNS;
-            set_pattern(settings.pattern_id);
-            ESP_LOGI(TAG, "Current pattern: %d", settings.pattern_id);
-            save_settings(&settings);
-            break;
-        case 1:
-            settings.brightness = (settings.brightness + 1) % NUM_BRIGHTNESS_LEVELS;
-            set_brightness(settings.brightness);
-            save_settings(&settings);
-            break;
-        case 2:
-            generate_gene(&patterns[settings.pattern_id]);
-            save_genomes_to_storage();
-            flash_feedback_pattern();
-            break;
-        case 3:
-            turn_off();
-            break;
-        case 4:
-            show_battery_meter = true;
-            battery_meter_start_time = esp_timer_get_time() / 1000;
-            break;
-        case 5:
-            now_send_firework();
-            break;
+        case 0: settings.pattern_id = (settings.pattern_id + 1) % NUM_PATTERNS;
+                set_pattern(settings.pattern_id);
+                save_settings(&settings);
+                break;
+        case 1: settings.brightness = (settings.brightness + 1) % NUM_BRIGHTNESS_LEVELS;
+                set_brightness(settings.brightness);
+                save_settings(&settings);
+                break;
+        case 2: generate_gene(&patterns[settings.pattern_id]);
+                save_genomes_to_storage();
+                flash_feedback_pattern();
+                break;
+        case 3: turn_off(); break;
+        case 4: show_battery_meter = true;
+                battery_meter_start_time = esp_timer_get_time() / 1000;
+                break;
+        case 5: now_send_firework(); break;
     }
 }
 
+static int find_pad_idx(int chan_id) {
+    for (int i = 0; i < NUM_TOUCH_PADS; i++) {
+        if (chan_id == pad_ids[i]) return i;
+    }
+    return -1;
+}
 
-// Touch input task
-void touch_task(void *param) {
-    while (1) {
-        for (int i = 0; i < NUM_TOUCH_PADS; i++) {
-            if (get_touch_event(i)) {
-                handle_touch_action(i);
-                break;
-            }
+static bool touch_on_active_callback(touch_sensor_handle_t sens_handle, const touch_active_event_data_t *event, void *user_ctx)
+{
+    int pad_idx = find_pad_idx(event->chan_id);
+    if (pad_idx >= 0) {
+        is_pressed[pad_idx] = true;
+        BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+        xQueueSendFromISR(touch_action_queue, &pad_idx, &xHigherPriorityTaskWoken);
+        return xHigherPriorityTaskWoken == pdTRUE;
+    }
+    return false;
+}
+
+static bool touch_on_inactive_callback(touch_sensor_handle_t sens_handle, const touch_inactive_event_data_t *event, void *user_ctx)
+{
+    int pad_idx = find_pad_idx(event->chan_id);
+    if (pad_idx >= 0) is_pressed[pad_idx] = false;
+    return false;
+}
+
+static void do_initial_scanning(touch_sensor_handle_t sens_handle)
+{
+    ESP_ERROR_CHECK(touch_sensor_enable(sens_handle));
+    for (int i = 0; i < 3; i++) {
+        ESP_ERROR_CHECK(touch_sensor_trigger_oneshot_scanning(sens_handle, 2000));
+    }
+    ESP_ERROR_CHECK(touch_sensor_disable(sens_handle));
+    for (int i = 0; i < NUM_TOUCH_PADS; i++) {
+        uint32_t benchmark[TOUCH_SAMPLE_CFG_NUM] = {0};
+        ESP_ERROR_CHECK(touch_channel_read_data(chan_handles[i], TOUCH_CHAN_DATA_TYPE_BENCHMARK, benchmark));
+        for (int j = 0; j < TOUCH_SAMPLE_CFG_NUM; j++) {
+            chan_cfg.active_thresh[j] = (uint32_t)(benchmark[j] * thresh2bm_ratio[i]);
         }
-        vTaskDelay(50 / portTICK_PERIOD_MS);
+        ESP_ERROR_CHECK(touch_sensor_reconfig_channel(chan_handles[i], &chan_cfg));
+    }
+}
+
+void init_touch(void)
+{
+    // Create action queue
+    touch_action_queue = xQueueCreate(4, sizeof(int));
+    // 1. Sensor config
+    touch_sensor_config_t sens_cfg = TOUCH_SENSOR_DEFAULT_BASIC_CONFIG(TOUCH_SAMPLE_CFG_NUM, sample_cfg);
+    ESP_ERROR_CHECK(touch_sensor_new_controller(&sens_cfg, &touch_handle));
+    // 2. Create and enable each channel
+    for (int i = 0; i < NUM_TOUCH_PADS; i++) {
+        ESP_ERROR_CHECK(touch_sensor_new_channel(touch_handle, pad_ids[i], &chan_cfg, &chan_handles[i]));
+    }
+    // 3. Software filter
+    touch_sensor_filter_config_t filter_cfg = TOUCH_SENSOR_DEFAULT_FILTER_CONFIG();
+    ESP_ERROR_CHECK(touch_sensor_config_filter(touch_handle, &filter_cfg));
+    // 4. Initial scan to calibrate thresholds
+    do_initial_scanning(touch_handle);
+    // 5. Register callbacks
+    touch_event_callbacks_t callbacks = {
+        .on_active = touch_on_active_callback,
+        .on_inactive = touch_on_inactive_callback,
+    };
+    ESP_ERROR_CHECK(touch_sensor_register_callbacks(touch_handle, &callbacks, NULL));
+    // 7. Enable sensor and start scanning
+    ESP_ERROR_CHECK(touch_sensor_enable(touch_handle));
+    ESP_ERROR_CHECK(touch_sensor_start_continuous_scanning(touch_handle));
+    ESP_LOGI(TAG, "Touch pads initialized");
+}
+
+bool get_is_touched(int pad_num)
+{
+    if (pad_num < 0 || pad_num >= NUM_TOUCH_PADS)
+        return false;
+    return is_pressed[pad_num];
+}
+
+void touch_task(void *param)
+{
+    int pad_idx;
+    while (1) {
+        // Wait for a pad event from the ISR callback
+        if (xQueueReceive(touch_action_queue, &pad_idx, portMAX_DELAY) == pdPASS) {
+            handle_touch_action(pad_idx);
+        }
     }
 }

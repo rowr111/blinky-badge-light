@@ -5,9 +5,6 @@
 
 void init_touch();
 bool get_is_touched(int pad_num);
-bool get_touch_event(int pad_num);
-void touch_debug_task(void *pvParameter);
-void periodic_touch_recalibration_task(void *pvParameter);
 void touch_task(void *param);
 
 #endif // TOUCH_INPUT_H
