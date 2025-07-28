@@ -15,6 +15,7 @@
 #include "battery_level_pattern.h"
 #include "battery_monitor.h"
 #include "now.h"
+#include "firework_notification_pattern.h"
 
 #define NUM_TOUCH_PADS 6
 static const char *TAG = "TOUCH_INPUT";
@@ -32,7 +33,7 @@ static const int pad_ids[NUM_TOUCH_PADS] = {
     8  // ? spot notification touchpad
 };
 
-static float thresh2bm_ratio[NUM_TOUCH_PADS] = {0.012f,0.012f,0.012f,0.012f,0.012f,0.012f};
+static float thresh2bm_ratio[NUM_TOUCH_PADS] = {0.020f,0.020f,0.020f,0.020f,0.020f,0.020f};
 
 #define TOUCH_SAMPLE_CFG_DEFAULT() ((touch_sensor_sample_config_t[]){TOUCH_SENSOR_V2_DEFAULT_SAMPLE_CONFIG(500, TOUCH_VOLT_LIM_L_0V5, TOUCH_VOLT_LIM_H_2V2)})
 #define TOUCH_CHAN_CFG_DEFAULT() ((touch_channel_config_t){ \
@@ -153,7 +154,10 @@ void touch_task(void *param)
     while (1) {
         // Wait for a pad event from the ISR callback
         if (xQueueReceive(touch_action_queue, &pad_idx, portMAX_DELAY) == pdPASS) {
-            handle_touch_action(pad_idx);
+            // Firework notification is so bright it can cause issues with voltage and affect touch readings
+            if (!show_firework_notification) {
+                handle_touch_action(pad_idx);
+            }
         }
     }
 }

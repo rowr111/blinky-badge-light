@@ -15,7 +15,7 @@ int firework_notification_start_time = 0;
 void render_firework_notification_pattern(uint8_t *framebuffer, int elapsed_ms, const genome *g, int loop) {
     uint8_t brightness = effective_brightness;
     if (!limit_brightness) {
-        brightness = 255; // unless we're low on battery, light it up!
+        brightness = 200; // unless we're low on battery, light it up!
     }
 
     // Phase 1: White swell (first 1000 ms)

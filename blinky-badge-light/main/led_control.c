@@ -208,8 +208,7 @@ void render_pattern(int index, uint8_t *framebuffer, int loop) {
         // Sound-reactive pattern brightness + effective_brightness for basic sound reactive pattern
         if (index == NUM_PATTERNS - 2) {
             // Scale brightness by smooth_dB_brightness_level and effective_brightness
-            // also set a minimum to prevent low light level flickering effect (slightly lower than the vu meter minimum of 0.2)
-            val = (uint8_t)(fmaxf(smooth_dB_brightness_level, 0.2f) * effective_brightness * (val / 255.0f));
+            val = (uint8_t)(smooth_dB_brightness_level * effective_brightness * (val / 255.0f));
         } else {
             val = (uint8_t)((val * effective_brightness) / 255);
         }
@@ -262,9 +261,12 @@ void lighting_task(void *param) {
 
     while (1) {
         if (flash_active) {
+            // Don't make flash too bright, 50 is the max
+             uint8_t flash_brightness = (effective_brightness < 50) ? effective_brightness : 50;
+
             // Render flash pattern
             for (int i = 0; i < LED_COUNT; i++) {
-                set_pixel(framebuffer, i, 50, 50, 50);
+                set_pixel(framebuffer, i, flash_brightness, flash_brightness, flash_brightness);
             }
             update_leds(framebuffer);
 
