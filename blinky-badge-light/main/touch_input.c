@@ -1,9 +1,7 @@
-#include <stdio.h>
-#include <inttypes.h>
-#include <driver/gpio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
+#include "freertos/timers.h"
 #include "esp_log.h"
 #include "esp_timer.h"
 #include "driver/touch_sens.h"
@@ -19,6 +17,7 @@
 
 #define NUM_TOUCH_PADS 6
 static const char *TAG = "TOUCH_INPUT";
+#define OFF_PAD_IDX 3
 
 static bool is_pressed[NUM_TOUCH_PADS] = {false};
 static touch_sensor_handle_t touch_handle = NULL;
@@ -33,7 +32,11 @@ static const int pad_ids[NUM_TOUCH_PADS] = {
     8  // ? spot notification touchpad
 };
 
-static float thresh2bm_ratio[NUM_TOUCH_PADS] = {0.020f,0.020f,0.020f,0.020f,0.020f,0.020f};
+static TimerHandle_t off_hold_timer = NULL;
+static const int OFF_HOLD_TIME_MS = 700; // 700 ms (1s seemed a bit long)
+
+static const float TOUCH_THRESH = 0.02f;
+static float thresh2bm_ratio[NUM_TOUCH_PADS] = {TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH};
 
 #define TOUCH_SAMPLE_CFG_DEFAULT() ((touch_sensor_sample_config_t[]){TOUCH_SENSOR_V2_DEFAULT_SAMPLE_CONFIG(500, TOUCH_VOLT_LIM_L_0V5, TOUCH_VOLT_LIM_H_2V2)})
 #define TOUCH_CHAN_CFG_DEFAULT() ((touch_channel_config_t){ \
@@ -44,6 +47,7 @@ static float thresh2bm_ratio[NUM_TOUCH_PADS] = {0.020f,0.020f,0.020f,0.020f,0.02
 
 touch_sensor_sample_config_t sample_cfg[TOUCH_SAMPLE_CFG_NUM] = TOUCH_SAMPLE_CFG_DEFAULT();
 touch_channel_config_t chan_cfg = TOUCH_CHAN_CFG_DEFAULT();
+
 
 // Action queue for pad press events
 static QueueHandle_t touch_action_queue = NULL;
@@ -77,11 +81,30 @@ static int find_pad_idx(int chan_id) {
     return -1;
 }
 
+
+static void off_hold_timer_callback(TimerHandle_t xTimer) {
+    // Trigger the OFF action
+    handle_touch_action(OFF_PAD_IDX);
+}
+
+
 static bool touch_on_active_callback(touch_sensor_handle_t sens_handle, const touch_active_event_data_t *event, void *user_ctx)
 {
     int pad_idx = find_pad_idx(event->chan_id);
     if (pad_idx >= 0) {
         is_pressed[pad_idx] = true;
+        if (pad_idx == OFF_PAD_IDX) {
+            if (off_hold_timer == NULL) {
+                off_hold_timer = xTimerCreate("OffHold", pdMS_TO_TICKS(OFF_HOLD_TIME_MS), pdFALSE, NULL, off_hold_timer_callback);
+                // Paranoia checking to make sure the timer was created successfully
+                if (off_hold_timer == NULL) {
+                    ESP_LOGE(TAG, "Failed to create off_hold_timer!");
+                    return false;
+                }
+            }
+            xTimerStart(off_hold_timer, 0); // Start or restart the timer for 1 second
+            return false; // Don't queue yet
+        }
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
         xQueueSendFromISR(touch_action_queue, &pad_idx, &xHigherPriorityTaskWoken);
         return xHigherPriorityTaskWoken == pdTRUE;
@@ -92,7 +115,14 @@ static bool touch_on_active_callback(touch_sensor_handle_t sens_handle, const to
 static bool touch_on_inactive_callback(touch_sensor_handle_t sens_handle, const touch_inactive_event_data_t *event, void *user_ctx)
 {
     int pad_idx = find_pad_idx(event->chan_id);
-    if (pad_idx >= 0) is_pressed[pad_idx] = false;
+    if (pad_idx >= 0) {
+        is_pressed[pad_idx] = false;
+        if (pad_idx == OFF_PAD_IDX) {
+            if (off_hold_timer != NULL) {
+                xTimerStop(off_hold_timer, 0);
+            }
+        }
+    }
     return false;
 }
 
