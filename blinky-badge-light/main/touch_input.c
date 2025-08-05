@@ -33,7 +33,7 @@ static const int pad_ids[NUM_TOUCH_PADS] = {
 };
 
 static TimerHandle_t off_hold_timer = NULL;
-static const int OFF_HOLD_TIME_MS = 700; // 700 ms (1s seemed a bit long)
+static const int OFF_HOLD_TIME_MS = 500; // 500 ms
 
 static const float TOUCH_THRESH = 0.02f;
 static float thresh2bm_ratio[NUM_TOUCH_PADS] = {TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH};
@@ -84,7 +84,9 @@ static int find_pad_idx(int chan_id) {
 
 static void off_hold_timer_callback(TimerHandle_t xTimer) {
     // Trigger the OFF action
-    handle_touch_action(OFF_PAD_IDX);
+    int pad_idx = OFF_PAD_IDX;
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    xQueueSendFromISR(touch_action_queue, &pad_idx, &xHigherPriorityTaskWoken);
 }
 
 
