@@ -16,6 +16,7 @@
 #include "battery_level_pattern.h"
 #include "firework_notification_pattern.h"
 #include "storage.h"
+#include "testing_routine.h"
 
 static const char *TAG = "LED_CONTROL";
 
@@ -260,6 +261,11 @@ void lighting_task(void *param) {
     uint8_t framebuffer[LED_COUNT * 3];
 
     while (1) {
+        if (show_testing_routine) {
+            vTaskDelay(20 / portTICK_PERIOD_MS);
+            continue;
+        }
+
         if (flash_active) {
             // Don't make flash too bright, 50 is the max
              uint8_t flash_brightness = (effective_brightness < 50) ? effective_brightness : 50;

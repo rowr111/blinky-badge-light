@@ -12,12 +12,13 @@
 #include "nvs.h"
 #include "esp_system.h"
 
+volatile bool show_testing_routine = false;
 
 static const char *TAG = "TESTING";
 
 uint8_t white_brightness = 40; // Brightness for white
 uint8_t color_brightness = 100; // Brightness for colors
-float threshold_db_level = 40.0f; // Threshold volume for microphone test
+float threshold_db_level = 60.0f; // Threshold volume for microphone test
 
 
 uint8_t framebuffer[LED_COUNT * 3];
@@ -235,4 +236,6 @@ void testing_routine() {
     ESP_LOGI(TAG, "NVS storage test completed.");
 
     ESP_LOGI(TAG, "Testing routine completed.");
+    show_testing_routine = false;
+    vTaskDelete(NULL);
 }

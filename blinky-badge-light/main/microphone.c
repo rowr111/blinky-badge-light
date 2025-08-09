@@ -9,6 +9,7 @@
 
 #include "pins.h"
 #include "microphone.h"
+#include "testing_routine.h"
 
 #define TAG "MICROPHONE"
 
@@ -170,6 +171,11 @@ static void db_get_low_high(void) {
 
 void microphone_task(void *param) {
     while (1) {
+        if (show_testing_routine) {
+            vTaskDelay(20 / portTICK_PERIOD_MS);
+            continue;
+        }
+
         current_dB_level = get_sound_level();
         dbHistory_add(current_dB_level); 
         db_get_low_high(); // Update low and high averages

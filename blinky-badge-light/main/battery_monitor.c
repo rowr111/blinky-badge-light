@@ -90,6 +90,7 @@ void init_battery_monitor() {
     ESP_ERROR_CHECK(adc_cali_create_scheme_curve_fitting(&cali_cfg, &cali_handle));
 
     // Check battery voltage
+    vTaskDelay(pdMS_TO_TICKS(100)); // small delay to ensure voltage is stable
     current_battery_voltage = get_battery_voltage();
     ESP_LOGI(TAG, "initial battery voltage: %d mV.", current_battery_voltage); 
     ESP_LOGI(TAG, "Battery monitor initialized");

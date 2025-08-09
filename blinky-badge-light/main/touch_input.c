@@ -14,6 +14,7 @@
 #include "battery_monitor.h"
 #include "now.h"
 #include "firework_notification_pattern.h"
+#include "testing_routine.h"
 
 #define NUM_TOUCH_PADS 6
 static const char *TAG = "TOUCH_INPUT";
@@ -34,6 +35,9 @@ static const int pad_ids[NUM_TOUCH_PADS] = {
 
 static TimerHandle_t off_hold_timer = NULL;
 static const int OFF_HOLD_TIME_MS = 500; // 500 ms
+
+static TimerHandle_t combo_hold_timer = NULL;
+static const int COMBO_HOLD_TIME_MS = 2000; // 2000 ms
 
 static const float TOUCH_THRESH = 0.02f;
 static float thresh2bm_ratio[NUM_TOUCH_PADS] = {TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH,TOUCH_THRESH};
@@ -90,6 +94,11 @@ static void off_hold_timer_callback(TimerHandle_t xTimer) {
 }
 
 
+static void combo_hold_timer_callback(TimerHandle_t xTimer) {
+    show_testing_routine = true;
+    xTaskCreatePinnedToCore((TaskFunction_t)testing_routine, "TestingRoutine", 4096, NULL, 5, NULL, 1);
+}
+
 static bool touch_on_active_callback(touch_sensor_handle_t sens_handle, const touch_active_event_data_t *event, void *user_ctx)
 {
     int pad_idx = find_pad_idx(event->chan_id);
@@ -98,15 +107,23 @@ static bool touch_on_active_callback(touch_sensor_handle_t sens_handle, const to
         if (pad_idx == OFF_PAD_IDX) {
             if (off_hold_timer == NULL) {
                 off_hold_timer = xTimerCreate("OffHold", pdMS_TO_TICKS(OFF_HOLD_TIME_MS), pdFALSE, NULL, off_hold_timer_callback);
-                // Paranoia checking to make sure the timer was created successfully
-                if (off_hold_timer == NULL) {
-                    ESP_LOGE(TAG, "Failed to create off_hold_timer!");
-                    return false;
-                }
             }
             xTimerStart(off_hold_timer, 0); // Start or restart the timer for 1 second
             return false; // Don't queue yet
         }
+
+        // if all three pads are pressed, start the combo hold timer for the testing routine
+        if (is_pressed[0] && is_pressed[1] && is_pressed[2]) {
+            if (combo_hold_timer == NULL) {
+                combo_hold_timer = xTimerCreate("ComboHold", pdMS_TO_TICKS(COMBO_HOLD_TIME_MS), pdFALSE, NULL, combo_hold_timer_callback);
+            }
+            xTimerStart(combo_hold_timer, 0); // Start or restart the timer
+        } else {
+            if (combo_hold_timer != NULL) {
+                xTimerStop(combo_hold_timer, 0);
+            }
+        }
+        
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
         xQueueSendFromISR(touch_action_queue, &pad_idx, &xHigherPriorityTaskWoken);
         return xHigherPriorityTaskWoken == pdTRUE;
@@ -124,6 +141,14 @@ static bool touch_on_inactive_callback(touch_sensor_handle_t sens_handle, const 
                 xTimerStop(off_hold_timer, 0);
             }
         }
+
+        // If any of pads 0, 1, or 2 is released and the testing routine is not showing, stop the combo hold timer
+        if ((pad_idx == 0 || pad_idx == 1 || pad_idx == 2) && !show_testing_routine){
+            if (combo_hold_timer != NULL) {
+                xTimerStop(combo_hold_timer, 0);
+            }
+        }
+
     }
     return false;
 }
@@ -184,6 +209,11 @@ void touch_task(void *param)
 {
     int pad_idx;
     while (1) {
+        if (show_testing_routine) {
+            vTaskDelay(20 / portTICK_PERIOD_MS);
+            continue;
+        }
+
         // Wait for a pad event from the ISR callback
         if (xQueueReceive(touch_action_queue, &pad_idx, portMAX_DELAY) == pdPASS) {
             // Firework notification is so bright it can cause issues with voltage and affect touch readings

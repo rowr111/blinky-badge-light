@@ -31,26 +31,19 @@ void app_main() {
     // Load or generate genomes
     load_genomes_from_storage();
     // Initialize components
-    init_battery_monitor();
     init_leds();
     init_touch();
     init_microphone();
     now_init();
     init_storage();
-    load_settings(&settings);
+    init_battery_monitor();
 
+    load_settings(&settings);
     set_pattern(settings.pattern_id);
     set_brightness(settings.brightness);
 
-    vTaskDelay(pdMS_TO_TICKS(50)); // give touch pads a little time to settle
-    if (get_is_touched(0)) { // Check if pad 0 is touched on startup
-        ESP_LOGI("TOUCH", "Touch detected on pad 0 on startup, starting testing routine.");
-        testing_routine();
-    } else {
-        ESP_LOGI("TOUCH", "No testing on startup, starting normal operation.");
-    }
-
     ESP_LOGI("MAIN", "System initialized. Starting tasks...");
+
     // Create tasks
     xTaskCreatePinnedToCore(lighting_task, "Lighting Task", 4096, NULL, 5, NULL, 1);
     xTaskCreatePinnedToCore(battery_monitor_task, "Battery Monitor Task", 4096, NULL, 5, NULL, 0);
