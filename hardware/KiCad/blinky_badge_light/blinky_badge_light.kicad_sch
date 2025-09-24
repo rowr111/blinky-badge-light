@@ -1598,6 +1598,16 @@
 	)
 	(wire
 		(pts
+			(xy 191.77 123.19) (xy 201.93 123.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8f8f75cc-35e2-4fb5-88cf-84104cbeed5c")
+	)
+	(wire
+		(pts
 			(xy 207.01 80.01) (xy 191.77 80.01)
 		)
 		(stroke
@@ -1875,6 +1885,28 @@
 		(uuid "16487e58-302b-4fc1-a682-c1a253a13343")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 243.8013 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "POWER SENSE"
+		(shape input)
+		(at 201.93 123.19 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "316fa994-efa7-477c-974a-b83214b15f8e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 218.4012 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
