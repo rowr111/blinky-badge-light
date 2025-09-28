@@ -6,6 +6,10 @@
 
 static const char *TAG = "STORAGE";
 
+#define NAME_NS   "storage"
+#define NAME_KEY  "badge_name"
+#define NAME_MAX  31
+
 badge_settings_t settings;
 genome patterns[NUM_PATTERNS];
 
@@ -103,4 +107,50 @@ void load_genomes_from_storage() {
     }
 
     nvs_close(nvs_handle);
+}
+
+
+esp_err_t storage_get_name(char *out, size_t out_size)
+{
+    if (!out || out_size == 0) return ESP_ERR_INVALID_ARG;
+
+    nvs_handle_t h;
+    esp_err_t err = nvs_open(NAME_NS, NVS_READONLY, &h);
+    if (err != ESP_OK) return err;
+
+    // Ask NVS for length first
+    size_t needed = 0;
+    err = nvs_get_str(h, NAME_KEY, NULL, &needed);
+    if (err != ESP_OK) { nvs_close(h); return err; }
+
+    // Clamp to caller buffer
+    if (needed > out_size) needed = out_size;
+
+    err = nvs_get_str(h, NAME_KEY, out, &needed);
+    nvs_close(h);
+    return err;
+}
+
+
+esp_err_t storage_set_name(const char *name)
+{
+    if (!name) return ESP_ERR_INVALID_ARG;
+
+    // Copy and clamp to NAME_MAX (avoid huge writes)
+    char tmp[NAME_MAX + 1];
+    size_t n = 0;
+    while (name[n] && n < NAME_MAX) { tmp[n] = name[n]; n++; }
+    tmp[n] = '\0';
+
+    nvs_handle_t h;
+    esp_err_t err = nvs_open(NAME_NS, NVS_READWRITE, &h);
+    if (err != ESP_OK) return err;
+
+    err = nvs_set_str(h, NAME_KEY, tmp);
+    if (err == ESP_OK) err = nvs_commit(h);
+    nvs_close(h);
+    if (err == ESP_OK) {
+        ESP_LOGI("STORAGE", "Saved badge_name=\"%s\"", tmp);
+    }
+    return err;
 }

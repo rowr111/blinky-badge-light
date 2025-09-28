@@ -2,8 +2,11 @@
 #define STORAGE_H
 
 #include <stdint.h>
+#include <stddef.h>
 #include "genes.h"
 #include "led_control.h"
+#include "esp_err.h"
+
 
 // Settings structure
 typedef struct {
@@ -20,5 +23,7 @@ void save_settings(const badge_settings_t *settings);
 void load_settings(badge_settings_t *settings);
 void load_genomes_from_storage(void);
 void save_genomes_to_storage(void);
+esp_err_t storage_get_name(char *out, size_t out_size);
+esp_err_t storage_set_name(const char *name);
 
 #endif // STORAGE_H

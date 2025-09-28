@@ -99,16 +99,7 @@ void now_init(void) {
     ESP_LOGI(TAG, "Initializing ESP-NOW");
     reset_sent_history();
 
-    // 1. Initialize Wi-Fi in STA mode (but not connected to any AP)
-    ESP_ERROR_CHECK(esp_netif_init());
-    ESP_ERROR_CHECK(esp_event_loop_create_default());
-    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
-    ESP_ERROR_CHECK(esp_wifi_init(&cfg));
-    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
-    ESP_ERROR_CHECK(esp_wifi_start());
-    ESP_ERROR_CHECK(esp_wifi_set_protocol(WIFI_IF_STA, WIFI_PROTOCOL_11B | WIFI_PROTOCOL_LR)); // use long range protocol
-
-    // 2. Init ESP-NOW
+    // Init ESP-NOW
     ESP_ERROR_CHECK(esp_now_init());
     // Add the broadcast address as a peer
     esp_now_peer_info_t peerInfo = {0};

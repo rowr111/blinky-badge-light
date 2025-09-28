@@ -15,6 +15,7 @@
 #include "microphone.h"
 #include "now.h"
 #include "testing_routine.h"
+#include "comms_portal.h"
 
 void app_main() {
     esp_reset_reason_t reason = esp_reset_reason();
@@ -34,7 +35,7 @@ void app_main() {
     init_leds();
     init_touch();
     init_microphone();
-    now_init();
+    comms_portal_start();
     init_storage();
     init_battery_monitor();
 

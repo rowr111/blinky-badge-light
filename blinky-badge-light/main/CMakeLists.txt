@@ -13,6 +13,10 @@ idf_component_register(
         "testing_routine.c"
         "firework_notification_pattern.c"
         "now.c"
+        "wifi_portal.c"
+        "portal.c"
+        "comms_portal.c"
+        "dns_portal.c"
     INCLUDE_DIRS
         "."
 )
