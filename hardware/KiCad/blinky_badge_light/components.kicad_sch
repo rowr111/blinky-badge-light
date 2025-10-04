@@ -4097,16 +4097,6 @@
 	)
 	(wire
 		(pts
-			(xy 54.61 107.95) (xy 55.88 107.95)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "76e1f6a8-1939-475f-8475-725ae7eb3fed")
-	)
-	(wire
-		(pts
 			(xy 232.41 35.56) (xy 232.41 49.53)
 		)
 		(stroke
@@ -4407,7 +4397,7 @@
 	)
 	(wire
 		(pts
-			(xy 42.545 107.95) (xy 46.99 107.95)
+			(xy 42.545 107.95) (xy 50.165 107.95)
 		)
 		(stroke
 			(width 0)
@@ -5241,7 +5231,7 @@
 	)
 	(global_label "POWER SENSE"
 		(shape output)
-		(at 55.88 107.95 0)
+		(at 50.165 107.95 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5251,7 +5241,7 @@
 		)
 		(uuid "f41bbd4e-024a-4c37-83a2-b5001b8e9dd2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 72.3512 107.95 0)
+			(at 66.6362 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5871,83 +5861,6 @@
 			(project "blinky_badge_light"
 				(path "/f33039b1-b38b-4cb6-baf0-07a137773378/a31a264e-f1c4-410a-a175-a81c007586a2"
 					(reference "#PWR013")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 50.8 107.95 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "245d1fd6-240e-4c03-bd92-0e4585ee5fed")
-		(property "Reference" "R21"
-			(at 50.8 101.6 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100kΩ"
-			(at 50.8 104.14 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 50.8 109.728 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706350726930432"
-			(at 50.8 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 50.8 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "JLCPCB Part #" "C25803"
-			(at 50.8 107.95 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c11adb87-261c-4381-83a4-4abcc1cf1b18")
-		)
-		(pin "2"
-			(uuid "dce738c6-a428-4e9e-9591-540e32708cbe")
-		)
-		(instances
-			(project "blinky_badge_light"
-				(path "/f33039b1-b38b-4cb6-baf0-07a137773378/a31a264e-f1c4-410a-a175-a81c007586a2"
-					(reference "R21")
 					(unit 1)
 				)
 			)
