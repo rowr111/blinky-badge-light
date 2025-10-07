@@ -1894,7 +1894,7 @@
 			)
 		)
 	)
-	(global_label "POWER SENSE"
+	(global_label "BUTTON SENSE"
 		(shape input)
 		(at 201.93 123.19 0)
 		(fields_autoplaced yes)
