@@ -15,6 +15,7 @@
 #include "microphone.h"
 #include "now.h"
 #include "testing_routine.h"
+#include "power_button.h"
 
 void app_main() {
     esp_reset_reason_t reason = esp_reset_reason();
@@ -37,6 +38,7 @@ void app_main() {
     now_init();
     init_storage();
     init_battery_monitor();
+    power_button_init();
 
     load_settings(&settings);
     set_pattern(settings.pattern_id);
@@ -49,4 +51,5 @@ void app_main() {
     xTaskCreatePinnedToCore(battery_monitor_task, "Battery Monitor Task", 4096, NULL, 5, NULL, 0);
     xTaskCreatePinnedToCore(microphone_task, "Microphone Task", 4096, NULL, 5, NULL, 0);
     xTaskCreatePinnedToCore(touch_task, "Touch Task", 4096, NULL, 5, NULL, 0);
+    xTaskCreatePinnedToCore(power_button_task, "power_button_task", 2048, NULL, 5, NULL, 0);
 }

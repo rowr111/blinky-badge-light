@@ -14,7 +14,7 @@
 
 // Power pins
 #define MOSFET_GATE_PIN GPIO_NUM_21
-#define BUTTON_PIN 27 // Power button
+#define POWER_BUTTON_PIN GPIO_NUM_45 // Power button
 
 // Microphone pins
 #define I2S_SCK_PIN GPIO_NUM_40  // Clock Pin (BCLK), pin 33

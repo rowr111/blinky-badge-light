@@ -13,6 +13,7 @@ idf_component_register(
         "testing_routine.c"
         "firework_notification_pattern.c"
         "now.c"
+        "power_button.c"
     INCLUDE_DIRS
         "."
 )
